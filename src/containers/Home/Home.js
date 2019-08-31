@@ -4,7 +4,7 @@ import Dashboard from "../../components/Dashboard/Dashboard";
 
 const Home = () => {
   return (
-    <div style={{padding: 0}}>
+    <div>
       <AppBar />
       <Dashboard />
     </div>

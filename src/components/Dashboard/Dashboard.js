@@ -6,6 +6,11 @@ import { grey } from "@material-ui/core/colors";
 import Events from "./Events"
 
 const useStyles = makeStyles(theme => ({
+  container: {
+    backgroundColor: grey[200],
+    height: "calc(100vh - 64px)",
+    padding: theme.spacing(0,2)
+  },
   root: {
     padding: theme.spacing(3, 2)
   },
@@ -14,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
   dashboard: {
     color: grey[600],
-    margin: theme.spacing(2,0,2,2),
+    padding: theme.spacing(2,0),
     fontWeight: "bold"
   },
   greet: {
@@ -28,11 +33,11 @@ const useStyles = makeStyles(theme => ({
 const Dashboard = () => {
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.container}>
       <Typography component="p" className={classes.dashboard}>DASHBOARD</Typography>
       <Paper className={classes.root}>
         <Typography variant="h4">HELLO JUDGES!</Typography>
-        <Typography component="p" className={classes.caption}>Please select an event:</Typography>
+        <Typography component="p" className={classes.caption}>Please select an event and the corresponding level to be judged:</Typography>
         <Divider style={{margin: "20px 0"}}/>
 
         <Events />
