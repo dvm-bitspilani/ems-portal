@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import React, { Fragment } from "react"
+import { Link } from "react-router-dom"
 
 import {
   Avatar,
@@ -8,8 +9,8 @@ import {
   Typography,
   Container
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { makeStyles } from "@material-ui/core/styles";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
+import { makeStyles } from "@material-ui/core/styles"
 
 // --------------------------------------------------------------------
 // Uses standard material ui styles to generate a Google-style login page
@@ -100,6 +101,8 @@ export default function SignIn() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              component={Link}
+              to="/ems"
             >
               Sign In
             </Button>
