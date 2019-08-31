@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", 
+    width: "100%",
     marginTop: theme.spacing(1)
   },
   submit: {
@@ -99,7 +99,7 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <Link to="/mainPage/" className={classes.link}>
+            <Link to="/ems/" className={classes.link}>
               <Button
                 type="submit"
                 fullWidth
