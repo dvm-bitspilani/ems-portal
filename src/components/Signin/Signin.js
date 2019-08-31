@@ -1,5 +1,5 @@
-import React, { Fragment } from "react"
-import { Link } from "react-router-dom"
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 import {
   Avatar,
@@ -9,8 +9,8 @@ import {
   Typography,
   Container
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
-import { makeStyles } from "@material-ui/core/styles"
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { makeStyles } from "@material-ui/core/styles";
 
 // --------------------------------------------------------------------
 // Uses standard material ui styles to generate a Google-style login page
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", 
+    width: "100%",
     marginTop: theme.spacing(1)
   },
   submit: {
