@@ -43,8 +43,19 @@ const Events = () => {
   // this will eventually have to be an array of objects
   // each object will contatin number of levels to be displayed
   // each level button will lead to a new route with the grading buttons
-  const events = ["Rap Wars", "Purple Prose", "Rocktaves"];
-
+  // const events = ["Rap Wars", "Purple Prose", "Rocktaves"];
+  const events = [{eventName:"Rap Wars",
+                   noOfLevels: "3",
+                   levels:["level 1","level 2", "level 3"]
+                  },
+                  {eventName:"Purple Prose",
+                   noOfLevels: "3",
+                   levels:["level 1","level 2"]
+                  },
+                  {eventName:"Rocktaves",
+                  noOfLevels : "3",
+                  levels:["level 1","level 2"]
+                  }];
   return (
     <div className={classes.root}>
       {events.map((event, index) => {
@@ -56,17 +67,18 @@ const Events = () => {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography className={classes.heading}>{event}</Typography>
+            <Typography className={classes.heading}>{event.eventName}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <List className={classes.list}>
-                <ListItem button className={classes.listItem}>
-                  <ListItemText primary="Level 1" />
-                </ListItem>
-                <ListItem button className={classes.listItem}>
-                  <ListItemText primary="Level 2" />
-                </ListItem>
-              </List>
+            <List className={classes.list}>
+              {event.levels.map((levelName,index)=>{
+                return(
+                    <ListItem button className={classes.listItem}>
+                      <ListItemText primary= {levelName}/>
+                    </ListItem>   
+                );
+              })}
+            </List>
             </ExpansionPanelDetails>
           </ExpansionPanel>
         );
