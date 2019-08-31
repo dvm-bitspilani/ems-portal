@@ -67,7 +67,7 @@ const TopBar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Event Management System
+            {window.innerWidth > 600 ? "Event Management System" : "EMS"}
           </Typography>
           <Button color="inherit" component={Link} to="/">Logout</Button>
         </Toolbar>

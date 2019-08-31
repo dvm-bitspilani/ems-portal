@@ -1,3 +1,11 @@
+/*
+-------------------------------------
+Parent component to render all the events as dropdowns
+Should be in the containers folder?
+Pata nahi baad me dekh lenge
+-------------------------------------
+*/
+
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -11,12 +19,14 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
+// -----------------------------------
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%"
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(20),
     fontWeight: theme.typography.fontWeightRegular
   },
   list: {
@@ -29,18 +39,22 @@ const useStyles = makeStyles(theme => ({
 
 const Events = () => {
   const classes = useStyles();
+
+  // this will eventually have to be an array of objects
+  // each object will contatin number of levels to be displayed
+  // each level button will lead to a new route with the grading buttons
   const events = ["Rap Wars", "Purple Prose", "Rocktaves"];
 
   return (
     <div className={classes.root}>
       {events.map((event, index) => {
         return (
-          <ExpansionPanel>
+          <ExpansionPanel key={index}>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
+              // dekho mai aria tags use kar rha hu :-)
               aria-controls="panel1a-content"
               id="panel1a-header"
-              key={index}
             >
               <Typography className={classes.heading}>{event}</Typography>
             </ExpansionPanelSummary>
