@@ -10,10 +10,10 @@ function App() {
   return (
       <Router>
         <Route component={SignIn} path="/" exact/>
-        <Route component={AppBar} path="/ems" exact/>
-        <Route component={Home} path="/ems" exact/> 
-        <Route component={AppBar} path="/ems/level" exact/>
-        <Route component={Level} path="/ems/level" />
+        <Route component={AppBar} path="/dashboard" exact/>
+        <Route component={Home} path="/dashboard" exact/> 
+        <Route component={AppBar} path="/dashboard/level" exact/>
+        <Route component={Level} path="/dashboard/level" />
       </Router>
   );
 }

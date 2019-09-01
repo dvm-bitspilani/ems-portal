@@ -78,7 +78,7 @@ const Events = () => {
             <List className={classes.list}>
               {event.levels.map((levelName,index)=>{
                 return(
-                   <Link to="/ems/level" className={classes.link}>
+                   <Link to="/dashboard/level" className={classes.link}>
                       <ListItem button className={classes.listItem}>
                         <ListItemText primary= {levelName}/>
                       </ListItem>   
