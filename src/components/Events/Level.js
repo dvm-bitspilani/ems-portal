@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux';
-import * as actions from "../../store/actions/actionTypes";
+import * as actions from "../../store/actions/level";
 class Level extends React.Component{
     constructor(props) {
         super(props);
@@ -18,7 +18,7 @@ class Level extends React.Component{
     render(){
         return( 
             <div>
-                level {" "+this.state.eventName+" "+this.state.level}
+                {this.state.eventName+"\n"+this.state.level}
             </div>
         )
     }
@@ -33,11 +33,10 @@ const mapStateToProps = state => {
   
 const mapDispatchToProps = dispatch => {
     return {
-     eventName: (eventName) => dispatch(actions.UPDATE_LEVEL(eventName)),
-     level: (level) => dispatch(actions.UPDATE_LEVEL(level))
+     levelUpdate: (eventName,level) => dispatch(actions.updateLevel(eventName,level)),
     };
 };
   
-  export default connect(
-   mapStateToProps, null
-  )(Level);
+export default connect(
+    mapStateToProps, mapDispatchToProps
+)(Level);

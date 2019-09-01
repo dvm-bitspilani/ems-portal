@@ -19,7 +19,7 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-
+import Links from "./Links";
 // -----------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -42,6 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
 const Events = () => {
   const classes = useStyles();
 
@@ -51,15 +52,15 @@ const Events = () => {
   // const events = ["Rap Wars", "Purple Prose", "Rocktaves"];
   const events = [{eventName:"Rap Wars",
                    noOfLevels: "3",
-                   levels:["level 1","level 2", "level 3"]
+                   levels:["1","2", "3"]
                   },
                   {eventName:"Purple Prose",
                    noOfLevels: "3",
-                   levels:["level 1","level 2"]
+                   levels:["1","2"]
                   },
                   {eventName:"Rocktaves",
                   noOfLevels : "3",
-                  levels:["level 1","level 2"]
+                  levels:["1","2"]
                   }];
   return (
     <div className={classes.root}>
@@ -78,11 +79,7 @@ const Events = () => {
             <List className={classes.list}>
               {event.levels.map((levelName,index)=>{
                 return(
-                   <Link to={"/dashboard/"+event.eventName+"/level/" + index} className={classes.link}>
-                      <ListItem button className={classes.listItem}>
-                        <ListItemText primary= {levelName}/>
-                      </ListItem>   
-                   </Link>
+                 <Links eventName={event.eventName} levelName={levelName}/>
                 );
               })}
             </List>

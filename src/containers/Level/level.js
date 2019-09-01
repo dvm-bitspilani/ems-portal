@@ -7,7 +7,7 @@ class LevelContainer extends React.Component{
     }
     render(){
         return(
-                <Level/>
+            <Level/>
         )
     }
 }
