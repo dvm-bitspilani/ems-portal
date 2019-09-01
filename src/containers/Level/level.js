@@ -1,15 +1,14 @@
 import React from "react";
-// import { ReactComponent } from "*.svg";
-class Level extends React.Component{
+import Level from "../../components/Events/Level";
+
+class LevelContainer extends React.Component{
     constructor(props) {
         super(props);
     }
     render(){
         return(
-            <div>
-                Level
-            </div>
+                <Level/>
         )
     }
 }
-export default Level;
+export default LevelContainer;

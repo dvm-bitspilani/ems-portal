@@ -12,8 +12,8 @@ function App() {
         <Route component={SignIn} path="/" exact/>
         <Route component={AppBar} path="/dashboard" exact/>
         <Route component={Home} path="/dashboard" exact/> 
-        <Route component={AppBar} path="/dashboard/level" exact/>
-        <Route component={Level} path="/dashboard/level" />
+        <Route component={AppBar} path="/dashboard/*/level/*" exact/>
+        <Route component={Level} path="/dashboard/*/level/*" />
       </Router>
   );
 }
