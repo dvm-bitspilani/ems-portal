@@ -39,7 +39,6 @@ const Dashboard = () => {
         <Typography variant="h4">HELLO JUDGES!</Typography>
         <Typography component="p" className={classes.caption}>Please select an event and the corresponding level to be judged:</Typography>
         <Divider style={{margin: "20px 0"}}/>
-
         <Events />
       </Paper>
     </div>

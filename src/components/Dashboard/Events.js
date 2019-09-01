@@ -18,6 +18,7 @@ import {
   ListItemText
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 // -----------------------------------
 
@@ -33,7 +34,11 @@ const useStyles = makeStyles(theme => ({
     width: '100%'
   },
   listItem: {
-    width: "100%"
+    width: "100%",
+  },
+  link: {
+   textDecoration: "none",
+   color: theme.palette.common.black
   }
 }));
 
@@ -73,9 +78,11 @@ const Events = () => {
             <List className={classes.list}>
               {event.levels.map((levelName,index)=>{
                 return(
-                    <ListItem button className={classes.listItem}>
-                      <ListItemText primary= {levelName}/>
-                    </ListItem>   
+                   <Link to="/ems/level" className={classes.link}>
+                      <ListItem button className={classes.listItem}>
+                        <ListItemText primary= {levelName}/>
+                      </ListItem>   
+                   </Link>
                 );
               })}
             </List>
