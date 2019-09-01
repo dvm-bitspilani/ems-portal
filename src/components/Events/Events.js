@@ -18,7 +18,7 @@ import {
   ListItemText
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // -----------------------------------
 
@@ -78,7 +78,7 @@ const Events = () => {
             <List className={classes.list}>
               {event.levels.map((levelName,index)=>{
                 return(
-                   <Link to="/dashboard/level" className={classes.link}>
+                   <Link to="/dashboard/level" className={classes.link} key={index}>
                       <ListItem button className={classes.listItem}>
                         <ListItemText primary= {levelName}/>
                       </ListItem>   

@@ -42,19 +42,17 @@ const TopBar = () => {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <ListItem button key="events">
+        <ListItem button key="events" component={Link} to="/dashboard">
           {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
           <ListItemText primary="Events" />
         </ListItem>
       </List>
       <Divider />
       <List>
-        {['Contacts', 'Labels'].map((text, index) => (
-          <ListItem button key={text}>
-            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button key="contacts" component={Link} to="/contacts">
+          {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+          <ListItemText primary={"Contacts"} />
+        </ListItem>
       </List>
     </div>
   )
