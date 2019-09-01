@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
       <Route component={SignIn} path="/" exact/>
-      <Route component={Home} path="/ems" exact />
+      <Route component={Home} path="/dashboard" exact />
     </Router>
   );
 }

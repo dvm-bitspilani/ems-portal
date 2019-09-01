@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Typography, Divider } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 
-import Events from "./Events"
+import Events from "../../components/Events/Events"
 
 const useStyles = makeStyles(theme => ({
   container: {

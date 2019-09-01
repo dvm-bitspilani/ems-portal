@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // --------------------------------------------------------------------
 // Uses standard material ui styles to generate a Google-style login page
@@ -99,17 +99,17 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <Link to="/ems/" className={classes.link}>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                component={Link}
+                to="/dashboard"
               >
                 Sign In
               </Button>
-            </Link>
           </form>
         </div>
       </Container>
