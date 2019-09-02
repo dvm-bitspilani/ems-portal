@@ -24,8 +24,10 @@ const useStyles = makeStyles(theme => ({
   background: '#eeeeee',
   paddingLeft: '20px',
   alignItems: 'center',
-  height: '5vw',
-  fontSize: theme.typography.fontSize.larger
+  height: '40px',
+  fontSize: theme.typography.fontSize.larger,
+  borderBottom: "1px solid #b5b5b5",
+  boxSizing: "border-box"
   },    
   nested: {
     paddingLeft: theme.spacing(4),
