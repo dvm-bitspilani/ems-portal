@@ -54,5 +54,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null, mapDispatchToProps
+  null, mapDispatchToProps,null,{
+    pure: false
+  }
 )(Links);

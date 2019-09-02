@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 
+import RouterBreadcrumbs from "../Breadcrumb/Breadcrumb";
 import AppBar from "../AppBar/AppBar";
 
 const useStyles = makeStyles(theme => ({
@@ -62,6 +63,7 @@ const Contacts = props => {
   return (
     <div>
       <AppBar />
+      <RouterBreadcrumbs/>
       <div className={classes.container}>
         <Typography component="p" className={classes.dashboard}>
           DASHBOARD

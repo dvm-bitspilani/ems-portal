@@ -5,18 +5,27 @@ import SignIn from "./components/Signin/Signin";
 import Level from "./containers/Level/level";
 import AppBar from "./components/AppBar/AppBar";
 import Contacts from "./components/Contacts/Contacts";
+import RouterBreadcrumbs from "./components/Breadcrumb/Breadcrumb";
 
 function App() {
   // const signIn=true;
   return (
+     <div>
       <Router>
         <Route component={SignIn} path="/" exact/>
+
         <Route component={AppBar} path="/dashboard" exact/>
+        <Route component={RouterBreadcrumbs} path="/dashboard" exact/>
         <Route component={Home} path="/dashboard" exact/> 
-        <Route component={AppBar} path="/dashboard/*/level/*" exact/>
-        <Route component={Level} path="/dashboard/*/level/*" />
-        <Route component={Contacts} path="/contacts" />
+        
+        <Route component={AppBar} path="/dashboard/*" exact/>
+        <Route component={RouterBreadcrumbs} path="/dashboard/*" exact/>        
+        <Route component={Level} path="/dashboard/*" />
+
+        
+        <Route component={Contacts} path="/contacts/" />
       </Router>
+      </div>
   );
 }
 export default App;

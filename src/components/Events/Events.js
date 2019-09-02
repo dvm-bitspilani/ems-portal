@@ -50,11 +50,11 @@ const Events = () => {
   // each object will contatin number of levels to be displayed
   // each level button will lead to a new route with the grading buttons
   // const events = ["Rap Wars", "Purple Prose", "Rocktaves"];
-  const events = [{eventName:"Rap Wars",
+  const events = [{eventName:"Rap-Wars",
                    noOfLevels: "3",
                    levels:["1","2", "3"]
                   },
-                  {eventName:"Purple Prose",
+                  {eventName:"Purple-Prose",
                    noOfLevels: "3",
                    levels:["1","2"]
                   },
