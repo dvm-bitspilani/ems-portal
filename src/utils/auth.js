@@ -18,11 +18,29 @@ export const login = (username, password) => {
     headers: {
       "Content-Type": "application/json"
     }
-  }).then(console.log, console.error); // for now, log any response to console
+  })
+    .then(response => response.json())
+    .then(data => {
+      const tokens = {...data};
+      // store token in localStorage
+      localStorage.setItem("access", tokens["access"]);
+      localStorage.setItem("refresh", tokens["refresh"])
+      // store time of login to check session expiry
+      localStorage.setItem("expiresIn", new Date());
+    })
+    .catch(console.error);
 };
+
+export const hasSessionExpired = () => {
+  // checks if the current session has expired
+  const expiresIn = localStorage.getItem("expiresIn");
+
+  return (new Date() - expiresIn >= (60 * 60 * 1000)) ? true : false
+} 
 
 export const logout = () => {
   // remove auth credentials from localStorage
-  // remaining
-  return;
+  localStorage.removeItem("access")
+  localStorage.removeItem("refresh")
+  localStorage.removeItem("expiresIn")
 };
