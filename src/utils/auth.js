@@ -1,6 +1,10 @@
 /* 
 -------------------------
-Utility functions for Authorization: login and logout
+Utility functions for Authorization: 
+1. login: accept credentials, send auth request, update localStorage with response data
+2. logout: remove creds from localStorage
+3. hasSessionExpired: check if current session has expired
+4. refreshSession: get new access token from backend and restart session timer 
 -------------------------
 */
 
@@ -21,10 +25,10 @@ export const login = (username, password) => {
   })
     .then(response => response.json())
     .then(data => {
-      const tokens = {...data};
+      const tokens = { ...data };
       // store token in localStorage
       localStorage.setItem("access", tokens["access"]);
-      localStorage.setItem("refresh", tokens["refresh"])
+      localStorage.setItem("refresh", tokens["refresh"]);
       // store time of login to check session expiry
       localStorage.setItem("expiresIn", new Date());
     })
@@ -34,13 +38,35 @@ export const login = (username, password) => {
 export const hasSessionExpired = () => {
   // checks if the current session has expired
   const expiresIn = localStorage.getItem("expiresIn");
+  // return if session has expired
+  return new Date() - expiresIn >= 60 * 60 * 1000 ? true : false;
+};
 
-  return (new Date() - expiresIn >= (60 * 60 * 1000)) ? true : false
-} 
+export const refreshSession = () => {
+  const refreshToken = localStorage.getItem("refresh");
+
+  fetch(URL, {
+    method: "POST",
+    body: JSON.stringify(refreshToken),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      // get new access token
+      const newAccess = data["access"];
+      // set into local storage
+      localStorage.setItem("access", newAccess);
+      // refresh expiration time for current session
+      localStorage.setItem("expiresIn", new Date())
+    })
+    .catch(console.error);
+};
 
 export const logout = () => {
   // remove auth credentials from localStorage
-  localStorage.removeItem("access")
-  localStorage.removeItem("refresh")
-  localStorage.removeItem("expiresIn")
+  localStorage.removeItem("access");
+  localStorage.removeItem("refresh");
+  localStorage.removeItem("expiresIn");
 };
