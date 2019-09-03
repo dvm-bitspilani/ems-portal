@@ -16,7 +16,7 @@ export const login = (username, password) => {
 
   const authData = { username, password };
 
-  fetch(authURL, {
+  fetch("test1.bits-oasis.org/ems/jwt/get_token", {
     method: "POST",
     body: JSON.stringify(authData),
     headers: {
@@ -45,7 +45,7 @@ export const hasSessionExpired = () => {
 export const refreshSession = () => {
   const refreshToken = localStorage.getItem("refresh");
 
-  fetch(URL, {
+  fetch("test1.bits-oasis.org/ems/jwt/refresh_token", {
     method: "POST",
     body: JSON.stringify(refreshToken),
     headers: {

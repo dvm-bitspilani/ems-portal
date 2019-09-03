@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import * as auth from "../../utils/auth";
 
 import {
   Avatar,
@@ -53,6 +54,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const [username, setUser] = useState("");
+  const [password, setPass] = useState("");
 
   return (
     <Fragment>
@@ -87,6 +90,9 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={e => {
+                setUser(e.target.value.toString());
+              }}
             />
             <TextField
               variant="outlined"
@@ -97,19 +103,22 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
+              onChange={e => {
+                setPass(e.target.value.toString());
+              }}
             />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                component={Link}
-                to="/dashboard"
-              >
-                Sign In
-              </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              component={Link}
+              to="/dashboard"
+              onClick={() => auth.login(username, password)}
+            >
+              Sign In
+            </Button>
           </form>
         </div>
       </Container>
