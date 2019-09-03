@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import * as auth from "../../utils/auth";
+import {login} from "../../utils/auth";
 
 import {
   Avatar,
@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 // --------------------------------------------------------------------
 // Uses standard material ui styles to generate a Google-style login page
@@ -86,9 +86,8 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Username"
               name="email"
-              autoComplete="email"
               autoFocus
               onChange={e => {
                 setUser(e.target.value.toString());
@@ -108,14 +107,11 @@ export default function SignIn() {
               }}
             />
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-              component={Link}
-              to="/dashboard"
-              onClick={() => auth.login(username, password)}
+              onClick={() => login(username, password)}
             >
               Sign In
             </Button>

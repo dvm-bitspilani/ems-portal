@@ -8,7 +8,7 @@ Utility functions for Authorization:
 -------------------------
 */
 
-const authURL = ""; // auth url goes here
+import axios from "axios";
 
 export const login = (username, password) => {
   // send login request and if successful,
@@ -16,21 +16,27 @@ export const login = (username, password) => {
 
   const authData = { username, password };
 
-  fetch("test1.bits-oasis.org/ems/jwt/get_token", {
-    method: "POST",
-    body: JSON.stringify(authData),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
-      const tokens = { ...data };
-      // store token in localStorage
-      localStorage.setItem("access", tokens["access"]);
-      localStorage.setItem("refresh", tokens["refresh"]);
-      // store time of login to check session expiry
-      localStorage.setItem("expiresIn", new Date());
+  // fetch("test1.bits-oasis.org/ems/jwt/get_token", {
+  //   method: "POST",
+  //   body: JSON.stringify(authData),
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   }
+  // })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     const tokens = { ...data };
+  //     // store token in localStorage
+  //     localStorage.setItem("access", tokens["access"]);
+  //     localStorage.setItem("refresh", tokens["refresh"]);
+  //     // store time of login to check session expiry
+  //     localStorage.setItem("expiresIn", new Date());
+  //   })
+  //   .catch(console.error);
+  axios
+    .post("http://test1.bits-oasis.org/ems/jwt/get_token/", authData)
+    .then(response => {
+      console.log(response)
     })
     .catch(console.error);
 };
@@ -59,7 +65,8 @@ export const refreshSession = () => {
       // set into local storage
       localStorage.setItem("access", newAccess);
       // refresh expiration time for current session
-      localStorage.setItem("expiresIn", new Date())
+      localStorage.setItem("expiresIn", new Date());
+      window.location.href("/dashboard");
     })
     .catch(console.error);
 };
