@@ -63,7 +63,7 @@ export const refreshSession = () => {
     .catch(console.error);
 };
 
-export const logout = () => {
+export async function logout() {
   // remove auth credentials from localStorage
   localStorage.removeItem("access");
   localStorage.removeItem("refresh");
