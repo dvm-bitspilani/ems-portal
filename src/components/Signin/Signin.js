@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import {login} from "../../utils/auth";
+import { login } from "../../utils/auth";
 
 import {
   Avatar,
@@ -52,7 +52,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
+  console.log(props);
+
   const classes = useStyles();
   const [username, setUser] = useState("");
   const [password, setPass] = useState("");
@@ -111,7 +113,17 @@ export default function SignIn() {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={() => login(username, password)}
+              onClick={() => {
+                login(username, password)
+                  .then(() => {
+                    if (localStorage.getItem("access")) {
+                      props.history.push("/dashboard")
+                    } else {
+                      console.log('failed')
+                    }
+                  })
+                  .catch(console.error);
+              }}
             >
               Sign In
             </Button>
