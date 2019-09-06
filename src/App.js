@@ -10,22 +10,20 @@ import RouterBreadcrumbs from "./components/Breadcrumb/Breadcrumb";
 function App() {
   // const signIn=true;
   return (
-     <div>
+    <div>
       <Router>
-        <Route component={SignIn} path="/" exact/>
+        <Route component={SignIn} path="/" exact />
+        <Route component={AppBar} path="/dashboard" exact />
+        <Route component={RouterBreadcrumbs} path="/dashboard" exact />
+        <Route component={Home} path="/dashboard" exact />
 
-        <Route component={AppBar} path="/dashboard" exact/>
-        <Route component={RouterBreadcrumbs} path="/dashboard" exact/>
-        <Route component={Home} path="/dashboard" exact/> 
-        
-        <Route component={AppBar} path="/dashboard/*" exact/>
-        <Route component={RouterBreadcrumbs} path="/dashboard/*" exact/>        
+        <Route component={AppBar} path="/dashboard/*" exact />
+        <Route component={RouterBreadcrumbs} path="/dashboard/*" exact />
         <Route component={Level} path="/dashboard/*" />
 
-        
         <Route component={Contacts} path="/contacts/" />
       </Router>
-      </div>
+    </div>
   );
 }
 export default App;
