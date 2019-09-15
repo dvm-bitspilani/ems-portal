@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import * as actions from "../../store/actions/level";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+// import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -47,7 +47,7 @@ class Level extends React.Component{
                 <List component="nav" aria-label="secondary mailbox folders">
                     <ListItem button>
                     <ListItemText primary={"Team Name"} style={styles.link}/>
-                    <ListItemText primary={"Total Score: "+"5"} style={styles.link}/>
+                    <ListItemText primary={"Total Score: 5"} style={styles.link}/>
                     <Button variant="contained" color="primary" style={styles.button}>
                         Update Score
                     </Button>

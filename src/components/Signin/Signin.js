@@ -116,10 +116,10 @@ export default function SignIn(props) {
               onClick={() => {
                 login(username, password)
                   .then(() => {
-                    if (localStorage.getItem("access")) {
+                    if (localStorage.getItem("access") !== "undefined") {
                       props.history.push("/dashboard")
                     } else {
-                      console.log('failed')
+                      console.error("Authentication failure - invalid credentials")
                     }
                   })
                   .catch(console.error);

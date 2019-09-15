@@ -79,7 +79,7 @@ const Events = () => {
             <List className={classes.list}>
               {event.levels.map((levelName,index)=>{
                 return(
-                 <Links eventName={event.eventName} levelName={levelName}/>
+                 <Links eventName={event.eventName} levelName={levelName} kwy={index}/>
                 );
               })}
             </List>
