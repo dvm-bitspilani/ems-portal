@@ -1,8 +1,8 @@
-export default function fetchEvents() {
+export default async function fetchEvents() {
   //fetch list of events once user is logged in
   const access = localStorage.getItem("access");
 
-  fetch("http://test1.bits-oasis.org/ems/events/", {
+  await fetch("http://test1.bits-oasis.org/ems/events/", {
     method: "GET",
     headers: {
       "Authorization": `Bearer ${access}`

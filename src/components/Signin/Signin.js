@@ -1,4 +1,6 @@
 import React, { Fragment, useState } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/events";
 import { login } from "../../utils/auth";
 import eventsList from "../../utils/eventsList";
 
@@ -53,7 +55,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn(props) {
+function SignIn(props) {
   // console.log(props);
 
   const classes = useStyles();
@@ -119,9 +121,11 @@ export default function SignIn(props) {
                   .then(() => {
                     if (localStorage.getItem("access") !== "undefined") {
                       props.history.push("/dashboard");
-                      eventsList();
+                      eventsList().then(props.updateEventsList, console.error);
                     } else {
-                      console.error("Authentication failure - invalid credentials")
+                      console.error(
+                        "Authentication failure - invalid credentials"
+                      );
                     }
                   })
                   .catch(console.error);
@@ -135,3 +139,20 @@ export default function SignIn(props) {
     </Fragment>
   );
 }
+
+const mapStatetoProps = state => {
+  return {
+    events: state.events.eventsList
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateEventsList: events => dispatch(actions.updateEventsList(events))
+  };
+};
+
+export default connect(
+  mapStatetoProps,
+  mapDispatchToProps
+)(SignIn);
