@@ -25,7 +25,7 @@ class Level extends React.Component{
     render(){
         const styles = {
             h1 : {
-                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+                "fontFamily": "Roboto, Helvetica, Arial, sans-serif"
             },
             button: {
                 margin: "10px",

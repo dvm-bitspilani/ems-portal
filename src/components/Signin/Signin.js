@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { login } from "../../utils/auth";
+import eventsList from "../../utils/eventsList";
 
 import {
   Avatar,
@@ -117,7 +118,8 @@ export default function SignIn(props) {
                 login(username, password)
                   .then(() => {
                     if (localStorage.getItem("access") !== "undefined") {
-                      props.history.push("/dashboard")
+                      props.history.push("/dashboard");
+                      eventsList();
                     } else {
                       console.error("Authentication failure - invalid credentials")
                     }
