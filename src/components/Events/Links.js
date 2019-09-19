@@ -1,42 +1,43 @@
 import React from "react";
-import {
-  ListItem,
-  ListItemText
-} from "@material-ui/core";
-import {Link} from "react-router-dom";
-import {connect} from 'react-redux';
+import { ListItem, ListItemText } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import * as actions from "../../store/actions/level";
 
+const style = {
+  listItem: {
+    width: "100%"
+  },
+  link: {
+    textDecoration: "none",
+    color: "black"
+  }
+};
+class Links extends React.Component {
+  state = {
+    eventName: this.props.eventName,
+    level: this.props.level
+  };
 
-class Links extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      eventName : this.props.eventName,
-      levelName: this.props.levelName
-    }
-    this.updateLevel = this.updateLevel.bind(this);
-  }
-  updateLevel=()=>{
-    this.props.levelUpdate(this.state.eventName,this.state.levelName);
-  }
-  render(){
-    const style = {
-      listItem: {
-        width: "100%",
-      },
-      link: {
-       textDecoration: "none",
-       color: "black"
-      }
-    };
-    return(
-      <Link to={"/dashboard/"+this.state.eventName+"/level/" + this.state.levelName} style={style.link} onClick={this.updateLevel}>
-      <ListItem button style={style.listItem}>
-        <ListItemText primary= {"Level " +this.state.levelName}/>
-      </ListItem>   
+  updateLevel = () => {
+    this.props.levelUpdate(this.state.eventName, this.state.levelName);
+  };
+
+  render() {
+    // console.log(this.props.level)
+    // const { name, id } = this.props.level;
+    // console.log(name);
+    return (
+      <Link
+        to={`/dashboard/${this.state.eventName}/level/${this.props.id}`}
+        style={style.link}
+        onClick={this.updateLevel}
+      >
+        <ListItem button style={style.listItem}>
+          <ListItemText primary={this.props.levelName} />
+        </ListItem>
       </Link>
-    )
+    );
   }
 }
 
@@ -49,12 +50,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-   levelUpdate: (eventName,level) => dispatch(actions.updateLevel(eventName,level)),
+    levelUpdate: (eventName, level) =>
+      dispatch(actions.updateLevel(eventName, level))
   };
 };
 
 export default connect(
-  null, mapDispatchToProps,null,{
-    pure: false
-  }
+  mapStateToProps,
+  mapDispatchToProps
 )(Links);

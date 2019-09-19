@@ -63,7 +63,7 @@ const Events = props => {
   return (
     <div className={classes.root}>
       {events.map((event, index) => {
-        const { name } = event;
+        const { name, levels_info } = event;
         return (
           <ExpansionPanel key={index}>
             <ExpansionPanelSummary
@@ -76,12 +76,12 @@ const Events = props => {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <List className={classes.list}>
-                {event.levels_info.map((level, index) => {
-                  const { levelName } = level;
+                {levels_info.map((level, index) => {
                   return (
                     <Links
-                      eventName={event.eventName}
-                      levelName={levelName}
+                      eventName={name}
+                      levelName={level.name}
+                      id={level.id}
                       key={index}
                     />
                   );
