@@ -1,2 +1,2 @@
 export { updateLevel } from "./level";
-export { updateEventsList } from "./events";
+export { fetchEvents } from "./events";

@@ -1,3 +1,4 @@
 export const UPDATE_LEVEL = "UPDATE_LEVEL";
 
 export const UPDATE_EVENTS_LIST = "UPDATE_EVENTS_LIST";
+export const FETCH_EVENTS = "FETCH_EVENTS";

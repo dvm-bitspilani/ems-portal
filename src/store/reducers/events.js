@@ -2,6 +2,7 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
   eventsList: [],
+  error: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         eventsList: action.events
+      }
+    case actionTypes.FETCH_EVENTS:
+      return {
+        ...state,
+        error: false  
       }
     default:
       return state

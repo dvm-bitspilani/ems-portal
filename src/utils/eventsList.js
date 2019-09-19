@@ -12,6 +12,7 @@ export default async function fetchEvents() {
     // data will contain the list of events
     .then(data => {
       console.log(data);
+      return data;
       // populate events list with this data
     })
     .catch(console.error);

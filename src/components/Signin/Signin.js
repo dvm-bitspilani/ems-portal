@@ -121,7 +121,8 @@ function SignIn(props) {
                   .then(() => {
                     if (localStorage.getItem("access") !== "undefined") {
                       props.history.push("/dashboard");
-                      eventsList().then(props.updateEventsList, console.error);
+                      // eventsList().then(props.updateEventsList, console.error);
+                      props.fetchEvents();
                     } else {
                       console.error(
                         "Authentication failure - invalid credentials"
@@ -148,7 +149,7 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateEventsList: events => dispatch(actions.updateEventsList(events))
+    fetchEvents: () => dispatch(actions.fetchEvents())
   };
 };
 

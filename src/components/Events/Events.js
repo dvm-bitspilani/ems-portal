@@ -7,13 +7,15 @@ Pata nahi baad me dekh lenge
 */
 
 import React from "react";
+import { connect } from "react-redux";
+// import * as actions from "../../store/actions/events";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
   Typography,
-  List,
+  List
   // ListItem,
   // ListItemText
 } from "@material-ui/core";
@@ -31,40 +33,37 @@ const useStyles = makeStyles(theme => ({
     fontWeight: theme.typography.fontWeightRegular
   },
   list: {
-    width: '100%'
+    width: "100%"
   },
   listItem: {
-    width: "100%",
+    width: "100%"
   },
   link: {
-   textDecoration: "none",
-   color: theme.palette.common.black
+    textDecoration: "none",
+    color: theme.palette.common.black
   }
 }));
 
-
-const Events = () => {
+const Events = props => {
   const classes = useStyles();
 
   // this will eventually have to be an array of objects
   // each object will contatin number of levels to be displayed
   // each level button will lead to a new route with the grading buttons
   // const events = ["Rap Wars", "Purple Prose", "Rocktaves"];
-  const events = [{eventName:"Rap-Wars",
-                   noOfLevels: "3",
-                   levels:["1","2", "3"]
-                  },
-                  {eventName:"Purple-Prose",
-                   noOfLevels: "3",
-                   levels:["1","2"]
-                  },
-                  {eventName:"Rocktaves",
-                  noOfLevels : "3",
-                  levels:["1","2"]
-                  }];
+  // const events = [
+  //   { eventName: "Rap-Wars", noOfLevels: "3", levels: ["1", "2", "3"] },
+  //   { eventName: "Purple-Prose", noOfLevels: "3", levels: ["1", "2"] },
+  //   { eventName: "Rocktaves", noOfLevels: "3", levels: ["1", "2"] }
+  // ];
+
+  const events = props.events;
+  // console.log(eventsss);
+
   return (
     <div className={classes.root}>
       {events.map((event, index) => {
+        const { name } = event;
         return (
           <ExpansionPanel key={index}>
             <ExpansionPanelSummary
@@ -73,16 +72,21 @@ const Events = () => {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-            <Typography className={classes.heading}>{event.eventName}</Typography>
+              <Typography className={classes.heading}>{name}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-            <List className={classes.list}>
-              {event.levels.map((levelName,index)=>{
-                return(
-                 <Links eventName={event.eventName} levelName={levelName} key={index}/>
-                );
-              })}
-            </List>
+              <List className={classes.list}>
+                {event.levels_info.map((level, index) => {
+                  const { levelName } = level;
+                  return (
+                    <Links
+                      eventName={event.eventName}
+                      levelName={levelName}
+                      key={index}
+                    />
+                  );
+                })}
+              </List>
             </ExpansionPanelDetails>
           </ExpansionPanel>
         );
@@ -91,4 +95,10 @@ const Events = () => {
   );
 };
 
-export default Events;
+const mapStateToProps = state => {
+  return {
+    events: state.events.eventsList
+  };
+};
+
+export default connect(mapStateToProps)(Events);
