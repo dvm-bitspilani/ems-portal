@@ -7,6 +7,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
+import '../../components/Events/level.scss';
 
 class Level extends React.Component{
     constructor(props) {
@@ -35,6 +36,7 @@ class Level extends React.Component{
                 width:"100%",
                 margin:"1vw auto",
                 display:"flex",
+                gridTemplateColumns: "[first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end]"
             },
             link:{
                 width:"140px"
@@ -42,21 +44,50 @@ class Level extends React.Component{
         }
         return( 
             <Container fixed>
-            <h1 style={styles.h1}>Teams</h1>
-            <div fixed style={styles.container}>
-                <List component="nav" aria-label="secondary mailbox folders">
-                    <ListItem button>
-                    <ListItemText primary={"Team Name"} style={styles.link}/>
-                    <ListItemText primary={"Total Score: "+"5"} style={styles.link}/>
-                    <Button variant="contained" color="primary" style={styles.button}>
+            <h1>Teams</h1>
+            <div fixed className="container">
+                <div className="teamName">
+                    <ListItemText primary={"Team Name"} className="link"/>
+                    <ListItemText primary={"Total Score: "+"5"} className="link"/>
+                    <Button variant="contained" color="primary" className="button">
                         Update Score
                     </Button>
-                    <Button variant="contained" color="secondary" style={styles.button}>
+                    <Button variant="contained" color="secondary" className="button">
                         Freeze
                     </Button>
-                    </ListItem>
-                   
-                </List>
+                </div>
+                <div className="teamName">
+                    {/* <ListItem button> */}
+                    <ListItemText primary={"Team Name"} className="link"/>
+                    <ListItemText primary={"Total Score: "+"5"} className="link"/>
+                    <Button variant="contained" color="primary" className="button">
+                        Update Score
+                    </Button>
+                    <Button variant="contained" color="secondary" className="button">
+                        Freeze
+                    </Button>
+                    {/* </ListItem> */}
+                </div>
+                <div className="teamName">
+                    <ListItemText primary={"Team Name"} className="link"/>
+                    <ListItemText primary={"Total Score: "+"5"} className="link"/>
+                    <Button variant="contained" color="primary" className="button">
+                        Update Score
+                    </Button>
+                    <Button variant="contained" color="secondary" className="button">
+                        Freeze
+                    </Button>
+                </div>
+                <div className="teamName">
+                    <ListItemText primary={"Team Name"} className="link"/>
+                    <ListItemText primary={"Total Score: "+"5"} className="link"/>
+                    <Button variant="contained" color="primary" className="button">
+                        Update Score
+                    </Button>
+                    <Button variant="contained" color="secondary" className="button">
+                        Freeze
+                    </Button>
+                </div>
             </div>
             </Container>
         )
