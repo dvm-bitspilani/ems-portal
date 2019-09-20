@@ -95,18 +95,9 @@ class Level extends React.Component{
 }
 
 const mapStateToProps = state => {
-    return {
-      eventName: state.level.eventName,
-      level: state.level.level
-    };
+  return {
+    teams: state.teams.teams
+  };
 };
-  
-const mapDispatchToProps = dispatch => {
-    return {
-     levelUpdate: (eventName,level) => dispatch(actions.updateLevel(eventName,level)),
-    };
-};
-  
-export default connect(
-    mapStateToProps, mapDispatchToProps,null,{pure: false}
-)(Level);
+
+export default connect(mapStateToProps)(Level);

@@ -1,5 +1,8 @@
 import React, { Fragment, useState } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/events";
 import { login } from "../../utils/auth";
+import eventsList from "../../utils/eventsList";
 
 import {
   Avatar,
@@ -52,8 +55,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn(props) {
-  console.log(props);
+function SignIn(props) {
+  // console.log(props);
 
   const classes = useStyles();
   const [username, setUser] = useState("");
@@ -116,10 +119,14 @@ export default function SignIn(props) {
               onClick={() => {
                 login(username, password)
                   .then(() => {
-                    if (localStorage.getItem("access")) {
-                      props.history.push("/dashboard")
+                    if (localStorage.getItem("access") !== "undefined") {
+                      props.history.push("/dashboard");
+                      // eventsList().then(props.updateEventsList, console.error);
+                      props.fetchEvents();
                     } else {
-                      console.log('failed')
+                      console.error(
+                        "Authentication failure - invalid credentials"
+                      );
                     }
                   })
                   .catch(console.error);
@@ -133,3 +140,20 @@ export default function SignIn(props) {
     </Fragment>
   );
 }
+
+const mapStatetoProps = state => {
+  return {
+    events: state.events.eventsList
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchEvents: () => dispatch(actions.fetchEvents())
+  };
+};
+
+export default connect(
+  mapStatetoProps,
+  mapDispatchToProps
+)(SignIn);

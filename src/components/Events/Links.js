@@ -1,60 +1,46 @@
 import React from "react";
-import {
-  ListItem,
-  ListItemText
-} from "@material-ui/core";
-import {Link} from "react-router-dom";
-import {connect} from 'react-redux';
-import * as actions from "../../store/actions/level";
+import { ListItem, ListItemText } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/teams";
 
-
-class Links extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      eventName : this.props.eventName,
-      levelName: this.props.levelName
-    }
-    this.updateLevel = this.updateLevel.bind(this);
+const style = {
+  listItem: {
+    width: "100%"
+  },
+  link: {
+    textDecoration: "none",
+    color: "black"
   }
-  updateLevel=()=>{
-    this.props.levelUpdate(this.state.eventName,this.state.levelName);
-  }
-  render(){
-    const style = {
-      listItem: {
-        width: "100%",
-      },
-      link: {
-       textDecoration: "none",
-       color: "black"
-      }
-    };
-    return(
-      <Link to={"/dashboard/"+this.state.eventName+"/level/" + this.state.levelName} style={style.link} onClick={this.updateLevel}>
-      <ListItem button style={style.listItem}>
-        <ListItemText primary= {"Level " +this.state.levelName}/>
-      </ListItem>   
+};
+class Links extends React.Component {
+  render() {
+    return (
+      <Link
+        to={`/dashboard/${this.props.eventName}/level/${this.props.levelId}`}
+        style={style.link}
+        // add async redux action to fetch team names for this level
+        onClick={() => this.props.fetchTeams(this.props.eventId)}
+      >
+        <ListItem button style={style.listItem}>
+          <ListItemText primary={this.props.levelName} />
+        </ListItem>
       </Link>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    eventName: state.level.eventName,
-    level: state.level.level
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     eventName: state.level.eventName,
+//     level: state.level.level
+//   };
+// };
 
 const mapDispatchToProps = dispatch => {
   return {
-   levelUpdate: (eventName,level) => dispatch(actions.updateLevel(eventName,level)),
+    fetchTeams: (eventId) => dispatch(actions.fetchTeams(eventId))
   };
 };
 
-export default connect(
-  null, mapDispatchToProps,null,{
-    pure: false
-  }
-)(Links);
+export default connect(null, mapDispatchToProps)(Links);
