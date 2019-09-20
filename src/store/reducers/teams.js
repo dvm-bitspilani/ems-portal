@@ -5,7 +5,7 @@ const initialState = {
   error: false
 }
 
-export const reducer = (state=initialState, action) => {
+const reducer = (state=initialState, action) => {
   switch(action.type) {
     case actionTypes.FETCH_EVENTS:
       return {
@@ -21,3 +21,5 @@ export const reducer = (state=initialState, action) => {
       return state
   }
 }
+
+export default reducer;

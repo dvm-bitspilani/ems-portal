@@ -10,7 +10,7 @@ export const populateTeams = teamsList => {
 export const fetchTeams = eventId => {
   const access = localStorage.getItem("access");
   return dispatch => {
-    fetch(`https://test1.bits-oasis.org/ems/events/${eventId}/`, {
+    fetch(`http://test1.bits-oasis.org/ems/events/${eventId}/`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${access}`
