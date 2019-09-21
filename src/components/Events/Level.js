@@ -1,58 +1,97 @@
 import React from "react";
-import { connect } from "react-redux";
-// import * as actions from "../../store/actions/level";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Container,
-  Button
-} from "@material-ui/core";
+import {connect} from 'react-redux';
+import * as actions from "../../store/actions/level";
+// import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
+// import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import '../../components/Events/level.scss';
 
-const styles = {
-  h1: {
-    fontFamily: "Roboto, Helvetica, Arial, sans-serif"
-  },
-  button: {
-    margin: "10px"
-  },
-  container: {
-    overflow: "scroll",
-    width: "100%",
-    margin: "1vw auto",
-    display: "flex"
-  },
-  link: {
-    width: "140px"
-  }
-};
-class Level extends React.Component {
-  render() {
-    // const teams = [...this.props.teams]
-    return (
-      <Container fixed>
-        <h1 style={styles.h1}>Teams</h1>
-        <div fixed style={styles.container}>
-          <List component="nav" aria-label="secondary mailbox folders">
-            <ListItem button>
-              <ListItemText primary={"Team Name"} style={styles.link} />
-              <ListItemText primary={"Total Score: 5"} style={styles.link} />
-              <Button variant="contained" color="primary" style={styles.button}>
-                Update Score
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                style={styles.button}
-              >
-                Freeze
-              </Button>
-            </ListItem>
-          </List>
-        </div>
-      </Container>
-    );
-  }
+class Level extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            eventName : "Rap Wars 2",
+            level: 2
+        }
+    }
+    componentWillMount(){
+        this.setState({
+            eventName: this.props.eventName,
+            level: this.props.level
+        })
+    }
+    render(){
+        const styles = {
+            h1 : {
+                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+            },
+            button: {
+                margin: "10px",
+            },
+            container:{
+                overflow:"scroll",
+                width:"100%",
+                margin:"1vw auto",
+                display:"flex",
+                gridTemplateColumns: "[first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end]"
+            },
+            link:{
+                width:"140px"
+            }
+        }
+        return( 
+            <Container fixed>
+            <h1>Teams</h1>
+            <div fixed className="container">
+                <div className="teamName">
+                    <ListItemText primary={"Team Name"} className="link"/>
+                    <ListItemText primary={"Total Score: "+"5"} className="link"/>
+                    <Button variant="contained" color="primary" className="button">
+                        Update Score
+                    </Button>
+                    <Button variant="contained" color="secondary" className="button">
+                        Freeze
+                    </Button>
+                </div>
+                <div className="teamName">
+                    {/* <ListItem button> */}
+                    <ListItemText primary={"Team Name"} className="link"/>
+                    <ListItemText primary={"Total Score: "+"5"} className="link"/>
+                    <Button variant="contained" color="primary" className="button">
+                        Update Score
+                    </Button>
+                    <Button variant="contained" color="secondary" className="button">
+                        Freeze
+                    </Button>
+                    {/* </ListItem> */}
+                </div>
+                <div className="teamName">
+                    <ListItemText primary={"Team Name"} className="link"/>
+                    <ListItemText primary={"Total Score: "+"5"} className="link"/>
+                    <Button variant="contained" color="primary" className="button">
+                        Update Score
+                    </Button>
+                    <Button variant="contained" color="secondary" className="button">
+                        Freeze
+                    </Button>
+                </div>
+                <div className="teamName">
+                    <ListItemText primary={"Team Name"} className="link"/>
+                    <ListItemText primary={"Total Score: "+"5"} className="link"/>
+                    <Button variant="contained" color="primary" className="button">
+                        Update Score
+                    </Button>
+                    <Button variant="contained" color="secondary" className="button">
+                        Freeze
+                    </Button>
+                </div>
+            </div>
+            </Container>
+        )
+    }
 }
 
 const mapStateToProps = state => {
