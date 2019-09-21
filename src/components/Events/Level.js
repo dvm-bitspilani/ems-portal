@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 // import * as actions from "../../store/actions/level";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  Container,
+  Button
+} from "@material-ui/core";
 
 const styles = {
   h1: {
@@ -27,7 +29,6 @@ const styles = {
 class Level extends React.Component {
   render() {
     // const teams = [...this.props.teams]
-
     return (
       <Container fixed>
         <h1 style={styles.h1}>Teams</h1>

@@ -16,11 +16,8 @@ import {
   ExpansionPanelSummary,
   Typography,
   List
-  // ListItem,
-  // ListItemText
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-// import { BrowserRouter as Router, Link } from "react-router-dom";
 import Links from "./Links";
 // -----------------------------------
 
@@ -47,19 +44,11 @@ const useStyles = makeStyles(theme => ({
 const Events = props => {
   const classes = useStyles();
 
-  // this will eventually have to be an array of objects
+  // this will eventually be an array of objects
   // each object will contatin number of levels to be displayed
   // each level button will lead to a new route with the grading buttons
-  // const events = ["Rap Wars", "Purple Prose", "Rocktaves"];
-  // const events = [
-  //   { eventName: "Rap-Wars", noOfLevels: "3", levels: ["1", "2", "3"] },
-  //   { eventName: "Purple-Prose", noOfLevels: "3", levels: ["1", "2"] },
-  //   { eventName: "Rocktaves", noOfLevels: "3", levels: ["1", "2"] }
-  // ];
 
   const events = props.events;
-  // console.log(eventsss);
-
   return (
     <div className={classes.root}>
       {events.map((event, index) => {
