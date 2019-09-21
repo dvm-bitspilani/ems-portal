@@ -51,10 +51,10 @@ const createData = (name, phone, email) => {
 };
 
 const rows = [
-  createData("Shivanshu Ayachi", "99999 - 99999", "mail@mail.com"),
-  createData("Divyansh Aggarwal", "99999 - 99999", "mail@mail.com"),
-  createData("Shreyans Jain", "99999 - 99999", "mail@mail.com"),
-  createData("Akshit Patel", "99999 - 99999", "mail@mail.com")
+  createData("Shivanshu Ayachi", "+91-7389216920", "mail@mail.com"),
+  createData("Divyansh Aggarwal", "+91-8800992911", "mail@mail.com"),
+  createData("Shreyans Jain", "+91-9582945729", "mail@mail.com"),
+  createData("Akshit Patel", "+91-7000392197", "mail@mail.com")
 ];
 
 const Contacts = props => {
