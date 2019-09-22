@@ -15,12 +15,14 @@ const style = {
 };
 class Links extends React.Component {
   render() {
+    // console.log(this.props);
+    const { eventId, eventName, levelId } = this.props;
     return (
       <Link
-        to={`/dashboard/${this.props.eventName}/level/${this.props.levelId}`}
+        to={`/dashboard/${eventName}/level/${levelId}`}
         style={style.link}
         // add async redux action to fetch team names for this level
-        onClick={() => this.props.fetchTeams(this.props.eventId)}
+        onClick={() => this.props.fetchTeams(eventId, levelId)}
       >
         <ListItem button style={style.listItem}>
           <ListItemText primary={this.props.levelName} />
@@ -39,7 +41,8 @@ class Links extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchTeams: eventId => dispatch(actions.fetchTeams(eventId))
+    fetchTeams: (eventId, levelId) =>
+      dispatch(actions.fetchTeams(eventId, levelId))
   };
 };
 
