@@ -34,7 +34,7 @@ class Level extends React.Component {
       level: 2
     };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.setState({
       eventName: this.props.eventName,
       level: this.props.level
@@ -45,7 +45,7 @@ class Level extends React.Component {
     return (
       <Container fixed>
         <h1>Teams</h1>
-        <div fixed className="container">
+        <div fixed="true" className="container">
           <div className="teamName">
             <ListItemText primary={"Team Name"} className="link" />
             <ListItemText primary={"Total Score: " + "5"} className="link" />

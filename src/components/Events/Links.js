@@ -39,8 +39,11 @@ class Links extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchTeams: (eventId) => dispatch(actions.fetchTeams(eventId))
+    fetchTeams: eventId => dispatch(actions.fetchTeams(eventId))
   };
 };
 
-export default connect(null, mapDispatchToProps)(Links);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Links);

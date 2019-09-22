@@ -4,7 +4,7 @@ import { Typography, makeStyles } from "@material-ui/core";
 
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
   Route,
   withRouter,
   Link
@@ -53,7 +53,7 @@ function RouterBreadcrumbs() {
       <Route>
         {() => {
           let pathnames = window.location.pathname.split("/").filter(x => x);
-          console.log(pathnames);
+          // console.log(pathnames);
           return (
             <Breadcrumbs aria-label="breadcrumb">
               <Link to="/dashboard" className={classes.links}>
@@ -67,7 +67,7 @@ function RouterBreadcrumbs() {
                 const to = `/dashboard/${pathnames
                   .slice(0, index + 1)
                   .join("/")}`;
-                console.log(to);
+                // console.log(to);
                 return last ? (
                   <Typography
                     color="textPrimary"
