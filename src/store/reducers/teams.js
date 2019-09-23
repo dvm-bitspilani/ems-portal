@@ -12,11 +12,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         teams: action.teams
       };
-    case actionTypes.FETCH_TEAMS:
-      return {
-        ...state,
-        error: false
-      };
     default:
       return state;
   }

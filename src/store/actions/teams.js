@@ -19,7 +19,7 @@ export const fetchTeams = (eventId, levelId) => {
       .then(response => response.json())
       .then(data => {
         // data contains array "teams_info" with the team list
-        console.log(data)
+        console.log(data);
         dispatch(populateTeams(data.teams_info));
       })
       .catch(console.error);
