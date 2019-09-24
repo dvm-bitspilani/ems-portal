@@ -32,13 +32,6 @@ class Links extends React.Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     eventName: state.level.eventName,
-//     level: state.level.level
-//   };
-// };
-
 const mapDispatchToProps = dispatch => {
   return {
     fetchTeams: (eventId, levelId) =>
