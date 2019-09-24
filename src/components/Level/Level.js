@@ -6,25 +6,25 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import "./level.scss";
 
-const styles = {
-  h1: {
-    "font-family": "Roboto, Helvetica, Arial, sans-serif"
-  },
-  button: {
-    margin: "10px"
-  },
-  container: {
-    overflow: "scroll",
-    width: "100%",
-    margin: "1vw auto",
-    display: "flex",
-    gridTemplateColumns:
-      "[first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end]"
-  },
-  link: {
-    width: "140px"
-  }
-};
+// const styles = {
+//   h1: {
+//     "font-family": "Roboto, Helvetica, Arial, sans-serif"
+//   },
+//   button: {
+//     margin: "10px"
+//   },
+//   container: {
+//     overflow: "scroll",
+//     width: "100%",
+//     margin: "1vw auto",
+//     display: "flex",
+//     gridTemplateColumns:
+//       "[first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end]"
+//   },
+//   link: {
+//     width: "140px"
+//   }
+// };
 
 class Level extends React.Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class Level extends React.Component {
         <div fixed="true" className="container">
           <div className="teamName">
             <ListItemText primary={"Team Name"} className="link" />
-            <ListItemText primary={"Total Score: " + "5"} className="link" />
+            <ListItemText primary={"Total Score: 5"} className="link" />
             <Button variant="contained" color="primary" className="button">
               Update Score
             </Button>
@@ -59,7 +59,7 @@ class Level extends React.Component {
           <div className="teamName">
             {/* <ListItem button> */}
             <ListItemText primary={"Team Name"} className="link" />
-            <ListItemText primary={"Total Score: " + "5"} className="link" />
+            <ListItemText primary={"Total Score: 5"} className="link" />
             <Button variant="contained" color="primary" className="button">
               Update Score
             </Button>
@@ -67,26 +67,6 @@ class Level extends React.Component {
               Freeze
             </Button>
             {/* </ListItem> */}
-          </div>
-          <div className="teamName">
-            <ListItemText primary={"Team Name"} className="link" />
-            <ListItemText primary={"Total Score: " + "5"} className="link" />
-            <Button variant="contained" color="primary" className="button">
-              Update Score
-            </Button>
-            <Button variant="contained" color="secondary" className="button">
-              Freeze
-            </Button>
-          </div>
-          <div className="teamName">
-            <ListItemText primary={"Team Name"} className="link" />
-            <ListItemText primary={"Total Score: " + "5"} className="link" />
-            <Button variant="contained" color="primary" className="button">
-              Update Score
-            </Button>
-            <Button variant="contained" color="secondary" className="button">
-              Freeze
-            </Button>
           </div>
         </div>
       </Container>
