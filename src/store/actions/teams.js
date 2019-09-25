@@ -9,7 +9,7 @@ export const populateTeams = teamsList => {
 
 /* ------------------------------
 GET INFO ABOUT A LEVEL
-response: {
+RESPONSE: {
   eventName,
   eventId,
   levelId,
