@@ -7,6 +7,18 @@ export const updateEventsList = events => {
   };
 };
 
+/* ---------------------
+GET LIST OF EVENTS -
+response: 
+{
+  eventName,
+  eventId,
+  levelsInfo: {
+    levelName,
+    levelId
+  }
+}
+----------------------- */ 
 export const fetchEvents = () => {
   const access = localStorage.getItem("access");
   return dispatch => {

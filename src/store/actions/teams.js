@@ -7,10 +7,26 @@ export const populateTeams = teamsList => {
   };
 };
 
+/* ------------------------------
+GET INFO ABOUT A LEVEL
+response: {
+  eventName,
+  eventId,
+  levelId,
+  teams: [
+    {
+      teamName,
+      teamId,
+      score
+    }
+  ]
+}
+------------------------------ */
+
 export const fetchTeams = (eventId, levelId) => {
   const access = localStorage.getItem("access");
   return dispatch => {
-    fetch(`http://test1.bits-oasis.org/ems/events/${eventId}/level/${levelId}`, {
+    fetch(`http://test1.bits-oasis.org/ems/judge/events/${eventId}/levels/${levelId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${access}`
@@ -20,7 +36,7 @@ export const fetchTeams = (eventId, levelId) => {
       .then(data => {
         // data contains array "teams_info" with the team list
         console.log(data);
-        dispatch(populateTeams(data.teams_info));
+        dispatch(populateTeams(data.teams));
       })
       .catch(console.error);
   };

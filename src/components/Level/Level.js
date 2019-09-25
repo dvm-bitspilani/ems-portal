@@ -42,6 +42,7 @@ class Level extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <Container fixed>
         <h1>Teams</h1>
