@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.POPULATE_TEAMS:
       return {
         ...state,
-        teams: action.teams || []
+        teams: action.teams
       };
     default:
       return state;
