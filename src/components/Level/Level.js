@@ -61,12 +61,12 @@ class Level extends React.Component {
         <h1>Teams</h1>
         <div fixed="true" className="container">
           {teams.map((team, index) => {
-            const { teamName, score } = team;
+            const { name, score } = team;
 
             return (
               <div className="teamName" key={index}>
                 <ListItemText
-                  primary={`${teamName}`}
+                  primary={`${name}`}
                   className="link"
                   onClick={() =>
                     this.props.fetchTeamInfo(
