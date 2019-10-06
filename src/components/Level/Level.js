@@ -1,6 +1,9 @@
+// renders list of teams for a particular level
+
 import React from "react";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/level";
+import * as actions from "../../store/actions/teams";
+
 import ListItemText from "@material-ui/core/ListItemText";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
@@ -42,8 +45,8 @@ class Level extends React.Component {
   }
 
   render() {
-    console.log(this.props)
-    const teams = [...this.props.teams]
+    console.log("Props for this level", this.props);
+    const teams = [...this.props.teams];
 
     // structure of teams array from request
     // teams: [
@@ -51,29 +54,44 @@ class Level extends React.Component {
     //     teamName,
     //     teamId,
     //     score
-    //   } 
-    //    ...
-    //    ...
+    //   }
     // ]
     return (
       <Container fixed>
         <h1>Teams</h1>
         <div fixed="true" className="container">
           {teams.map((team, index) => {
-            const {teamName, score} = team;
+            const { teamName, score } = team;
 
             return (
               <div className="teamName" key={index}>
-                <ListItemText primary={`${teamName}`} className="link" />
-                <ListItemText primary={`Total Score: ${score}`} className="link" />
+                <ListItemText
+                  primary={`${teamName}`}
+                  className="link"
+                  onClick={() =>
+                    this.props.fetchTeamInfo(
+                      this.props.eventId,
+                      this.props.levelId,
+                      team.id
+                    )
+                  }
+                />
+                <ListItemText
+                  primary={`Total Score: ${score}`}
+                  className="link"
+                />
                 <Button variant="contained" color="primary" className="button">
                   Update Score
                 </Button>
-                <Button variant="contained" color="secondary" className="button">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className="button"
+                >
                   Freeze
                 </Button>
               </div>
-            )
+            );
           })}
         </div>
       </Container>
@@ -83,8 +101,21 @@ class Level extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    teams: state.teams.teams
+    teams: state.teams.teams,
+    eventId: state.teams.eventId,
+    levelId: state.teams.levelId,
+    events: state.events.eventsList
   };
 };
 
-export default connect(mapStateToProps)(Level);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchTeamInfo: (eventId, levelId, teamId) =>
+      dispatch(actions.fetchTeamInfo(eventId, levelId, teamId))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Level);

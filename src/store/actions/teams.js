@@ -1,9 +1,11 @@
 import * as actionTypes from "./actionTypes";
 
-export const populateTeams = teamsList => {
+export const populateTeams = (teamsList, eventId, levelId) => {
   return {
     type: actionTypes.POPULATE_TEAMS,
-    teams: teamsList
+    teams: teamsList,
+    eventId: eventId,
+    levelId: levelId
   };
 };
 
@@ -46,7 +48,7 @@ export const fetchTeams = (eventId, levelId) => {
       .then(data => {
         // data contains array "teams_info" with the team list
         console.log(data);
-        dispatch(populateTeams(data.teams));
+        dispatch(populateTeams(data.teams, eventId, levelId));
       })
       .catch(console.error);
   };
