@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-// import * as actions from "../../store/actions/level";
+import * as actions from "../../store/actions/level";
 import ListItemText from "@material-ui/core/ListItemText";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
@@ -43,7 +43,7 @@ class Level extends React.Component {
 
   render() {
     console.log(this.props)
-    const teams = [...this.state.teams]
+    const teams = [...this.props.teams]
 
     // structure of teams array from request
     // teams: [

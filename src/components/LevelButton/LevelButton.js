@@ -1,8 +1,13 @@
+// Button component for one team
+// displayed on events route
+// each Button leads to a new page conataining that team's info
+
 import React from "react";
 import { ListItem, ListItemText } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/teams";
+
 
 const style = {
   listItem: {
@@ -13,7 +18,7 @@ const style = {
     color: "black"
   }
 };
-class Links extends React.Component {
+class LevelButton extends React.Component {
   render() {
     // console.log(this.props);
     const { eventId, eventName, levelId } = this.props;
@@ -42,4 +47,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(Links);
+)(LevelButton);

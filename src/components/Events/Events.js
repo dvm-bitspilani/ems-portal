@@ -18,7 +18,7 @@ import {
   List
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Links from "./Links";
+import LevelButton from "../LevelButton/LevelButton";
 // -----------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -67,7 +67,7 @@ const Events = props => {
               <List className={classes.list}>
                 {levels_info.map((level, levelIndex) => {
                   return (
-                    <Links
+                    <LevelButton
                       eventName={name}
                       eventId={id}
                       levelName={level.name}
