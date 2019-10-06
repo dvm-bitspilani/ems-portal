@@ -6,3 +6,4 @@ export const FETCH_EVENTS = "FETCH_EVENTS";
 // fetch list of teams for a particular level of an event
 export const FETCH_TEAMS = "FETCH_TEAMS";
 export const POPULATE_TEAMS = "POPULATE_TEAMS"; 
+export const POPULATE_TEAM_INFO = "POPULATE_TEAM_INFO";
