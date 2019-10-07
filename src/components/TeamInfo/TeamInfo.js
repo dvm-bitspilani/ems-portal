@@ -43,7 +43,7 @@ const createScoreRows = (level, score) => {
 function TeamInfo(props) {
   console.log(props);
   const classes = useStyles();
-  const {team_info, participants, levels_info} = {...props.teamInfo};
+  const {team_info, participants, levels_info} = {...this.props.teamInfo};
 
   /* ---------------- Structure of response objects --------------------
 

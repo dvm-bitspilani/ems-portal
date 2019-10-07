@@ -18,7 +18,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         teamInfo: action.teamInfo,
-        loading: action.loading
       }
     default:
       return state;
