@@ -67,7 +67,7 @@ class Level extends React.Component {
             return (
               <div className="teamName" key={index}>
                 <Link
-                  to={`${this.props.match.url}/team/${team.id}`}
+                  to={`/team/${team.id}`}
                   onClick={() => {
                     this.props.fetchTeamInfo(
                       this.props.eventId,
