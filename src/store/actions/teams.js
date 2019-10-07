@@ -12,7 +12,8 @@ export const populateTeams = (teamsList, eventId, levelId) => {
 export const populateTeamInfo = teamInfo => {
   return {
     type: actionTypes.POPULATE_TEAM_INFO,
-    teamInfo: teamInfo
+    teamInfo: teamInfo,
+    loading: false
   };
 };
 

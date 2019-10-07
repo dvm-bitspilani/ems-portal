@@ -17,7 +17,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.POPULATE_TEAM_INFO:
       return {
         ...state,
-        teamInfo: action.teamInfo
+        teamInfo: action.teamInfo,
+        loading: action.loading
       }
     default:
       return state;

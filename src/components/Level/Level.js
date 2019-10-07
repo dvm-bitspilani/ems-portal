@@ -4,11 +4,11 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/teams";
 
+import { Link } from "react-router-dom";
 import ListItemText from "@material-ui/core/ListItemText";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import "./level.scss";
-import { Link } from "@material-ui/core";
 
 // const styles = {
 //   h1: {
@@ -69,12 +69,12 @@ class Level extends React.Component {
                 <Link
                   to={`${this.props.match.url}/team/${team.id}`}
                   onClick={() => {
-                    this.props.history.push(`/team`)
                     this.props.fetchTeamInfo(
                       this.props.eventId,
                       this.props.levelId,
                       team.id
-                    )
+                    );
+                    // this.props.history.push(`/team`)
                   }
                   }
                 >

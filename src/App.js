@@ -22,8 +22,8 @@ function App() {
         <Route component={RouterBreadcrumbs} path="/dashboard/*" exact />
         <Route component={Level} path="/dashboard/*" />
 
-        <Route component={AppBar} path="/team" exact/>
-        <Route component={TeamInfo} path="/team" exact/>
+        <Route component={AppBar} path="/team" />
+        <Route component={TeamInfo} path="/team" />
 
         <Route component={Contacts} path="/contacts/" />
       </Router>

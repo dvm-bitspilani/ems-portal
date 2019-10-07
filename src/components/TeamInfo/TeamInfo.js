@@ -24,29 +24,28 @@ const createTeamRows = (name, college, emsCode) => {
   return {name, college, emsCode};
 }
 
-const teamRows = [
-  createTeamRows("Participant-1", "BITS Pilani", "W23@12"),
-  createTeamRows("Participant-1", "BITS Pilani", "W23@12"),
-  createTeamRows("Participant-1", "BITS Pilani", "W23@12"),
-  createTeamRows("Participant-1", "BITS Pilani", "W23@12"),
-]
+// const teamRows = [
+//   createTeamRows("Participant-1", "BITS Pilani", "W23@12"),
+//   createTeamRows("Participant-1", "BITS Pilani", "W23@12"),
+//   createTeamRows("Participant-1", "BITS Pilani", "W23@12"),
+//   createTeamRows("Participant-1", "BITS Pilani", "W23@12"),
+// ]
 
 const createScoreRows = (level, score) => {
   return {level, score};
 }
 
-const scoreRows = [
-  createScoreRows("Level1", "23"),
-  createScoreRows("Level2", "46"),
-]
+// const scoreRows = [
+//   createScoreRows("Level1", "23"),
+//   createScoreRows("Level2", "46"),
+// ]
 
 function TeamInfo(props) {
+  console.log(props);
   const classes = useStyles();
+  const {team_info, participants, levels_info} = {...props.teamInfo};
 
-  const teamData = {...this.props.teamInfo};
-  const {team_info, participants, levels_info} = teamData;
-
-  /* ---------------- Structure of response onjects --------------------
+  /* ---------------- Structure of response objects --------------------
 
   team_info: {
     id,
@@ -73,9 +72,23 @@ function TeamInfo(props) {
   ]
 
   --------------------------------------------------------------------*/
+  let teamRows = [];
+  let scoreRows = [];
+
+  if (participants >= 1) {
+    teamRows = participants.map(person => (
+      createTeamRows(person.name, person.college, person.code)
+    ));
+  
+    scoreRows = levels_info.map(level => (
+      createScoreRows(level.name, level.score)
+    ));
+  }
+
   return (
     <div>
-      <Typography variant="h2">EMS-Team</Typography>
+      <Typography variant="h4">{team_info.name}</Typography>
+      <Typography variant="caption">{`ID:${team_info.id} | Code:${team_info.code}`}</Typography>
       <Typography variant="h4">Participants: </Typography>
 
       <div className={classes.tableContainer}>
