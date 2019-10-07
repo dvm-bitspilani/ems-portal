@@ -56,8 +56,8 @@ function TeamInfo(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {teamRows.map(row => (
-              <TableRow key={row.name}>
+            {teamRows.map((row,index) => (
+              <TableRow key={index}>
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
@@ -79,8 +79,8 @@ function TeamInfo(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {scoreRows.map(row => (
-              <TableRow key={row.name}>
+            {scoreRows.map((row,index) => (
+              <TableRow key={index}>
                 <TableCell component="th" scope="row">
                   {scoreRows.level}
                 </TableCell>

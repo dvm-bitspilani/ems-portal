@@ -8,6 +8,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import "./level.scss";
+import { Link } from "@material-ui/core";
 
 // const styles = {
 //   h1: {
@@ -65,17 +66,30 @@ class Level extends React.Component {
 
             return (
               <div className="teamName" key={index}>
-                <ListItemText
-                  primary={`${name}`}
-                  className="link"
-                  onClick={() =>
+                <Link
+                  to={`${this.props.match.url}/team/${team.id}`}
+                  onClick={() => {
+                    this.props.history.push(`/team`)
                     this.props.fetchTeamInfo(
                       this.props.eventId,
                       this.props.levelId,
                       team.id
                     )
                   }
-                />
+                  }
+                >
+                  <ListItemText
+                    primary={`${name}`}
+                    className="link"
+                    onClick={() =>
+                      this.props.fetchTeamInfo(
+                        this.props.eventId,
+                        this.props.levelId,
+                        team.id
+                      )
+                    }
+                  />
+                </Link>
                 <ListItemText
                   primary={`Total Score: ${score}`}
                   className="link"

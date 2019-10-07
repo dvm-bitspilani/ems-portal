@@ -6,6 +6,7 @@ import Level from "./containers/Level/level";
 import AppBar from "./components/AppBar/AppBar";
 import Contacts from "./components/Contacts/Contacts";
 import RouterBreadcrumbs from "./components/Breadcrumb/Breadcrumb";
+import TeamInfo from "./components/TeamInfo/TeamInfo";
 
 function App() {
   // const signIn=true;
@@ -20,6 +21,9 @@ function App() {
         <Route component={AppBar} path="/dashboard/*" exact />
         <Route component={RouterBreadcrumbs} path="/dashboard/*" exact />
         <Route component={Level} path="/dashboard/*" />
+
+        <Route component={AppBar} path="/team" exact/>
+        <Route component={TeamInfo} path="/team" exact/>
 
         <Route component={Contacts} path="/contacts/" />
       </Router>
