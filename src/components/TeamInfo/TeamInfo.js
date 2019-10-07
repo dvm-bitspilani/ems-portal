@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import {
   Typography,
   Table,
@@ -41,6 +42,37 @@ const scoreRows = [
 
 function TeamInfo(props) {
   const classes = useStyles();
+
+  const teamData = {...this.props.teamInfo};
+  const {team_info, participants, levels_info} = teamData;
+
+  /* ---------------- Structure of response onjects --------------------
+
+  team_info: {
+    id,
+    name,
+    code
+  }
+
+  participants: [
+    {
+      name,
+      college,
+      code
+    }
+    ...
+    ...
+  ]
+
+  levels_info: [
+    {
+      name,
+      level_inst_id,
+      score
+    }
+  ]
+
+  --------------------------------------------------------------------*/
   return (
     <div>
       <Typography variant="h2">EMS-Team</Typography>
@@ -94,4 +126,10 @@ function TeamInfo(props) {
   );
 }
 
-export default TeamInfo;
+const mapStateToProps = state => {
+  return {
+    teamInfo: state.teams.teamInfo
+  }
+}
+
+export default connect(mapStateToProps)(TeamInfo);
