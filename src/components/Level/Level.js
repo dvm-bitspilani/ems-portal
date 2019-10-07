@@ -74,20 +74,11 @@ class Level extends React.Component {
                       this.props.levelId,
                       team.id
                     );
-                    // this.props.history.push(`/team`)
-                  }
-                  }
+                  }}
                 >
                   <ListItemText
                     primary={`${name}`}
                     className="link"
-                    onClick={() =>
-                      this.props.fetchTeamInfo(
-                        this.props.eventId,
-                        this.props.levelId,
-                        team.id
-                      )
-                    }
                   />
                 </Link>
                 <ListItemText
