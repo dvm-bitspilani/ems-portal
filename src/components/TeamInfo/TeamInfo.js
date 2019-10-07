@@ -82,9 +82,9 @@ function TeamInfo(props) {
             {scoreRows.map((row,index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
-                  {scoreRows.level}
+                  {row.level}
                 </TableCell>
-                <TableCell align="left">{scoreRows.score}</TableCell>
+                <TableCell align="left">{row.score}</TableCell>
               </TableRow>
             ))}
           </TableBody>
