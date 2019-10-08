@@ -83,7 +83,7 @@ class Level extends React.Component {
                   className="link"
                 />
                 <Link
-                  to={`${this.props.match.url}/team/${team.id}update-score`}
+                  to={`/update-score/${team.id}`}
                 >
                   <Button
                     variant="contained"

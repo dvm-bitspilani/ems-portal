@@ -13,7 +13,7 @@ import {
 const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
-    width: "100vw",
+    width: "99vw",
     margin: "auto",
     background: "#eeeeee",
     paddingLeft: "20px",

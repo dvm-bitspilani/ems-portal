@@ -1,12 +1,12 @@
 import React from "react";
-import { Typography, TextField, Button } from "@material-ui/core";
-import makeStyles from "@material-ui/core/styles";
+import { Typography, TextField, Button, makeStyles } from "@material-ui/core";
+// import makeStyles from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200
+    width: 300
   }
 }));
 

@@ -15,16 +15,22 @@ function App() {
     <div>
       <Router>
         <Route component={SignIn} path="/" exact />
-        <Route component={AppBar} path="/dashboard" exact />
+        {/* render AppBar in all routes */}
+        <Route component={AppBar} path="/dashboard" />
+        <Route component={AppBar} path="/update-score" />
+        <Route component={AppBar} path="/team" />
+        <Route component={AppBar} path="/contacts" />
+
+        {/* <Route component={AppBar} path="/dashboard" exact /> */}
         <Route component={RouterBreadcrumbs} path="/dashboard" exact />
         <Route component={Home} path="/dashboard" exact />
-
-        <Route component={AppBar} path="/dashboard/*" exact />
+        {/* <Route component={AppBar} path="/dashboard/*" exact /> */}
         <Route component={RouterBreadcrumbs} path="/dashboard/*" exact />
         <Route component={Level} path="/dashboard/*" />
-        <Route component={UpdateScore} path="/dashboard/*" />
 
-        <Route component={AppBar} path="/team" />
+        <Route component={UpdateScore} path="/update-score" />
+
+        {/* <Route component={AppBar} path="/team" /> */}
         <Route component={TeamInfo} path="/team" />
 
         <Route component={Contacts} path="/contacts/" />

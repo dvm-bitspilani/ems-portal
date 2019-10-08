@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TopBar = (props) => {
+const TopBar = props => {
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -70,7 +70,7 @@ const TopBar = (props) => {
       </List>
     </div>
   );
-
+  console.log(props);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -92,7 +92,7 @@ const TopBar = (props) => {
             onClick={() => {
               logout()
                 .then(() => {
-                  props.history.replace("/")
+                  props.history.replace("/");
                 })
                 .catch(console.error);
             }}
