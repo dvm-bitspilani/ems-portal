@@ -76,18 +76,23 @@ class Level extends React.Component {
                     );
                   }}
                 >
-                  <ListItemText
-                    primary={`${name}`}
-                    className="link"
-                  />
+                  <ListItemText primary={`${name}`} className="link" />
                 </Link>
                 <ListItemText
                   primary={`Total Score: ${score}`}
                   className="link"
                 />
-                <Button variant="contained" color="primary" className="button">
-                  Update Score
-                </Button>
+                <Link
+                  to={`${this.props.match.url}/team/${team.id}update-score`}
+                >
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className="button"
+                  >
+                    Update Score
+                  </Button>
+                </Link>
                 <Button
                   variant="contained"
                   color="secondary"
