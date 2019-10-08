@@ -12,9 +12,6 @@ import {
 } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 
-import RouterBreadcrumbs from "../Breadcrumb/Breadcrumb";
-import AppBar from "../AppBar/AppBar";
-
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -62,8 +59,6 @@ const Contacts = props => {
   const classes = useStyles();
   return (
     <div>
-      <AppBar />
-      <RouterBreadcrumbs/>
       <div className={classes.container}>
         <Typography component="p" className={classes.dashboard}>
           DASHBOARD
