@@ -20,8 +20,8 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     backgroundColor: grey[200],
-    height: "calc(100vh - 64px)",
-    padding: theme.spacing(0, 2)
+    height: "calc(100vh - 90px)",
+    padding: theme.spacing(2)
   },
   tabelContainer: {
     width: "100%",
