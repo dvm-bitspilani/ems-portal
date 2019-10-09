@@ -6,8 +6,9 @@
   - [ ] _Improve routing implementation_
   - [ ] _Resolve teamInfo route bug_
   - [ ] _Make styles consistent all over (especially on Desktop)_
-  - [ ] _Disable update button when score has been frozen_
+  - [x] _Disable update button when score has been frozen_
   - [ ] _Provide feedback on score update and freeze_
+  - [ ] _Change update score view to allow parameter wise scoring_
 
 ## EMS
 

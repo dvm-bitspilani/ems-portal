@@ -87,26 +87,30 @@ class Level extends React.Component {
                   primary={`Total Score: ${score}`}
                   className="link"
                 />
-                <Link to={`/update-score/${team.id}`}>
-                  {is_frozen ? (
+                {is_frozen ? (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    disabled
+                    className="button"
+                    onClick={() => {
+                      window.alert("Score for this level has been locked by the judge");
+                    }}
+                  >
+                    Update Score
+                  </Button>
+                ) : (
+                  <Link to={`/update-score/${team.id}`}>
                     <Button
                       variant="contained"
                       color="primary"
-                      disabled
                       className="button"
                     >
                       Update Score
                     </Button>
-                  ) : (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      className="button"
-                    >
-                      Update Score
-                    </Button>
-                  )}
-                </Link>
+                  </Link>
+                )}
+
                 <Button
                   variant="contained"
                   color="secondary"
