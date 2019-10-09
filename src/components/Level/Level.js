@@ -2,7 +2,7 @@
 
 import React from "react";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/teams";
+import * as actions from "../../store/actions/index";
 
 import { Link } from "react-router-dom";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -48,6 +48,11 @@ class Level extends React.Component {
   render() {
     console.log("Props for this level", this.props);
     const teams = [...this.props.teams];
+    const ids = {
+      eventId: this.props.eventId,
+      levelId: this.props.levelId,
+      teamId: this.props.teamId
+    };
 
     // structure of teams array from request
     // teams: [
@@ -82,9 +87,7 @@ class Level extends React.Component {
                   primary={`Total Score: ${score}`}
                   className="link"
                 />
-                <Link
-                  to={`/update-score/${team.id}`}
-                >
+                <Link to={`/update-score/${team.id}`}>
                   <Button
                     variant="contained"
                     color="primary"
@@ -97,6 +100,7 @@ class Level extends React.Component {
                   variant="contained"
                   color="secondary"
                   className="button"
+                  onClick={() => this.props.post_score_freeze(ids)}
                 >
                   Freeze
                 </Button>
@@ -114,6 +118,7 @@ const mapStateToProps = state => {
     teams: state.teams.teams,
     eventId: state.teams.eventId,
     levelId: state.teams.levelId,
+    teamId: state.teams.teamId,
     events: state.events.eventsList
   };
 };
@@ -121,7 +126,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchTeamInfo: (eventId, levelId, teamId) =>
-      dispatch(actions.fetchTeamInfo(eventId, levelId, teamId))
+      dispatch(actions.fetchTeamInfo(eventId, levelId, teamId)),
+    freezeScore: ids => dispatch(actions.post_score_freeze(ids))
   };
 };
 
