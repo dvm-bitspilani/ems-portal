@@ -2,10 +2,12 @@
 
 ## _To-do_
   - [x] _Add actions for update and freeze score_
-  - [ ] _Link above actions to UpdateScore and Level component_
+  - [x] _Link above actions to UpdateScore and Level component_
   - [ ] _Improve routing implementation_
   - [ ] _Resolve teamInfo route bug_
   - [ ] _Make styles consistent all over (especially on Desktop)_
+  - [ ] _Disable update button when score has been frozen_
+  - [ ] _Provide feedback on score update and freeze_
 
 ## EMS
 

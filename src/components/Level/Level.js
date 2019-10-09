@@ -67,7 +67,7 @@ class Level extends React.Component {
         <h1>Teams</h1>
         <div fixed="true" className="container">
           {teams.map((team, index) => {
-            const { name, score } = team;
+            const { name, score, is_frozen } = team;
 
             return (
               <div className="teamName" key={index}>
@@ -88,13 +88,24 @@ class Level extends React.Component {
                   className="link"
                 />
                 <Link to={`/update-score/${team.id}`}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className="button"
-                  >
-                    Update Score
-                  </Button>
+                  {is_frozen ? (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disabled
+                      className="button"
+                    >
+                      Update Score
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className="button"
+                    >
+                      Update Score
+                    </Button>
+                  )}
                 </Link>
                 <Button
                   variant="contained"
