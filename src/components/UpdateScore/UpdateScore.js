@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/score";
 import {
   Typography,
   TextField,
@@ -13,11 +15,11 @@ const useStyles = makeStyles(theme => ({
   container: {
     backgroundColor: grey[200],
     height: "calc(100vh - 90px)",
-    padding: theme.spacing(2),
+    padding: theme.spacing(2)
     // paddingTop: theme.spacing(2)
   },
   paper: {
-    padding: theme.spacing(3, 2),
+    padding: theme.spacing(3, 2)
   },
   textField: {
     marginBottom: theme.spacing(4),
@@ -25,8 +27,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UpdateScore = (props) => {
+const UpdateScore = props => {
   const classes = useStyles();
+  const ids = {
+    eventId: props.eventId,
+    levelId: props.levelId,
+    teamId: props.teamId
+  };
   console.log(props);
 
   return (
@@ -42,7 +49,12 @@ const UpdateScore = (props) => {
             margin="normal"
           />
         </form>
-        <Button variant="contained" color="primary" className="button">
+        <Button
+          variant="contained"
+          color="primary"
+          className="button"
+          onClick={() => props.updateScore(ids)}
+        >
           Update
         </Button>
       </Paper>
@@ -50,4 +62,21 @@ const UpdateScore = (props) => {
   );
 };
 
-export default UpdateScore;
+const mapStateToProps = state => {
+  return {
+    eventId: state.teams.eventId,
+    levelId: state.teams.levelId,
+    teamId: state.teams.teamId
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateScore: ids => dispatch(actions.post_freeze_update(ids))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UpdateScore);

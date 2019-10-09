@@ -13,6 +13,7 @@ export const populateTeamInfo = teamInfo => {
   return {
     type: actionTypes.POPULATE_TEAM_INFO,
     teamInfo: teamInfo,
+    teamId: teamInfo.team_info.id
   };
 };
 

@@ -1,7 +1,7 @@
 # Event Management System ([OASIS '19](https://bits-oasis.org/))   
 
 ## _To-do_
-  - [ ] _Add actions for update and freeze score_
+  - [x] _Add actions for update and freeze score_
   - [ ] _Link above actions to UpdateScore and Level component_
   - [ ] _Improve routing implementation_
   - [ ] _Resolve teamInfo route bug_
