@@ -6,7 +6,7 @@ import React from "react";
 import { ListItem, ListItemText } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/teams";
+import * as actions from "../../store/actions/index";
 
 const style = {
   listItem: {

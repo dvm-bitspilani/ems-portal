@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/score";
+import * as actions from "../../store/actions/index";
 import {
   Typography,
   TextField,
@@ -72,7 +72,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateScore: ids => dispatch(actions.post_freeze_update(ids))
+    updateScore: ids => dispatch(actions.post_score_freeze(ids))
   };
 };
 
