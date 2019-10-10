@@ -4,11 +4,13 @@
   - [x] _Add actions for update and freeze score_
   - [x] _Link above actions to UpdateScore and Level component_
   - [ ] _Improve routing implementation_
-  - [ ] _Resolve teamInfo route bug_
+  - [x] _Resolve teamInfo route bug_
   - [ ] _Make styles consistent all over (especially on Desktop)_
   - [x] _Disable update button when score has been frozen_
   - [ ] _Provide feedback on score update and freeze_
-  - [ ] _Change update score view to allow parameter wise scoring_
+  - [x] _Change update score view to allow parameter wise scoring_
+  - [ ] _Handle inputs in update score view_
+  - [ ] _Key Logger_
 
 ## EMS
 
