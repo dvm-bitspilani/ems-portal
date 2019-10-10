@@ -8,9 +8,10 @@ export const updateScore = () => {
   };
 };
 
-export const freezeScore = () => {
+export const freezeScore = (teamId) => {
   return {
-    type: actions.FREEZE_SCORE
+    type: actions.FREEZE_SCORE,
+    teamId: teamId
   };
 };
 
@@ -75,7 +76,7 @@ export const post_score_freeze = ids => {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        dispatch(freezeScore());
+        dispatch(freezeScore(teamId));
       })
       .catch(console.error);
   };

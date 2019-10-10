@@ -13,6 +13,11 @@ const reducer = (state = initialState, action) => {
         ...state
       }
     case actions.POPULATE_PARAMS:
+      // for (let team in state.teams.teams) {
+      //   if (team.id === action.teamId) {
+      //     team.is_frozen = 1;
+      //   }
+      // }
       return {
         ...state,
         params_info: action.params_info

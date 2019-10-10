@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import Spinner from "../Spinner/Spinner";
+import useScores from "./InputHook";
 // import makeStyles from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -37,13 +38,14 @@ const UpdateScore = props => {
   };
   console.log(props);
 
-  const paramIds = [];
-  if (props.params_info !== undefined) {
-    for (let parameter of props.params_info) {
-      paramIds.push(parameter.parameter_id);
-    }
-  }
+  // const paramIds = [];
+  // if (props.params_info !== undefined) {
+  //   for (let parameter of props.params_info) {
+  //     paramIds.push(parameter.parameter_id);
+  //   }
+  // }
 
+  const {handleSubmit, handleInputChange, inputs} = useScores();
   return (
     <div>
       {props.params_info === undefined ? (
@@ -62,18 +64,22 @@ const UpdateScore = props => {
               return (
                 <div id={parameter_id} key={index}>
                   <Typography variant="caption">{parameter_name}</Typography>
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <TextField
                       id="score"
                       label="Score"
                       className={classes.textField}
                       margin="normal"
+                      onChange={handleInputChange}
+                      value={inputs.score}
                     />
                     <TextField
                       id="comments"
                       label="Comments"
                       className={classes.textField}
                       margin="normal"
+                      onChange={handleInputChange}
+                      value={inputs.comments}
                     />
                   </form>
                 </div>

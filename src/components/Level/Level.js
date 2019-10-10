@@ -48,6 +48,7 @@ class Level extends React.Component {
   render() {
     // console.log("Props for this level", this.props);
     const teams = [...this.props.teams];
+    console.log("teamId from Level.js props", this.props.teamId)
     // const ids = {
     //   eventId: this.props.eventId,
     //   levelId: this.props.levelId,
@@ -73,6 +74,7 @@ class Level extends React.Component {
               levelId: this.props.levelId,
               teamId: team.id
             };
+            console.log("[IDs from Level.js]",ids);
 
             return (
               <div className="teamName" key={index}>
@@ -125,7 +127,7 @@ class Level extends React.Component {
                   variant="contained"
                   color="secondary"
                   className="button"
-                  onClick={() => this.props.post_score_freeze(ids)}
+                  onClick={() => this.props.freezeScore(ids)}
                 >
                   Freeze
                 </Button>
@@ -143,7 +145,6 @@ const mapStateToProps = state => {
     teams: state.teams.teams,
     eventId: state.teams.eventId,
     levelId: state.teams.levelId,
-    teamId: state.teams.teamId,
     events: state.events.eventsList
   };
 };
