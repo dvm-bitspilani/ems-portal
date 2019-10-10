@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+const rootURL = "https://testwallet.bits-oasis.org/ems/judge/events"
 
 export const populateTeams = (teamsList, eventId, levelId) => {
   return {
@@ -37,7 +38,7 @@ export const fetchTeams = (eventId, levelId) => {
   const access = localStorage.getItem("access");
   return dispatch => {
     fetch(
-      `http://test1.bits-oasis.org/ems/judge/events/${eventId}/levels/${levelId}`,
+      `${rootURL}/${eventId}/levels/${levelId}`,
       {
         method: "GET",
         headers: {
@@ -59,7 +60,7 @@ export const fetchTeamInfo = (eventId, levelId, teamId) => {
   const access = localStorage.getItem("access");
   return dispatch => {
     fetch(
-      `http://test1.bits-oasis.org/ems/judge/events/${eventId}/levels/${levelId}/team/${teamId}`,
+      `${rootURL}/${eventId}/levels/${levelId}/team/${teamId}`,
       {
         method: "GET",
         headers: {

@@ -72,7 +72,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateScore: ids => dispatch(actions.post_score_freeze(ids))
+    updateScore: ids => dispatch(actions.post_score_update(ids))
   };
 };
 
