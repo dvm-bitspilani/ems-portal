@@ -9,6 +9,7 @@ import {
   Paper
 } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
+import Spinner from "../Spinner/Spinner";
 // import makeStyles from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -37,43 +38,51 @@ const UpdateScore = props => {
   console.log(props);
 
   return (
-    <div className={classes.container}>
-      <Paper className={classes.paper}>
-        <Typography variant="h4">Update Score</Typography>
-        <Typography>Please type in the updated scores and comments:</Typography>
+    <div>
+      {props.params_info === undefined ? (
+        <Spinner />
+      ) : (
+        <div className={classes.container}>
+          <Paper className={classes.paper}>
+            <Typography variant="h4">Update Score</Typography>
+            <Typography>
+              Please type in the updated scores and comments:
+            </Typography>
 
-        {props.params_info.map((parameter, index) => {
-          const { parameter_name, parameter_id } = parameter;
+            {props.params_info.map((parameter, index) => {
+              const { parameter_name, parameter_id } = parameter;
 
-          return (
-            <div id={parameter_id}>
-              <Typography variant="caption">{parameter_name}</Typography>
-              <form>
-                <TextField
-                  id="score"
-                  label="Score"
-                  className={classes.textField}
-                  margin="normal"
-                />
-                <TextField
-                  id="comments"
-                  label="Comments"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </form>
-            </div>
-          );
-        })}
-        <Button
-          variant="contained"
-          color="primary"
-          className="button"
-          onClick={() => props.updateScore(ids)}
-        >
-          Update
-        </Button>
-      </Paper>
+              return (
+                <div id={parameter_id} key={index}>
+                  <Typography variant="caption">{parameter_name}</Typography>
+                  <form>
+                    <TextField
+                      id="score"
+                      label="Score"
+                      className={classes.textField}
+                      margin="normal"
+                    />
+                    <TextField
+                      id="comments"
+                      label="Comments"
+                      className={classes.textField}
+                      margin="normal"
+                    />
+                  </form>
+                </div>
+              );
+            })}
+            <Button
+              variant="contained"
+              color="primary"
+              className="button"
+              onClick={() => props.updateScore(ids)}
+            >
+              Update
+            </Button>
+          </Paper>
+        </div>
+      )}
     </div>
   );
 };

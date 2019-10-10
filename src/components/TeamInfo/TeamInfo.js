@@ -99,7 +99,7 @@ const TeamInfo = props => {
           <Paper className={classes.paper}>
             <Typography variant="h4">{team_info.name}</Typography>
             <Typography variant="caption">{`ID:${team_info.id} | Code:${team_info.code}`}</Typography>
-            <Typography variant="h4">Participants: </Typography>
+            <Typography variant="h6" style={{marginTop: "30px"}}>Participants: </Typography>
 
             <div className={classes.tableContainer}>
               <Table className={classes.table}>
@@ -124,7 +124,7 @@ const TeamInfo = props => {
               </Table>
             </div>
 
-            <Typography variant="h4">Scores:</Typography>
+            <Typography variant="h6" style={{marginTop: "30px"}}>Scores:</Typography>
             <div className={classes.tableContainer}>
               <Table className={classes.table}>
                 <TableHead>
