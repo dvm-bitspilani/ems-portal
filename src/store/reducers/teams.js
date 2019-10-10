@@ -18,6 +18,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         teamInfo: action.teamInfo,
+        teamId: action.teamId
       }
     default:
       return state;

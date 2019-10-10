@@ -1,7 +1,5 @@
 import * as actions from "./actionTypes";
 
-// access token to be included in all requests
-const access = localStorage.getItem("access");
 const rootURL = "https://testwallet.bits-oasis.org/ems/judge/events";
 
 export const updateScore = () => {
@@ -44,6 +42,7 @@ export const fetch_params = ids => {
 
 export const post_score_update = ids => {
   const { eventId, levelId, teamId } = ids;
+  const access = localStorage.getItem("access");
   return dispatch => {
     fetch(`${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score`, {
       method: "POST",
@@ -62,7 +61,7 @@ export const post_score_update = ids => {
 
 export const post_score_freeze = ids => {
   const { eventId, levelId, teamId } = ids;
-
+  const access = localStorage.getItem("access");
   return dispatch => {
     fetch(
       `${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score/freeze`,
