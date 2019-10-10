@@ -10,11 +10,11 @@ export const populateTeams = (teamsList, eventId, levelId) => {
   };
 };
 
-export const populateTeamInfo = teamInfo => {
+export const populateTeamInfo = (teamInfo, teamId) => {
   return {
     type: actionTypes.POPULATE_TEAM_INFO,
     teamInfo: teamInfo,
-    teamId: teamInfo.team_info.id
+    teamId: teamId
   };
 };
 
@@ -71,7 +71,7 @@ export const fetchTeamInfo = (eventId, levelId, teamId) => {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        dispatch(populateTeamInfo(data));
+        dispatch(populateTeamInfo(data, teamId));
       })
       .catch(console.error);
   };

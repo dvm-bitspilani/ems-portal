@@ -11,3 +11,4 @@ export const POPULATE_TEAM_INFO = "POPULATE_TEAM_INFO";
 // actions to manage score update on server
 export const UPDATE_SCORE = "UPDATE_SCORE";
 export const FREEZE_SCORE = "FREEZE_SCORE"; 
+export const POPULATE_PARAMS = "POPULATE_PARAMS";

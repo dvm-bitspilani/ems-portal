@@ -12,6 +12,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state
       }
+    case actions.POPULATE_PARAMS:
+      return {
+        ...state,
+        params_info: action.params_info
+      }
     default:
       return state;
   }

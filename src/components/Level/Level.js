@@ -68,6 +68,11 @@ class Level extends React.Component {
         <div fixed="true" className="container">
           {teams.map((team, index) => {
             const { name, score, is_frozen } = team;
+            const ids = {
+              eventId: this.props.eventId,
+              levelId: this.props.levelId,
+              teamId: team.id
+            };
 
             return (
               <div className="teamName" key={index}>
@@ -94,13 +99,18 @@ class Level extends React.Component {
                     disabled
                     className="button"
                     onClick={() => {
-                      window.alert("Score for this level has been locked by the judge");
+                      window.alert(
+                        "Score for this level has been locked by the judge"
+                      );
                     }}
                   >
                     Update Score
                   </Button>
                 ) : (
-                  <Link to={`/update-score/${team.id}`}>
+                  <Link
+                    to={`/update-score/${team.id}`}
+                    onClick={() => this.props.fetchParams(ids)}
+                  >
                     <Button
                       variant="contained"
                       color="primary"
@@ -142,7 +152,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchTeamInfo: (eventId, levelId, teamId) =>
       dispatch(actions.fetchTeamInfo(eventId, levelId, teamId)),
-    freezeScore: ids => dispatch(actions.post_score_freeze(ids))
+    freezeScore: ids => dispatch(actions.post_score_freeze(ids)),
+    fetchParams: ids => dispatch(actions.fetch_params(ids))
   };
 };
 

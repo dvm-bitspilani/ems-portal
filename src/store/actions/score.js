@@ -16,6 +16,31 @@ export const freezeScore = () => {
   };
 };
 
+export const populateParams = params_info => {
+  return {
+    type: actions.POPULATE_PARAMS,
+    params_info: params_info
+  };
+};
+
+export const fetch_params = ids => {
+  const { eventId, levelId, teamId } = ids;
+  return dispatch => {
+    fetch(`${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${access}`
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        dispatch(populateParams(data.parameters_info));
+      })
+      .catch();
+  };
+};
+
 export const post_score_update = ids => {
   const { eventId, levelId, teamId } = ids;
   return dispatch => {
@@ -28,7 +53,7 @@ export const post_score_update = ids => {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        dispatch(actions.UPDATE_SCORE)
+        dispatch(updateScore());
       })
       .catch(console.error);
   };
@@ -50,7 +75,7 @@ export const post_score_freeze = ids => {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        dispatch(actions.FREEZE_SCORE)
+        dispatch(freezeScore());
       })
       .catch(console.error);
   };
