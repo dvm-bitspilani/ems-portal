@@ -25,9 +25,10 @@ export const populateParams = params_info => {
 
 export const fetch_params = ids => {
   const { eventId, levelId, teamId } = ids;
+  const access = localStorage.getItem("access");
   return dispatch => {
     fetch(`${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score`, {
-      method: "POST",
+      method: "GET",
       headers: {
         Authorization: `Bearer ${access}`
       }

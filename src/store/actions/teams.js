@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-const rootURL = "https://testwallet.bits-oasis.org/ems/judge/events"
+const rootURL = "https://testwallet.bits-oasis.org/ems/judge/events";
 
 export const populateTeams = (teamsList, eventId, levelId) => {
   return {
@@ -37,15 +37,12 @@ RESPONSE: {
 export const fetchTeams = (eventId, levelId) => {
   const access = localStorage.getItem("access");
   return dispatch => {
-    fetch(
-      `${rootURL}/${eventId}/levels/${levelId}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${access}`
-        }
+    fetch(`${rootURL}/${eventId}/levels/${levelId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${access}`
       }
-    )
+    })
       .then(response => response.json())
       .then(data => {
         // data contains array "teams_info" with the team list
@@ -59,15 +56,12 @@ export const fetchTeams = (eventId, levelId) => {
 export const fetchTeamInfo = (eventId, levelId, teamId) => {
   const access = localStorage.getItem("access");
   return dispatch => {
-    fetch(
-      `${rootURL}/${eventId}/levels/${levelId}/team/${teamId}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${access}`
-        }
+    fetch(`${rootURL}/${eventId}/levels/${levelId}/team/${teamId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${access}`
       }
-    )
+    })
       .then(response => response.json())
       .then(data => {
         console.log(data);
