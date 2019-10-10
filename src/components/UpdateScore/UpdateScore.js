@@ -37,6 +37,13 @@ const UpdateScore = props => {
   };
   console.log(props);
 
+  const paramIds = [];
+  if (props.params_info !== undefined) {
+    for (let parameter of props.params_info) {
+      paramIds.push(parameter.parameter_id);
+    }
+  }
+
   return (
     <div>
       {props.params_info === undefined ? (
