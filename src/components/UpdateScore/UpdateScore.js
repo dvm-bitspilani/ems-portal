@@ -40,15 +40,31 @@ const UpdateScore = props => {
     <div className={classes.container}>
       <Paper className={classes.paper}>
         <Typography variant="h4">Update Score</Typography>
-        <Typography>Please type in the updated score:</Typography>
-        <form>
-          <TextField
-            id="standard-name"
-            label="Score"
-            className={classes.textField}
-            margin="normal"
-          />
-        </form>
+        <Typography>Please type in the updated scores and comments:</Typography>
+
+        {props.params_info.map((parameter, index) => {
+          const { parameter_name, parameter_id } = parameter;
+
+          return (
+            <div id={parameter_id}>
+              <Typography variant="caption">{parameter_name}</Typography>
+              <form>
+                <TextField
+                  id="score"
+                  label="Score"
+                  className={classes.textField}
+                  margin="normal"
+                />
+                <TextField
+                  id="comments"
+                  label="Comments"
+                  className={classes.textField}
+                  margin="normal"
+                />
+              </form>
+            </div>
+          );
+        })}
         <Button
           variant="contained"
           color="primary"
@@ -66,7 +82,8 @@ const mapStateToProps = state => {
   return {
     eventId: state.teams.eventId,
     levelId: state.teams.levelId,
-    teamId: state.teams.teamId
+    teamId: state.teams.teamId,
+    params_info: state.score.params_info
   };
 };
 

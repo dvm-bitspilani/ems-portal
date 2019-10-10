@@ -37,7 +37,7 @@ export const fetch_params = ids => {
         console.log(data);
         dispatch(populateParams(data.parameters_info));
       })
-      .catch();
+      .catch(console.error);
   };
 };
 
