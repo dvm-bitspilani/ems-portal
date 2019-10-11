@@ -11,7 +11,6 @@ export default async function fetchEvents() {
     .then(response => response.json())
     // data will contain the list of events
     .then(data => {
-      console.log(data);
       return data;
       // populate events list with this data
     })

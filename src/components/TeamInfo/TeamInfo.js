@@ -67,7 +67,6 @@ const createScoreRows = (level, score) => {
 const TeamInfo = props => {
   const classes = useStyles();
 
-  console.log(props);
   let teamRows = [];
   let scoreRows = [];
 

@@ -53,7 +53,6 @@ function RouterBreadcrumbs() {
       <Route>
         {() => {
           let pathnames = window.location.pathname.split("/").filter(x => x);
-          // console.log(pathnames);
           return (
             <Breadcrumbs aria-label="breadcrumb">
               <Link to="/dashboard" className={classes.links}>
@@ -67,7 +66,6 @@ function RouterBreadcrumbs() {
                 const to = `/dashboard/${pathnames
                   .slice(0, index + 1)
                   .join("/")}`;
-                // console.log(to);
                 return last ? (
                   <Typography
                     color="textPrimary"

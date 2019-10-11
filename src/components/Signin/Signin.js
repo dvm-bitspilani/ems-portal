@@ -55,7 +55,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SignIn(props) {
-  // console.log(props);
 
   const classes = useStyles();
   const [username, setUser] = useState("");

@@ -70,7 +70,6 @@ const TopBar = props => {
       </List>
     </div>
   );
-  // console.log(props);
   return (
     <div className={classes.root}>
       <AppBar position="static">

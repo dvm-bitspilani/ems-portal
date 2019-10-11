@@ -46,14 +46,7 @@ class Level extends React.Component {
   }
 
   render() {
-    // console.log("Props for this level", this.props);
     const teams = [...this.props.teams];
-    console.log("teamId from Level.js props", this.props.teamId)
-    // const ids = {
-    //   eventId: this.props.eventId,
-    //   levelId: this.props.levelId,
-    //   teamId: this.props.teamId
-    // };
 
     // structure of teams array from request
     // teams: [
@@ -74,7 +67,6 @@ class Level extends React.Component {
               levelId: this.props.levelId,
               teamId: team.id
             };
-            console.log("[IDs from Level.js]",ids);
 
             return (
               <div className="teamName" key={index}>

@@ -36,7 +36,6 @@ const UpdateScore = props => {
     levelId: props.levelId,
     teamId: props.teamId
   };
-  console.log(props);
 
   // const paramIds = [];
   // if (props.params_info !== undefined) {

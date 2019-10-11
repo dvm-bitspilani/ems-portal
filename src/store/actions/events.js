@@ -3,7 +3,7 @@ import * as actionTypes from "../actions/actionTypes";
 export const updateEventsList = events => {
   return {
     type: actionTypes.UPDATE_EVENTS_LIST,
-    events: events
+    events: events ? events : []
   };
 };
 
@@ -30,7 +30,6 @@ export const fetchEvents = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         dispatch(updateEventsList(data.events_info))
       })
       .catch(console.error);

@@ -55,7 +55,6 @@ const rows = [
 ];
 
 const Contacts = props => {
-  // console.log(props);
   const classes = useStyles();
   return (
     <div>

@@ -34,7 +34,6 @@ export const fetch_params = ids => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         dispatch(populateParams(data.parameters_info));
       })
       .catch(console.error);
@@ -53,7 +52,6 @@ export const post_score_update = ids => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         dispatch(updateScore());
       })
       .catch(console.error);
@@ -75,7 +73,6 @@ export const post_score_freeze = ids => {
     )
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         dispatch(freezeScore(teamId));
       })
       .catch(console.error);
