@@ -91,6 +91,7 @@ const Level = props => {
                         team.id
                       );
                     }}
+                    className="linkTeamName"
                   >
                     <ListItemText primary={`${name}`} className="link" />
                   </Link>
@@ -124,17 +125,17 @@ const Level = props => {
                       >
                         Update Score
                       </Button>
-                    </Link>
+                    </Link> 
                   )}
 
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    className="button"
-                    // onClick={() => props.freezeScore(ids)}
-                  >
-                    <div onClick={handleClickOpen}>Freeze</div>
-                  </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      className="button"
+                      // onClick={() => props.freezeScore(ids)}
+                    >
+                      <div onClick={handleClickOpen}>Freeze</div>
+                    </Button>
                 </div>
               );
             })}
