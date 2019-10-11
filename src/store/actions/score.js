@@ -8,7 +8,7 @@ export const updateScore = () => {
   };
 };
 
-export const freezeScore = (teamId) => {
+export const freezeScore = teamId => {
   return {
     type: actions.FREEZE_SCORE,
     teamId: teamId
@@ -41,12 +41,58 @@ export const fetch_params = ids => {
   };
 };
 
-export const post_score_update = ids => {
+export const post_score_update = (ids, params_details) => {
+  // ------ prepare body to send over request ---------
+  /*  structure of params_details
+    {
+     1:{
+       score: "",
+       comments: ""
+     }
+     2: {
+       score: "",
+       comments: ""
+     }
+     ...
+     ...
+   }
+  */
+  const param_ids = [];
+  const values = [];
+  const comments = [];
+  // eslint-disable-next-line no-unused-vars
+  // for (let param in params_details) {
+  //   if (param === 0) continue;
+  //   param_ids.push(param);
+  // }
+
+  Object.keys(params_details).forEach(param => {
+    let id = parseInt(param);
+    if (id !== 0) {
+      param_ids.push(id);
+    }
+  })
+  param_ids.forEach(param => {
+    values.push(parseInt(params_details[param].score));
+    comments.push(params_details[param].comments);
+  })
+  // arrays populated
+  // make object to be stringified later and
+  // populate object with above arrays
+  const postData = {};
+  postData["param_ids"] = param_ids;
+  postData["values"] = values;
+  postData["comments"] = comments;
+  console.log(postData);
+
+  // ---------------------------------------------------
+
   const { eventId, levelId, teamId } = ids;
   const access = localStorage.getItem("access");
   return dispatch => {
     fetch(`${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score`, {
       method: "POST",
+      body: JSON.stringify(postData),
       headers: {
         Authorization: `Bearer ${access}`
       }
@@ -67,6 +113,7 @@ export const post_score_freeze = ids => {
       `${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score/freeze`,
       {
         method: "POST",
+        body: JSON.stringify({}),
         headers: {
           Authorization: `Bearer ${access}`
         }

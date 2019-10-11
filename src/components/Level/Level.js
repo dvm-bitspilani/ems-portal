@@ -1,5 +1,5 @@
 // renders list of teams for a particular level
-import React from "react";
+import React, {useState} from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import { Link } from "react-router-dom";
@@ -9,6 +9,12 @@ import {
   Button,
   ListItemText,
   Paper,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
   makeStyles
 } from "@material-ui/core";
 import "./level.scss";
@@ -32,12 +38,33 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(3, 2)
-  },
+  }
 }));
+
+function useForceUpdate(){
+  const [value, set] = useState(true); //boolean state
+  return () => set(!value); // toggle the state to force render
+}
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const Level = props => {
   const classes = useStyles();
-  const teams = [...props.teams]
+  const teams = [...props.teams];
+  const [open, setOpen] = React.useState(false);
+
+  const forceUpdate = useForceUpdate();
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    // props.history.goBack();
+    forceUpdate();
+  };
 
   return (
     <div className={classes.container}>
@@ -104,9 +131,9 @@ const Level = props => {
                     variant="contained"
                     color="secondary"
                     className="button"
-                    onClick={() => props.freezeScore(ids)}
+                    // onClick={() => props.freezeScore(ids)}
                   >
-                    Freeze
+                    <div onClick={handleClickOpen}>Freeze</div>
                   </Button>
                 </div>
               );
@@ -114,6 +141,28 @@ const Level = props => {
           </div>
         </Paper>
       </Container>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">
+          {"Score frozen!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            The total score for this team has been frozen. You will not be able to alter the score.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Okay
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

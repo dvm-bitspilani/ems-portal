@@ -10,6 +10,7 @@ const useScores = callback => {
 
   const handleInputChange = e => {
     e.persist();
+    console.log(e.target.name,":",e.target.value)
     setInputs(inputs => ({ ...inputs, [e.target.name]: e.target.value }));
   };
   return {
