@@ -20,7 +20,8 @@ const reducer = (state = initialState, action) => {
       // }
       return {
         ...state,
-        params_info: action.params_info
+        params_info: action.params_info,
+        teamId: action.teamId
       }
     default:
       return state;

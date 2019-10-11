@@ -15,10 +15,11 @@ export const freezeScore = (teamId) => {
   };
 };
 
-export const populateParams = params_info => {
+export const populateParams = data => {
   return {
     type: actions.POPULATE_PARAMS,
-    params_info: params_info
+    params_info: data.parameters_info,
+    teamId: data.team_id
   };
 };
 
@@ -34,7 +35,7 @@ export const fetch_params = ids => {
     })
       .then(response => response.json())
       .then(data => {
-        dispatch(populateParams(data.parameters_info));
+        dispatch(populateParams(data));
       })
       .catch(console.error);
   };

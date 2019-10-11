@@ -35,8 +35,7 @@ const UpdateScore = props => {
     eventId: props.eventId,
     levelId: props.levelId,
     teamId: props.teamId
-  };
-
+  }
   // const paramIds = [];
   // if (props.params_info !== undefined) {
   //   for (let parameter of props.params_info) {
@@ -103,7 +102,7 @@ const mapStateToProps = state => {
   return {
     eventId: state.teams.eventId,
     levelId: state.teams.levelId,
-    teamId: state.teams.teamId,
+    teamId: state.score.teamId,
     params_info: state.score.params_info
   };
 };
