@@ -5,9 +5,12 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 
 import { Link } from "react-router-dom";
-import ListItemText from "@material-ui/core/ListItemText";
-import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
+// import ListItemText from "@material-ui/core/ListItemText";
+// import Container from "@material-ui/core/Container";
+// import Button from "@material-ui/core/Button";
+
+import { Typography, Container, Button, ListItemText } from "@material-ui/core";
+
 import "./level.scss";
 
 // const styles = {
@@ -58,7 +61,7 @@ class Level extends React.Component {
     // ]
     return (
       <Container fixed>
-        <h1>Teams</h1>
+        <Typography variant="h2">Teams</Typography>
         <div fixed="true" className="container">
           {teams.map((team, index) => {
             const { name, score, is_frozen } = team;

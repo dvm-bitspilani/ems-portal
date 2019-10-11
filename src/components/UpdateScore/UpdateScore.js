@@ -39,7 +39,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+// ------------------ Update Score component -------------------
+
 const UpdateScore = props => {
+  // renders inut fields and uses the keylogger to 
+  // record scores entered by judge
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -49,6 +53,7 @@ const UpdateScore = props => {
 
   const handleClose = () => {
     setOpen(false);
+    props.history.goBack()
   };
 
   const ids = {
@@ -81,7 +86,7 @@ const UpdateScore = props => {
 
               return (
                 <div id={parameter_id} key={index}>
-                  <Typography variant="caption">{parameter_name}</Typography>
+                  <Typography variant="body1">{parameter_name}</Typography>
                   <form onSubmit={handleSubmit}>
                     <TextField
                       id="score"
@@ -107,13 +112,14 @@ const UpdateScore = props => {
               variant="contained"
               color="primary"
               className="button"
-              onClick={() => props.updateScore(ids)}
+              // onClick={() => props.updateScore(ids)}
             >
               <div
-                onClick={() => {
-                  if (!props.updateScoreError) return handleClickOpen;
-                  else return null
-                }}
+                // onClick={() => {
+                //   if (!props.updateScoreError) return handleClickOpen;
+                //   else return null;
+                // }}
+                onClick={handleClickOpen}
               >
                 Update
               </div>
@@ -128,21 +134,17 @@ const UpdateScore = props => {
             aria-describedby="alert-dialog-slide-description"
           >
             <DialogTitle id="alert-dialog-slide-title">
-              {"Use Google's location service?"}
+              {"Score updated successfully!"}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
-                Let Google help apps determine location. This means sending
-                anonymous location data to Google, even when no apps are
-                running.
+                The score for this team has been updated. Please note that any
+                changes made while entering the score have also been recorded.
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} color="primary">
-                Disagree
-              </Button>
-              <Button onClick={handleClose} color="primary">
-                Agree
+                Return to Teams
               </Button>
             </DialogActions>
           </Dialog>
