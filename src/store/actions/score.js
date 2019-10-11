@@ -83,6 +83,12 @@ export const post_score_update = (ids, params_details) => {
   postData["param_ids"] = param_ids;
   postData["values"] = values;
   postData["comments"] = comments;
+
+  // hard coded keylogs for testing
+  postData["keylogs"] = [
+    "23"
+  ]
+
   console.log(postData);
 
   // ---------------------------------------------------
@@ -90,11 +96,13 @@ export const post_score_update = (ids, params_details) => {
   const { eventId, levelId, teamId } = ids;
   const access = localStorage.getItem("access");
   return dispatch => {
-    fetch(`${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score`, {
+    fetch(`${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score/`, {
       method: "POST",
+      // body: JSON.stringify(postData),
       body: JSON.stringify(postData),
       headers: {
-        Authorization: `Bearer ${access}`
+        Authorization: `Bearer ${access}`,
+        "Content-Type": "application/json"
       }
     })
       .then(response => response.json())
@@ -110,7 +118,7 @@ export const post_score_freeze = ids => {
   const access = localStorage.getItem("access");
   return dispatch => {
     fetch(
-      `${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score/freeze`,
+      `${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score/freeze/`,
       {
         method: "POST",
         body: JSON.stringify({}),

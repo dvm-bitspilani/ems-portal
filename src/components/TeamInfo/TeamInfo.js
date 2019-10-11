@@ -105,8 +105,8 @@ const TeamInfo = props => {
                 <TableHead>
                   <TableRow>
                     <TableCell align="left">Name</TableCell>
-                    <TableCell align="left">Phone</TableCell>
-                    <TableCell align="left">Email</TableCell>
+                    <TableCell align="left">College</TableCell>
+                    <TableCell align="left">Participant Code</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
