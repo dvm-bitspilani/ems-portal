@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import {
@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import Spinner from "../Spinner/Spinner";
-import useScores from "./InputHook";
+// import useScores from "./InputHook";
 // import makeStyles from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -42,10 +42,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 // ------------------ Update Score component -------------------
 
 const UpdateScore = props => {
-  // renders inut fields and uses the keylogger to 
+  // renders inut fields and uses the keylogger to
   // record scores entered by judge
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [inputs, setInputs] = useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -53,7 +54,7 @@ const UpdateScore = props => {
 
   const handleClose = () => {
     setOpen(false);
-    props.history.goBack()
+    props.history.goBack();
   };
 
   const ids = {
@@ -68,7 +69,8 @@ const UpdateScore = props => {
   //   }
   // }
 
-  const { handleSubmit, handleInputChange, inputs } = useScores();
+  // const { handleSubmit, handleInputChange, inputs } = useScores();
+  // const params_info = [];
   return (
     <div>
       {props.params_info === undefined ? (
@@ -83,26 +85,27 @@ const UpdateScore = props => {
 
             {props.params_info.map((parameter, index) => {
               const { parameter_name, parameter_id } = parameter;
+              // params_info.push({ parameter_id: { score: "", comments: "" } });
 
               return (
                 <div id={parameter_id} key={index}>
                   <Typography variant="body1">{parameter_name}</Typography>
-                  <form onSubmit={handleSubmit}>
+                  <form>
                     <TextField
-                      id="score"
+                      id={parameter_id}
                       label="Score"
                       className={classes.textField}
                       margin="normal"
-                      onChange={handleInputChange}
-                      value={inputs.score}
+                      // onChange={handleInputChange}
+                      name="score"
                     />
                     <TextField
-                      id="comments"
+                      id={parameter_id}
                       label="Comments"
                       className={classes.textField}
                       margin="normal"
-                      onChange={handleInputChange}
-                      value={inputs.comments}
+                      // onChange={handleInputChange}
+                      name="comments"
                     />
                   </form>
                 </div>
