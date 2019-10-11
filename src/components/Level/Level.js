@@ -1,139 +1,122 @@
 // renders list of teams for a particular level
-
 import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-
 import { Link } from "react-router-dom";
-// import ListItemText from "@material-ui/core/ListItemText";
-// import Container from "@material-ui/core/Container";
-// import Button from "@material-ui/core/Button";
-
-import { Typography, Container, Button, ListItemText } from "@material-ui/core";
-
+import {
+  Typography,
+  Container,
+  Button,
+  ListItemText,
+  Paper,
+  makeStyles
+} from "@material-ui/core";
 import "./level.scss";
+import { grey } from "@material-ui/core/colors";
 
-// const styles = {
-//   h1: {
-//     "font-family": "Roboto, Helvetica, Arial, sans-serif"
-//   },
-//   button: {
-//     margin: "10px"
-//   },
-//   container: {
-//     overflow: "scroll",
-//     width: "100%",
-//     margin: "1vw auto",
-//     display: "flex",
-//     gridTemplateColumns:
-//       "[first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end]"
-//   },
-//   link: {
-//     width: "140px"
+// structure of teams array from request
+// teams: [
+//   {
+//     teamName,
+//     teamId,
+//     score
 //   }
-// };
+// ]
 
-class Level extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      eventName: "Rap Wars 2",
-      level: 2
-    };
-  }
-  UNSAFE_componentWillMount() {
-    this.setState({
-      eventName: this.props.eventName,
-      level: this.props.level
-    });
-  }
+const useStyles = makeStyles(theme => ({
+  container: {
+    backgroundColor: grey[200],
+    height: "calc(100vh - 130px)",
+    padding: theme.spacing(2)
+    // paddingTop: theme.spacing(2)
+  },
+  paper: {
+    padding: theme.spacing(3, 2)
+  },
+}));
 
-  render() {
-    const teams = [...this.props.teams];
+const Level = props => {
+  const classes = useStyles();
+  const teams = [...props.teams]
 
-    // structure of teams array from request
-    // teams: [
-    //   {
-    //     teamName,
-    //     teamId,
-    //     score
-    //   }
-    // ]
-    return (
+  return (
+    <div className={classes.container}>
       <Container fixed>
-        <Typography variant="h2">Teams</Typography>
-        <div fixed="true" className="container">
-          {teams.map((team, index) => {
-            const { name, score, is_frozen } = team;
-            const ids = {
-              eventId: this.props.eventId,
-              levelId: this.props.levelId,
-              teamId: team.id
-            };
+        <Paper className={classes.paper}>
+          <Typography variant="h2">Teams</Typography>
+          <div fixed="true" className="container">
+            {teams.map((team, index) => {
+              const { name, score, is_frozen } = team;
+              const ids = {
+                eventId: props.eventId,
+                levelId: props.levelId,
+                teamId: team.id
+              };
 
-            return (
-              <div className="teamName" key={index}>
-                <Link
-                  to={`/team/${team.id}`}
-                  onClick={() => {
-                    this.props.fetchTeamInfo(
-                      this.props.eventId,
-                      this.props.levelId,
-                      team.id
-                    );
-                  }}
-                >
-                  <ListItemText primary={`${name}`} className="link" />
-                </Link>
-                <ListItemText
-                  primary={`Total Score: ${score}`}
-                  className="link"
-                />
-                {is_frozen ? (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    disabled
-                    className="button"
+              return (
+                <div className="teamName" key={index}>
+                  <Link
+                    to={`/team/${team.id}`}
                     onClick={() => {
-                      window.alert(
-                        "Score for this level has been locked by the judge"
+                      props.fetchTeamInfo(
+                        props.eventId,
+                        props.levelId,
+                        team.id
                       );
                     }}
                   >
-                    Update Score
-                  </Button>
-                ) : (
-                  <Link
-                    to={`/update-score/${team.id}`}
-                    onClick={() => this.props.fetchParams(ids)}
-                  >
+                    <ListItemText primary={`${name}`} className="link" />
+                  </Link>
+                  <ListItemText
+                    primary={`Total Score: ${score}`}
+                    className="link"
+                  />
+                  {is_frozen ? (
                     <Button
                       variant="contained"
                       color="primary"
+                      disabled
                       className="button"
+                      onClick={() => {
+                        window.alert(
+                          "Score for this level has been locked by the judge"
+                        );
+                      }}
                     >
                       Update Score
                     </Button>
-                  </Link>
-                )}
+                  ) : (
+                    <Link
+                      to={`/update-score/${team.id}`}
+                      onClick={() => props.fetchParams(ids)}
+                    >
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className="button"
+                      >
+                        Update Score
+                      </Button>
+                    </Link>
+                  )}
 
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  className="button"
-                  onClick={() => this.props.freezeScore(ids)}
-                >
-                  Freeze
-                </Button>
-              </div>
-            );
-          })}
-        </div>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className="button"
+                    onClick={() => props.freezeScore(ids)}
+                  >
+                    Freeze
+                  </Button>
+                </div>
+              );
+            })}
+          </div>
+        </Paper>
       </Container>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapStateToProps = state => {
   return {
