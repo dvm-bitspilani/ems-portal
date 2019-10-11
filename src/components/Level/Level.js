@@ -91,6 +91,7 @@ const Level = props => {
                         team.id
                       );
                     }}
+                    className="linkTeamName"
                   >
                     <ListItemText primary={`${name}`} className="link" />
                   </Link>

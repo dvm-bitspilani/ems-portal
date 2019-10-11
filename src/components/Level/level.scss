@@ -2,21 +2,30 @@ h1{
     font-family: "Helvetica, Arial, sans-serif";
 }
 
-.container{  
+.container{ 
+    width: 100%; 
     .teamName{
         margin:1vw auto;
         display:flex;
         grid-template-columns: [first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end];
         grid-template-rows: [row1-start] 25% [row1-end] 100px [third-line] auto [last-line];
-        width:70vw;
+        width:60vw;
         .button{
             margin: 10px;
         }
         .link{
-            width:140px;
+            width:110px;
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+        .linkTeamName{
+            width:110px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: black;  
         }
     }
     @media(max-width:600px){
