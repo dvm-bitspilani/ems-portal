@@ -6,7 +6,13 @@ import {
   TextField,
   Button,
   makeStyles,
-  Paper
+  Paper,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide
 } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import Spinner from "../Spinner/Spinner";
@@ -29,13 +35,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const UpdateScore = props => {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const ids = {
     eventId: props.eventId,
     levelId: props.levelId,
     teamId: props.teamId
-  }
+  };
   // const paramIds = [];
   // if (props.params_info !== undefined) {
   //   for (let parameter of props.params_info) {
@@ -43,7 +63,7 @@ const UpdateScore = props => {
   //   }
   // }
 
-  const {handleSubmit, handleInputChange, inputs} = useScores();
+  const { handleSubmit, handleInputChange, inputs } = useScores();
   return (
     <div>
       {props.params_info === undefined ? (
@@ -89,9 +109,43 @@ const UpdateScore = props => {
               className="button"
               onClick={() => props.updateScore(ids)}
             >
-              Update
+              <div
+                onClick={() => {
+                  if (!props.updateScoreError) return handleClickOpen;
+                  else return null
+                }}
+              >
+                Update
+              </div>
             </Button>
           </Paper>
+          <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle id="alert-dialog-slide-title">
+              {"Use Google's location service?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                Let Google help apps determine location. This means sending
+                anonymous location data to Google, even when no apps are
+                running.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Disagree
+              </Button>
+              <Button onClick={handleClose} color="primary">
+                Agree
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
       )}
     </div>
@@ -103,7 +157,8 @@ const mapStateToProps = state => {
     eventId: state.teams.eventId,
     levelId: state.teams.levelId,
     teamId: state.score.teamId,
-    params_info: state.score.params_info
+    params_info: state.score.params_info,
+    updateScoreError: state.score.updateScoreError
   };
 };
 

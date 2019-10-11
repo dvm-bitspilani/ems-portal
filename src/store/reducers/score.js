@@ -7,6 +7,7 @@ const reducer = (state = initialState, action) => {
     case actions.UPDATE_SCORE:
       return {
         ...state,
+        updateScoreError: false
       }
     case actions.FREEZE_SCORE:
       return {
