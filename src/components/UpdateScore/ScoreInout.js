@@ -1,6 +1,7 @@
 let inputs = { 1: { score: "", comments: "" }, 2: { score: "", comments: "" } };
 
 const handleInput = e => {
+  e.stopPropagation();
   for (let input of inputs) {
     if (e.target.id === input) {
       // data for this parameter already exists in state

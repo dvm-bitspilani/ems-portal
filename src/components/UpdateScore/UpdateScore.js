@@ -48,6 +48,36 @@ const UpdateScore = props => {
   const [open, setOpen] = React.useState(false);
   const [inputs, setInputs] = useState([]);
 
+  const handleInput = e => {
+    // for (let input of inputs) {
+    //   if (e.target.id === input) {
+    //     if (e.target.name === "score") {
+    //       console.log("changing score")
+    //       input.score = e.target.value
+    //     } else {
+    //       console.log("changing comments")
+    //       input.comments = e.target.value
+    //     }
+    //     setInputs([...inputs]);
+    //   }
+    // }
+
+    // data for this parameter does not exist
+    // create new object for this param
+    // let data = {score: "", comments: ""};
+    // data[e.target.name] = e.target.value;
+    // inputs[e.target.id] = data;
+    let field = e.target.name;
+    let value = e.target.value;
+    inputs[e.target.id] = {
+      ...inputs[e.target.id],
+      [field]: value
+    }
+
+    // console.log("setting new object")
+    setInputs([...inputs])
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -92,19 +122,19 @@ const UpdateScore = props => {
                   <Typography variant="body1">{parameter_name}</Typography>
                   <form>
                     <TextField
-                      id={parameter_id}
+                      id={parameter_id + ""}
                       label="Score"
                       className={classes.textField}
                       margin="normal"
-                      // onChange={handleInputChange}
+                      onChange={handleInput}
                       name="score"
                     />
                     <TextField
-                      id={parameter_id}
+                      id={parameter_id + ""}
                       label="Comments"
                       className={classes.textField}
                       margin="normal"
-                      // onChange={handleInputChange}
+                      onChange={handleInput}
                       name="comments"
                     />
                   </form>
@@ -115,7 +145,7 @@ const UpdateScore = props => {
               variant="contained"
               color="primary"
               className="button"
-              // onClick={() => props.updateScore(ids)}
+              onClick={() => props.updateScore(ids, inputs)}
             >
               <div
                 // onClick={() => {
@@ -169,7 +199,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateScore: ids => dispatch(actions.post_score_update(ids))
+    updateScore: (ids, inputs) => dispatch(actions.post_score_update(ids, inputs))
   };
 };
 
