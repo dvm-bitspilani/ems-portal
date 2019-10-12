@@ -41,10 +41,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function useForceUpdate(){
-  const [value, set] = useState(true); //boolean state
-  return () => set(!value); // toggle the state to force render
-}
+// function useForceUpdate(){
+//   const [value, set] = useState(true); //boolean state
+//   return () => set(!value); // toggle the state to force render
+// }
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -53,17 +53,23 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const Level = props => {
   const classes = useStyles();
   const teams = [...props.teams];
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
-  const forceUpdate = useForceUpdate();
-  const handleClickOpen = () => {
+  // state variables to disable Update Score button
+  const [shouldDisable, setShouldDisable] = useState({});
+  const [id, setId] = useState(-1);
+
+  // const forceUpdate = useForceUpdate();
+  const handleClickOpen = (e) => {
     setOpen(true);
+    setId(e.target.id);
   };
 
   const handleClose = () => {
     setOpen(false);
     // props.history.goBack();
-    forceUpdate();
+    shouldDisable[id] = true;
+    setShouldDisable({...shouldDisable});
   };
 
   return (
@@ -99,7 +105,7 @@ const Level = props => {
                     primary={`Total Score: ${score}`}
                     className="link"
                   />
-                  {is_frozen ? (
+                  {shouldDisable[team.id] || is_frozen ? (
                     <Button
                       variant="contained"
                       color="primary"
@@ -134,7 +140,7 @@ const Level = props => {
                       className="button"
                       // onClick={() => props.freezeScore(ids)}
                     >
-                      <div onClick={handleClickOpen}>Freeze</div>
+                      <div onClick={handleClickOpen} id={team.id}>Freeze</div>
                     </Button>
                 </div>
               );

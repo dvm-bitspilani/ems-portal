@@ -174,6 +174,7 @@ const UpdateScore = props => {
                 </div>
               );
             })}
+            
             <Button
               variant="contained"
               color="primary"
