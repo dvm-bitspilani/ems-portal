@@ -1,9 +1,9 @@
 # Event Management System ([OASIS '19](https://bits-oasis.org/))   
 
 ## _To-do_
-  - [ ] _Disable update button when score has been frozen_
-  - [ ] _Key Logger_
+  - [x] _Disable update button when score has been frozen_
   - [ ] _Manage page refresh_
+  - [ ] _Key Logger_
   - [ ] _Make styles consistent all over (especially on Desktop)_
   - [ ] _Improve routing implementation_
   - [x] _Add actions for update and freeze score_

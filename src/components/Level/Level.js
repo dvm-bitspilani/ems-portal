@@ -32,7 +32,7 @@ import { grey } from "@material-ui/core/colors";
 const useStyles = makeStyles(theme => ({
   container: {
     backgroundColor: grey[200],
-    // height: "calc(100vh - 130px)",
+    minHeight: "calc(100vh - 130px)",
     padding: theme.spacing(2)
     // paddingTop: theme.spacing(2)
   },
