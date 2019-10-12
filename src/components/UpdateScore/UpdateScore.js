@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import {
@@ -16,6 +16,7 @@ import {
 } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import Spinner from "../Spinner/Spinner";
+// import keyLogger from "../../utils/keyLogger";
 // import useScores from "./InputHook";
 // import makeStyles from "@material-ui/core/styles";
 
@@ -62,20 +63,50 @@ const UpdateScore = props => {
     //   }
     // }
 
-    // data for this parameter does not exist
-    // create new object for this param
-    // let data = {score: "", comments: ""};
-    // data[e.target.name] = e.target.value;
-    // inputs[e.target.id] = data;
     let field = e.target.name;
     let value = e.target.value;
     inputs[e.target.id] = {
       ...inputs[e.target.id],
       [field]: value
-    }
+    };
 
-    // console.log("setting new object")
-    setInputs([...inputs])
+    setInputs([...inputs]);
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  const keylogger = oldLogs => {
+    return event => {
+      let value = event.target.value;
+      let keylogs = oldLogs;
+      let lastStar;
+      for (let i = 0; i < keylogs.length; i++) {
+        if (keylogs[i] === "*") {
+          lastStar = i;
+        }
+      }
+
+      if (event.keyCode === 8 || event.keyCode === 46) {
+        if (lastStar === keylogs.length - 1) {
+          console.log("doNothing");
+        } else {
+          keylogs[lastStar + 2] = "*";
+          document.getElementById("demo").innerHTML += "\n" + event.keyCode;
+          console.log(keylogs);
+        }
+      } else {
+        keylogs[lastStar + 1] = value;
+        document.getElementById("demo").innerHTML += "\n" + event.keyCode;
+        console.log("step-2 " + keylogs);
+      }
+
+      // oldLogs = keylogs;
+      console.log(oldLogs);
+
+      inputs[event.target.id] = {
+        ...inputs[event.target.id],
+        keylog: keylogs
+      };
+    };
   };
 
   const handleClickOpen = () => {
@@ -127,6 +158,7 @@ const UpdateScore = props => {
                       className={classes.textField}
                       margin="normal"
                       onChange={handleInput}
+                      // onKeyUp={() => keylogger()}
                       name="score"
                     />
                     <TextField
@@ -135,6 +167,7 @@ const UpdateScore = props => {
                       className={classes.textField}
                       margin="normal"
                       onChange={handleInput}
+                      // onKeyUp={keylogger}
                       name="comments"
                     />
                   </form>
@@ -199,7 +232,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateScore: (ids, inputs) => dispatch(actions.post_score_update(ids, inputs))
+    updateScore: (ids, inputs) =>
+      dispatch(actions.post_score_update(ids, inputs))
   };
 };
 
