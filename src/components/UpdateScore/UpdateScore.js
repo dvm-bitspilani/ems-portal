@@ -47,7 +47,7 @@ const UpdateScore = props => {
   // record scores entered by judge
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [inputs, setInputs] = useState([]);
+  const [inputs, setInputs] = useState({});
 
   const handleInput = e => {
     // for (let input of inputs) {
@@ -70,7 +70,7 @@ const UpdateScore = props => {
       [field]: value
     };
 
-    setInputs([...inputs]);
+    setInputs({...inputs});
   };
 
   // eslint-disable-next-line no-unused-vars

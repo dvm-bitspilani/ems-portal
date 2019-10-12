@@ -93,75 +93,81 @@ const Level = props => {
           <Paper className={classes.paper}>
             <Typography variant="h2">Teams</Typography>
             <div fixed="true" className="container">
-              {teams.map((team, index) => {
-                const { name, score, is_frozen } = team;
-                const ids = {
-                  eventId: localStorage.getItem("eventId"),
-                  levelId: localStorage.getItem("levelId"),
-                  teamId: team.id
-                };
+              {teams.length === 0 ? (
+                <Typography variant="h6">
+                  There are no teams for this level
+                </Typography>
+              ) : (
+                teams.map((team, index) => {
+                  const { name, score, is_frozen } = team;
+                  const ids = {
+                    eventId: localStorage.getItem("eventId"),
+                    levelId: localStorage.getItem("levelId"),
+                    teamId: team.id
+                  };
 
-                return (
-                  <div className="teamName" key={index}>
-                    <Link
-                      to={`/team/${team.id}`}
-                      onClick={() => {
-                        props.fetchTeamInfo(
-                          props.eventId,
-                          props.levelId,
-                          team.id
-                        );
-                      }}
-                      className="linkTeamName"
-                    >
-                      <ListItemText primary={`${name}`} className="link" />
-                    </Link>
-                    <ListItemText
-                      primary={`Total Score: ${score}`}
-                      className="link"
-                    />
-                    {shouldDisable[team.id] || is_frozen ? (
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        disabled
-                        className="button"
+                  return (
+                    <div className="teamName" key={index}>
+                      <Link
+                        to={`/team/${team.id}`}
                         onClick={() => {
-                          window.alert(
-                            "Score for this level has been locked by the judge"
+                          props.fetchTeamInfo(
+                            props.eventId,
+                            props.levelId,
+                            team.id
                           );
                         }}
+                        className="linkTeamName"
                       >
-                        Update Score
-                      </Button>
-                    ) : (
-                      <Link
-                        to={`/update-score/${team.id}`}
-                        onClick={() => props.fetchParams(ids)}
-                      >
+                        <ListItemText primary={`${name}`} className="link" />
+                      </Link>
+                      <ListItemText
+                        primary={`Total Score: ${score}`}
+                        className="link"
+                      />
+                      {shouldDisable[team.id] || is_frozen ? (
                         <Button
                           variant="contained"
                           color="primary"
+                          disabled
                           className="button"
+                          onClick={() => {
+                            window.alert(
+                              "Score for this level has been locked by the judge"
+                            );
+                          }}
                         >
                           Update Score
                         </Button>
-                      </Link>
-                    )}
+                      ) : (
+                        <Link
+                          to={`/update-score/${team.id}`}
+                          onClick={() => props.fetchParams(ids)}
+                        >
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            className="button"
+                          >
+                            Update Score
+                          </Button>
+                        </Link>
+                      )}
 
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      className="button"
-                      onClick={() => props.freezeScore(ids)}
-                    >
-                      <div onClick={handleClickOpen} id={team.id}>
-                        Freeze
-                      </div>
-                    </Button>
-                  </div>
-                );
-              })}
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        className="button"
+                        onClick={() => props.freezeScore(ids)}
+                      >
+                        <div onClick={handleClickOpen} id={team.id}>
+                          Freeze
+                        </div>
+                      </Button>
+                    </div>
+                  );
+                })
+              )}
             </div>
           </Paper>
         )}
