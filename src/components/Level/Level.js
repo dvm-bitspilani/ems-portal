@@ -1,5 +1,5 @@
 // renders list of teams for a particular level
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import { Link } from "react-router-dom";
@@ -19,6 +19,7 @@ import {
 } from "@material-ui/core";
 import "./level.scss";
 import { grey } from "@material-ui/core/colors";
+import Spinner from "../Spinner/Spinner";
 
 // structure of teams array from request
 // teams: [
@@ -60,7 +61,7 @@ const Level = props => {
   const [id, setId] = useState(-1);
 
   // const forceUpdate = useForceUpdate();
-  const handleClickOpen = (e) => {
+  const handleClickOpen = e => {
     setOpen(true);
     setId(e.target.id);
   };
@@ -69,84 +70,101 @@ const Level = props => {
     setOpen(false);
     // props.history.goBack();
     shouldDisable[id] = true;
-    setShouldDisable({...shouldDisable});
+    setShouldDisable({ ...shouldDisable });
   };
+
+  console.log("Event Id", props.eventId);
+  useEffect(() => {
+    console.log("Using effect");
+    // console.log(props.eventId);
+    // console.log(props.levelId);
+    props.fetchTeams(
+      localStorage.getItem("eventId"),
+      localStorage.getItem("levelId")
+    );
+  }, []);
 
   return (
     <div className={classes.container}>
       <Container fixed>
-        <Paper className={classes.paper}>
-          <Typography variant="h2">Teams</Typography>
-          <div fixed="true" className="container">
-            {teams.map((team, index) => {
-              const { name, score, is_frozen } = team;
-              const ids = {
-                eventId: props.eventId,
-                levelId: props.levelId,
-                teamId: team.id
-              };
+        {teams === undefined ? (
+          <Spinner />
+        ) : (
+          <Paper className={classes.paper}>
+            <Typography variant="h2">Teams</Typography>
+            <div fixed="true" className="container">
+              {teams.map((team, index) => {
+                const { name, score, is_frozen } = team;
+                const ids = {
+                  eventId: localStorage.getItem("eventId"),
+                  levelId: localStorage.getItem("levelId"),
+                  teamId: team.id
+                };
 
-              return (
-                <div className="teamName" key={index}>
-                  <Link
-                    to={`/team/${team.id}`}
-                    onClick={() => {
-                      props.fetchTeamInfo(
-                        props.eventId,
-                        props.levelId,
-                        team.id
-                      );
-                    }}
-                    className="linkTeamName"
-                  >
-                    <ListItemText primary={`${name}`} className="link" />
-                  </Link>
-                  <ListItemText
-                    primary={`Total Score: ${score}`}
-                    className="link"
-                  />
-                  {shouldDisable[team.id] || is_frozen ? (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      disabled
-                      className="button"
+                return (
+                  <div className="teamName" key={index}>
+                    <Link
+                      to={`/team/${team.id}`}
                       onClick={() => {
-                        window.alert(
-                          "Score for this level has been locked by the judge"
+                        props.fetchTeamInfo(
+                          props.eventId,
+                          props.levelId,
+                          team.id
                         );
                       }}
+                      className="linkTeamName"
                     >
-                      Update Score
-                    </Button>
-                  ) : (
-                    <Link
-                      to={`/update-score/${team.id}`}
-                      onClick={() => props.fetchParams(ids)}
-                    >
+                      <ListItemText primary={`${name}`} className="link" />
+                    </Link>
+                    <ListItemText
+                      primary={`Total Score: ${score}`}
+                      className="link"
+                    />
+                    {shouldDisable[team.id] || is_frozen ? (
                       <Button
                         variant="contained"
                         color="primary"
+                        disabled
                         className="button"
+                        onClick={() => {
+                          window.alert(
+                            "Score for this level has been locked by the judge"
+                          );
+                        }}
                       >
                         Update Score
                       </Button>
-                    </Link> 
-                  )}
+                    ) : (
+                      <Link
+                        to={`/update-score/${team.id}`}
+                        onClick={() => props.fetchParams(ids)}
+                      >
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className="button"
+                        >
+                          Update Score
+                        </Button>
+                      </Link>
+                    )}
 
                     <Button
                       variant="contained"
                       color="secondary"
                       className="button"
-                      // onClick={() => props.freezeScore(ids)}
+                      onClick={() => props.freezeScore(ids)}
                     >
-                      <div onClick={handleClickOpen} id={team.id}>Freeze</div>
+                      <div onClick={handleClickOpen} id={team.id}>
+                        Freeze
+                      </div>
                     </Button>
-                </div>
-              );
-            })}
-          </div>
-        </Paper>
+                  </div>
+                );
+              })}
+            </div>
+          </Paper>
+        )}
       </Container>
       <Dialog
         open={open}
@@ -161,7 +179,8 @@ const Level = props => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            The total score for this team has been frozen. You will not be able to alter the score.
+            The total score for this team has been frozen. You will not be able
+            to alter the score.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -188,7 +207,9 @@ const mapDispatchToProps = dispatch => {
     fetchTeamInfo: (eventId, levelId, teamId) =>
       dispatch(actions.fetchTeamInfo(eventId, levelId, teamId)),
     freezeScore: ids => dispatch(actions.post_score_freeze(ids)),
-    fetchParams: ids => dispatch(actions.fetch_params(ids))
+    fetchParams: ids => dispatch(actions.fetch_params(ids)),
+    fetchTeams: (eventId, levelId) =>
+      dispatch(actions.fetchTeams(eventId, levelId))
   };
 };
 

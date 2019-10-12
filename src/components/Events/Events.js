@@ -6,9 +6,9 @@ Pata nahi baad me dekh lenge
 -------------------------------------
 */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-// import * as actions from "../../store/actions/events";
+import * as actions from "../../store/actions/events";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   ExpansionPanel,
@@ -19,6 +19,7 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LevelButton from "../LevelButton/LevelButton";
+import Spinner from "../Spinner/Spinner";
 // -----------------------------------
 
 const useStyles = makeStyles(theme => ({
@@ -48,39 +49,47 @@ const Events = props => {
   // each object will contatin number of levels to be displayed
   // each level button will lead to a new route with the grading buttons
 
+  useEffect(() => {
+    props.fetchEvents()
+  }, [])  
+
   const events = props.events;
   return (
     <div className={classes.root}>
-      {events.map((event, index) => {
-        const { name, id, levels_info } = event;
-        return (
-          <ExpansionPanel key={index}>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              // dekho mai aria tags use kar rha hu :-)
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography className={classes.heading}>{name}</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <List className={classes.list}>
-                {levels_info.map((level, levelIndex) => {
-                  return (
-                    <LevelButton
-                      eventName={name}
-                      eventId={id}
-                      levelName={level.name}
-                      levelId={level.id}
-                      key={levelIndex}
-                    />
-                  );
-                })}
-              </List>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-        );
-      })}
+      {props.events === undefined ? (
+        <Spinner />
+      ) : (
+        events.map((event, index) => {
+          const { name, id, levels_info } = event;
+          return (
+            <ExpansionPanel key={index}>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                // dekho mai aria tags use kar rha hu :-)
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography className={classes.heading}>{name}</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <List className={classes.list}>
+                  {levels_info.map((level, levelIndex) => {
+                    return (
+                      <LevelButton
+                        eventName={name}
+                        eventId={id}
+                        levelName={level.name}
+                        levelId={level.id}
+                        key={levelIndex}
+                      />
+                    );
+                  })}
+                </List>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          );
+        })
+      )}
     </div>
   );
 };
@@ -91,4 +100,13 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Events);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchEvents: () => dispatch(actions.fetchEvents())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Events);

@@ -24,8 +24,11 @@ export const populateParams = data => {
 };
 
 export const fetch_params = ids => {
-  const { eventId, levelId, teamId } = ids;
+  const { teamId } = ids;
+  const eventId = localStorage.getItem("eventId");
+  const levelId = localStorage.getItem("levelId");
   const access = localStorage.getItem("access");
+
   return dispatch => {
     fetch(`${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score`, {
       method: "GET",
@@ -118,7 +121,7 @@ export const post_score_freeze = ids => {
   const access = localStorage.getItem("access");
   return dispatch => {
     fetch(
-      `${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score/freeze/`,
+      `${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score/freeze`,
       {
         method: "POST",
         body: JSON.stringify({}),
