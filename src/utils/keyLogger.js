@@ -15,7 +15,6 @@ function keylogger(input,oldLogs){
               lastStar = i;
             }
         }
-     
             if(event.keyCode == "8" || event.keyCode =="46"){
                 if(lastStar == keylogs.length -1){
                     console.log("doNothing");

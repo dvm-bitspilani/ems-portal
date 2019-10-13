@@ -47,7 +47,7 @@ const UpdateScore = props => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [inputs, setInputs] = useState([]);
-
+  let [keylogs,updateKeyLogs] = useState( [ {keylogs:[]},{keylogs:[]} ] );
   const handleInput = e => {
     // for (let input of inputs) {
     //   if (e.target.id === input) {
@@ -69,6 +69,7 @@ const UpdateScore = props => {
     // inputs[e.target.id] = data;
     let field = e.target.name;
     let value = e.target.value;
+  
     inputs[e.target.id] = {
       ...inputs[e.target.id],
       [field]: value
@@ -77,6 +78,43 @@ const UpdateScore = props => {
     // console.log("setting new object")
     setInputs([...inputs])
   };
+
+  const handleKeyLogs = e => {
+    // let field = e.target.name;
+    // let value = e.target.value;
+    let a = keylogger(e,keylogs[e.target.id].keylogs);
+    
+    keylogs[e.target.id] = {
+      ...keylogs[e.target.id],
+      keylogs: a 
+    }
+    // console.log("setting new object")
+    updateKeyLogs([...keylogs]);
+  }
+
+  const keylogger = (event,oldLogs) => {
+    // return function(event){
+        // let value = event.target.value;
+        // if(oldLogs.length == 0 ){ oldLogs =[]}
+        // console.log(oldLogs);
+        let keyLogs1 = oldLogs;
+        let keyCode = event.keyCode;
+        if(keyCode === 8 || keyCode === 46){
+          keyLogs1.push("*");
+          // console.log("keylogs" + keyLogs1);
+        }
+        else{
+          // console.log(keyCode);
+          if(event.keyCode >= 96 && event.keyCode <= 105){
+            keyCode = keyCode - 48;
+          }
+          keyLogs1.push(String.fromCharCode(keyCode));
+          console.log(keyLogs1);
+        }
+        oldLogs = keyLogs1;
+        return oldLogs;
+    // }
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -128,6 +166,23 @@ const UpdateScore = props => {
                       margin="normal"
                       onChange={handleInput}
                       name="score"
+                      // onKeyUp = {(e) => {
+                      //   // console.log(e.target.id);
+                      //   let a ;
+                      //   console.log("initial");
+                      //   console.log(keylogs[e.target.id]);
+                      //   if(keylogs[e.target.id] == null){
+                      //     a=[];
+                      //   }else{
+                      //     a=keylogs[e.target.id];
+                      //   }
+                      //   // console.log(a);
+                      //   a = keylogger(e,a);  
+                      //   updateKeyLogs(keylogs.push(a));
+                      //   console.log("final");
+                      //   console.log(a);              
+                      // }}
+                      onKeyUp = {handleKeyLogs}
                     />
                     <TextField
                       id={parameter_id + ""}

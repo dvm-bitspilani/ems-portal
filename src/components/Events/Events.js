@@ -63,6 +63,7 @@ const Events = props => {
             >
               <Typography className={classes.heading}>{name}</Typography>
             </ExpansionPanelSummary>
+            
             <ExpansionPanelDetails>
               <List className={classes.list}>
                 {levels_info.map((level, levelIndex) => {
