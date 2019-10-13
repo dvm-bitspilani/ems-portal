@@ -76,36 +76,6 @@ const UpdateScore = props => {
     setInputs({ ...inputs });
   };
 
-<<<<<<< HEAD
-  // eslint-disable-next-line no-unused-vars
-  const keylogger = oldLogs => {
-    return event => {
-      let value = event.target.value;
-      let keylogs = oldLogs;
-      let lastStar;
-      for (let i = 0; i < keylogs.length; i++) {
-        if (keylogs[i] === "*") {
-          lastStar = i;
-        }
-      }
-
-      if (event.keyCode === 8 || event.keyCode === 46) {
-        if (lastStar === keylogs.length - 1) {
-          console.log("doNothing");
-        } else {
-          keylogs[lastStar + 2] = "*";
-          // document.getElementById("demo").innerHTML += "\n" + event.keyCode;
-          console.log(keylogs);
-        }
-      } else {
-        keylogs[lastStar + 1] = value;
-        // document.getElementById("demo").innerHTML += "\n" + event.keyCode;
-        console.log("step-2 " + keylogs);
-      }
-
-      // oldLogs = keylogs;
-      // console.log(oldLogs);
-=======
   const handleKeyLogs = e => {
     let a = [];
     if (keylogs[e.target.id] == null) {
@@ -113,7 +83,6 @@ const UpdateScore = props => {
     } else {
       a = keylogger(e, keylogs[e.target.id].keylogs);
     }
->>>>>>> keylogger
 
     keylogs[e.target.id] = {
       ...keylogs[e.target.id],
@@ -205,10 +174,6 @@ const UpdateScore = props => {
                       className={classes.textField}
                       margin="none"
                       onChange={handleInput}
-<<<<<<< HEAD
-                      // onKeyUp={() => keylogger(inputs[parameter_id].keylog || ['*'])}
-=======
->>>>>>> keylogger
                       name="score"
                       // value={`${parameter_instance_value}`}
                       onKeyUp={handleKeyLogs}
