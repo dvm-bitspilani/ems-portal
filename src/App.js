@@ -5,7 +5,7 @@ import SignIn from "./components/Signin/Signin";
 import Level from "./containers/Level/level";
 import AppBar from "./components/AppBar/AppBar";
 import Contacts from "./components/Contacts/Contacts";
-import RouterBreadcrumbs from "./components/Breadcrumb/Breadcrumb";
+// import RouterBreadcrumbs from "./components/Breadcrumb/Breadcrumb";
 import TeamInfo from "./components/TeamInfo/TeamInfo";
 import UpdateScore from "./components/UpdateScore/UpdateScore";
 
@@ -22,7 +22,7 @@ function App() {
         <Route component={AppBar} path="/team" />
         <Route component={AppBar} path="/contacts" />
 
-        <Route component={RouterBreadcrumbs} path="/dashboard" />
+        {/* <Route component={RouterBreadcrumbs} path="/dashboard" /> */}
         <Route component={Home} path="/dashboard" exact />
         <Route component={Level} path="/dashboard/*" />
 
