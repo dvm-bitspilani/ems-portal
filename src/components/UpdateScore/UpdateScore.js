@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import {
@@ -23,7 +23,7 @@ import Spinner from "../Spinner/Spinner";
 const useStyles = makeStyles(theme => ({
   container: {
     backgroundColor: grey[200],
-    height: "calc(100vh - 90px)",
+    minHeight: "calc(100vh - 90px)",
     padding: theme.spacing(2)
     // paddingTop: theme.spacing(2)
   },
@@ -48,7 +48,7 @@ const UpdateScore = props => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [inputs, setInputs] = useState({});
-  let [keylogs,updateKeyLogs] = useState( [] );
+  const [keylogs, updateKeyLogs] = useState({});
   const handleInput = e => {
     // for (let input of inputs) {
     //   if (e.target.id === input) {
@@ -64,55 +64,52 @@ const UpdateScore = props => {
     // }
     let field = e.target.name;
     let value = e.target.value;
-  
+
     inputs[e.target.id] = {
       ...inputs[e.target.id],
       [field]: value
     };
 
-    setInputs({...inputs});
+    setInputs({ ...inputs });
   };
 
-
-
   const handleKeyLogs = e => {
-    let a =[];
-    if(keylogs[e.target.id] == null){
-      a=[e.target.value];
-    }else{
-      a = keylogger(e,keylogs[e.target.id].keylogs);
+    let a = [];
+    if (keylogs[e.target.id] == null) {
+      a = [e.target.value];
+    } else {
+      a = keylogger(e, keylogs[e.target.id].keylogs);
     }
 
     keylogs[e.target.id] = {
       ...keylogs[e.target.id],
-      keylogs: a 
-    }
-    updateKeyLogs([...keylogs]);
-  }
+      keylogs: a
+    };
+    updateKeyLogs({ ...keylogs });
+  };
 
-  const keylogger = (event,oldLogs) => {
+  const keylogger = (event, oldLogs) => {
     // return function(event){
-        // let value = event.target.value;
-        // if(oldLogs.length == 0 ){ oldLogs =[]}
-        // console.log(oldLogs);
-        let keyLogs1 = oldLogs;
-        let keyCode = event.keyCode;
-        if(keyCode === 8 || keyCode === 46){
-          keyLogs1.push("*");
-          // console.log("keylogs" + keyLogs1);
-        }
-        else{
-          // console.log(keyCode);
-          if(event.keyCode >= 96 && event.keyCode <= 105){
-            keyCode = keyCode - 48;
-          }
-          keyLogs1.push(String.fromCharCode(keyCode));
-          console.log(keyLogs1);
-        }
-        oldLogs = keyLogs1;
-        return oldLogs;
+    // let value = event.target.value;
+    // if(oldLogs.length == 0 ){ oldLogs =[]}
+    // console.log(oldLogs);
+    let keyLogs1 = oldLogs;
+    let keyCode = event.keyCode;
+    if (keyCode === 8 || keyCode === 46) {
+      keyLogs1.push("*");
+      // console.log("keylogs" + keyLogs1);
+    } else {
+      // console.log(keyCode);
+      if (event.keyCode >= 96 && event.keyCode <= 105) {
+        keyCode = keyCode - 48;
+      }
+      keyLogs1.push(String.fromCharCode(keyCode));
+      console.log(keyLogs1);
+    }
+    oldLogs = keyLogs1;
+    return oldLogs;
     // }
-  }
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -126,8 +123,12 @@ const UpdateScore = props => {
   const ids = {
     eventId: props.eventId,
     levelId: props.levelId,
-    teamId: props.teamId
+    teamId: localStorage.getItem("teamId")
   };
+
+  useEffect(() => {
+    props.fetchParams(ids);
+  }, []);
   // const paramIds = [];
   // if (props.params_info !== undefined) {
   //   for (let parameter of props.params_info) {
@@ -150,7 +151,14 @@ const UpdateScore = props => {
             </Typography>
 
             {props.params_info.map((parameter, index) => {
-              const { parameter_name, parameter_id } = parameter;
+              const {
+                parameter_name,
+                parameter_id,
+                parameter_max_value,
+                parameter_min_value,
+                parameter_instance_value,
+                parameter_instance_comment
+              } = parameter;
               // params_info.push({ parameter_id: { score: "", comments: "" } });
 
               return (
@@ -159,7 +167,7 @@ const UpdateScore = props => {
                   <form>
                     <TextField
                       id={parameter_id + ""}
-                      label="Score"
+                      label={`Score | Last score: ${parameter_instance_value} | Min-score: ${parameter_min_value} | Max-score: ${parameter_max_value}`}
                       className={classes.textField}
                       margin="normal"
                       onChange={handleInput}
@@ -176,12 +184,12 @@ const UpdateScore = props => {
                       //     a=keylogs[e.target.id];
                       //   }
                       //   // console.log(a);
-                      //   a = keylogger(e,a);  
+                      //   a = keylogger(e,a);
                       //   updateKeyLogs(keylogs.push(a));
                       //   console.log("final");
-                      //   console.log(a);              
+                      //   console.log(a);
                       // }}
-                      onKeyUp = {handleKeyLogs}
+                      onKeyUp={handleKeyLogs}
                     />
                     <TextField
                       id={parameter_id + ""}
@@ -196,12 +204,12 @@ const UpdateScore = props => {
                 </div>
               );
             })}
-            
+
             <Button
               variant="contained"
               color="primary"
               className="button"
-              onClick={() => props.updateScore(ids, inputs)}
+              onClick={() => props.updateScore(ids, inputs, keylogs)}
             >
               <div
                 // onClick={() => {
@@ -255,8 +263,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateScore: (ids, inputs) =>
-      dispatch(actions.post_score_update(ids, inputs))
+    updateScore: (ids, inputs, keylogs) =>
+      dispatch(actions.post_score_update(ids, inputs, keylogs)),
+    fetchParams: ids => dispatch(actions.fetch_params(ids))
   };
 };
 

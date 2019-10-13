@@ -142,7 +142,10 @@ const Level = props => {
                       ) : (
                         <Link
                           to={`/update-score/${team.id}`}
-                          onClick={() => props.fetchParams(ids)}
+                          // onClick={() => props.fetchParams(ids)}
+                          onClick={() =>
+                            localStorage.setItem("teamId", team.id)
+                          }
                         >
                           <Button
                             variant="contained"
