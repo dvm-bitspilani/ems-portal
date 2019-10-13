@@ -44,7 +44,7 @@ export const fetch_params = ids => {
   };
 };
 
-export const post_score_update = (ids, params_details) => {
+export const post_score_update = (ids, params_details, keylogs) => {
   // ------ prepare body to send over request ---------
   /*  structure of params_details
     {
@@ -63,6 +63,7 @@ export const post_score_update = (ids, params_details) => {
   const param_ids = [];
   const values = [];
   const comments = [];
+  const keylogsArr = [];
   // eslint-disable-next-line no-unused-vars
   // for (let param in params_details) {
   //   if (param === 0) continue;
@@ -82,6 +83,13 @@ export const post_score_update = (ids, params_details) => {
     } else {
       comments.push(params_details[param].comments);
     }
+  });
+  Object.keys(keylogs).forEach((parameter_obj) => {
+    let keylogString = "";
+    keylogs[parameter_obj].keylogs.forEach((char) => {
+      keylogString += char;
+    })
+    keylogsArr.push(keylogString);
   })
   // arrays populated
   // make object to be stringified later and
@@ -90,11 +98,7 @@ export const post_score_update = (ids, params_details) => {
   postData["param_ids"] = param_ids;
   postData["values"] = values;
   postData["comments"] = comments;
-
-  // hard coded keylogs for testing
-  postData["keylogs"] = [
-    "23"
-  ]
+  postData["keylogs"] = keylogsArr;
 
   console.log(postData);
 
