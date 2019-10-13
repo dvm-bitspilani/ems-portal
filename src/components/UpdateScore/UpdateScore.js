@@ -48,7 +48,7 @@ const UpdateScore = props => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [inputs, setInputs] = useState({});
-  let [keylogs,updateKeyLogs] = useState( [ {keylogs:[]},{keylogs:[]} ] );
+  let [keylogs,updateKeyLogs] = useState( [] );
   const handleInput = e => {
     // for (let input of inputs) {
     //   if (e.target.id === input) {
@@ -76,7 +76,13 @@ const UpdateScore = props => {
 
 
   const handleKeyLogs = e => {
-    let a = keylogger(e,keylogs[e.target.id].keylogs);
+    let a =[];
+    if(keylogs[e.target.id] == null){
+      a=[e.target.value];
+    }else{
+      a = keylogger(e,keylogs[e.target.id].keylogs);
+    }
+
     keylogs[e.target.id] = {
       ...keylogs[e.target.id],
       keylogs: a 
