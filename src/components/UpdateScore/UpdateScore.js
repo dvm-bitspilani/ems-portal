@@ -33,6 +33,9 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginBottom: theme.spacing(4),
     width: "100%"
+  },
+  parameterName: {
+    marginTop: theme.spacing(2)
   }
 }));
 
@@ -157,45 +160,29 @@ const UpdateScore = props => {
                 parameter_max_value,
                 parameter_min_value,
                 parameter_instance_value,
-                parameter_instance_comment
               } = parameter;
               // params_info.push({ parameter_id: { score: "", comments: "" } });
 
               return (
                 <div id={parameter_id} key={index}>
-                  <Typography variant="body1">{parameter_name}</Typography>
+                  <Typography variant="h6" className={classes.parameterName}>{parameter_name}</Typography>
+                  <Typography variant="body1">{`Min-score:${parameter_min_value} | Max-score:${parameter_max_value}`}</Typography>
                   <form>
                     <TextField
                       id={parameter_id + ""}
-                      label={`Score | Last score: ${parameter_instance_value} | Min-score: ${parameter_min_value} | Max-score: ${parameter_max_value}`}
+                      label={`Score | Previous: ${parameter_instance_value}`}
                       className={classes.textField}
-                      margin="normal"
+                      margin="none"
                       onChange={handleInput}
-                      // onKeyUp={() => keylogger()}
                       name="score"
-                      // onKeyUp = {(e) => {
-                      //   // console.log(e.target.id);
-                      //   let a ;
-                      //   console.log("initial");
-                      //   console.log(keylogs[e.target.id]);
-                      //   if(keylogs[e.target.id] == null){
-                      //     a=[];
-                      //   }else{
-                      //     a=keylogs[e.target.id];
-                      //   }
-                      //   // console.log(a);
-                      //   a = keylogger(e,a);
-                      //   updateKeyLogs(keylogs.push(a));
-                      //   console.log("final");
-                      //   console.log(a);
-                      // }}
+                      // value={`${parameter_instance_value}`}
                       onKeyUp={handleKeyLogs}
                     />
                     <TextField
                       id={parameter_id + ""}
-                      label="Comments"
+                      label={`Comments`}
                       className={classes.textField}
-                      margin="normal"
+                      margin="none"
                       onChange={handleInput}
                       // onKeyUp={keylogger}
                       name="comments"
