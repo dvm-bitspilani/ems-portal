@@ -117,10 +117,10 @@ function SignIn(props) {
               onClick={() => {
                 login(username, password)
                   .then(() => {
-                    if (localStorage.getItem("access") !== "undefined") {
+                    if (localStorage.getItem("access") !== "undefined" && localStorage.getItem("access") !== null) {
                       props.history.push("/dashboard");
                       // eventsList().then(props.updateEventsList, console.error);
-                      props.fetchEvents();
+                      // props.fetchEvents();
                     } else {
                       console.error(
                         "Authentication failure - invalid credentials"

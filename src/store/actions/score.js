@@ -24,8 +24,11 @@ export const populateParams = data => {
 };
 
 export const fetch_params = ids => {
-  const { eventId, levelId, teamId } = ids;
+  const { teamId } = ids;
+  const eventId = localStorage.getItem("eventId");
+  const levelId = localStorage.getItem("levelId");
   const access = localStorage.getItem("access");
+
   return dispatch => {
     fetch(`${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score`, {
       method: "GET",
@@ -74,7 +77,11 @@ export const post_score_update = (ids, params_details) => {
   })
   param_ids.forEach(param => {
     values.push(parseInt(params_details[param].score));
-    comments.push(params_details[param].comments);
+    if (params_details[param].comments === null) {
+      comments.push("")
+    } else {
+      comments.push(params_details[param].comments);
+    }
   })
   // arrays populated
   // make object to be stringified later and
@@ -83,18 +90,28 @@ export const post_score_update = (ids, params_details) => {
   postData["param_ids"] = param_ids;
   postData["values"] = values;
   postData["comments"] = comments;
+
+  // hard coded keylogs for testing
+  postData["keylogs"] = [
+    "23"
+  ]
+
   console.log(postData);
 
   // ---------------------------------------------------
 
-  const { eventId, levelId, teamId } = ids;
+  const { teamId } = ids;
   const access = localStorage.getItem("access");
+  const eventId = localStorage.getItem("eventId");
+  const levelId = localStorage.getItem("levelId");
   return dispatch => {
-    fetch(`${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score`, {
+    fetch(`${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score/`, {
       method: "POST",
+      // body: JSON.stringify(postData),
       body: JSON.stringify(postData),
       headers: {
-        Authorization: `Bearer ${access}`
+        Authorization: `Bearer ${access}`,
+        "Content-Type": "application/json"
       }
     })
       .then(response => response.json())
@@ -106,8 +123,10 @@ export const post_score_update = (ids, params_details) => {
 };
 
 export const post_score_freeze = ids => {
-  const { eventId, levelId, teamId } = ids;
+  const { teamId } = ids;
   const access = localStorage.getItem("access");
+  const eventId = localStorage.getItem("eventId");
+  const levelId = localStorage.getItem("levelId");
   return dispatch => {
     fetch(
       `${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score/freeze`,

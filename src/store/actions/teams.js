@@ -5,10 +5,20 @@ export const populateTeams = (teamsList, eventId, levelId) => {
   return {
     type: actionTypes.POPULATE_TEAMS,
     teams: teamsList,
-    eventId: eventId,
-    levelId: levelId
+    // eventId: eventId,
+    // levelId: levelId
   };
 };
+
+export const setIds = (eventId, levelId) => {
+  localStorage.setItem("eventId", eventId);
+  localStorage.setItem("levelId", levelId);
+  return {
+    type: actionTypes.SET_IDS,
+    eventId: eventId,
+    levelId: levelId
+  }
+}
 
 export const populateTeamInfo = (teamInfo, teamId) => {
   return {

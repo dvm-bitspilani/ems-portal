@@ -68,4 +68,6 @@ export async function logout() {
   localStorage.removeItem("access");
   localStorage.removeItem("refresh");
   localStorage.removeItem("expiresIn");
+  localStorage.removeItem("eventId");
+  localStorage.removeItem("levelId");
 };

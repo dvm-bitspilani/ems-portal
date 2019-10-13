@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import {
@@ -16,6 +16,7 @@ import {
 } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import Spinner from "../Spinner/Spinner";
+// import keyLogger from "../../utils/keyLogger";
 // import useScores from "./InputHook";
 // import makeStyles from "@material-ui/core/styles";
 
@@ -46,7 +47,7 @@ const UpdateScore = props => {
   // record scores entered by judge
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [inputs, setInputs] = useState([]);
+  const [inputs, setInputs] = useState({});
   let [keylogs,updateKeyLogs] = useState( [ {keylogs:[]},{keylogs:[]} ] );
   const handleInput = e => {
     // for (let input of inputs) {
@@ -61,34 +62,25 @@ const UpdateScore = props => {
     //     setInputs([...inputs]);
     //   }
     // }
-
-    // data for this parameter does not exist
-    // create new object for this param
-    // let data = {score: "", comments: ""};
-    // data[e.target.name] = e.target.value;
-    // inputs[e.target.id] = data;
     let field = e.target.name;
     let value = e.target.value;
   
     inputs[e.target.id] = {
       ...inputs[e.target.id],
       [field]: value
-    }
+    };
 
-    // console.log("setting new object")
-    setInputs([...inputs])
+    setInputs({...inputs});
   };
 
+
+
   const handleKeyLogs = e => {
-    // let field = e.target.name;
-    // let value = e.target.value;
     let a = keylogger(e,keylogs[e.target.id].keylogs);
-    
     keylogs[e.target.id] = {
       ...keylogs[e.target.id],
       keylogs: a 
     }
-    // console.log("setting new object")
     updateKeyLogs([...keylogs]);
   }
 
@@ -165,6 +157,7 @@ const UpdateScore = props => {
                       className={classes.textField}
                       margin="normal"
                       onChange={handleInput}
+                      // onKeyUp={() => keylogger()}
                       name="score"
                       // onKeyUp = {(e) => {
                       //   // console.log(e.target.id);
@@ -190,12 +183,14 @@ const UpdateScore = props => {
                       className={classes.textField}
                       margin="normal"
                       onChange={handleInput}
+                      // onKeyUp={keylogger}
                       name="comments"
                     />
                   </form>
                 </div>
               );
             })}
+            
             <Button
               variant="contained"
               color="primary"
@@ -254,7 +249,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateScore: (ids, inputs) => dispatch(actions.post_score_update(ids, inputs))
+    updateScore: (ids, inputs) =>
+      dispatch(actions.post_score_update(ids, inputs))
   };
 };
 

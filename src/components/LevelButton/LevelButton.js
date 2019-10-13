@@ -24,7 +24,7 @@ class LevelButton extends React.Component {
       <Link
         to={`/dashboard/${eventName}/level/${levelId}`}
         style={style.link}
-        onClick={() => this.props.fetchTeams(eventId, levelId)}
+        onClick={() => this.props.setIds(eventId, levelId)}
       >
         <ListItem button style={style.listItem}>
           <ListItemText primary={this.props.levelName} />
@@ -37,7 +37,8 @@ class LevelButton extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     fetchTeams: (eventId, levelId) =>
-      dispatch(actions.fetchTeams(eventId, levelId))
+      dispatch(actions.fetchTeams(eventId, levelId)),
+    setIds: (eventId, levelId) => dispatch(actions.setIds(eventId, levelId))
   };
 };
 
