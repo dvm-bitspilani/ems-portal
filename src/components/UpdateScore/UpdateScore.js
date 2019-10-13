@@ -90,17 +90,17 @@ const UpdateScore = props => {
           console.log("doNothing");
         } else {
           keylogs[lastStar + 2] = "*";
-          document.getElementById("demo").innerHTML += "\n" + event.keyCode;
+          // document.getElementById("demo").innerHTML += "\n" + event.keyCode;
           console.log(keylogs);
         }
       } else {
         keylogs[lastStar + 1] = value;
-        document.getElementById("demo").innerHTML += "\n" + event.keyCode;
+        // document.getElementById("demo").innerHTML += "\n" + event.keyCode;
         console.log("step-2 " + keylogs);
       }
 
       // oldLogs = keylogs;
-      console.log(oldLogs);
+      // console.log(oldLogs);
 
       inputs[event.target.id] = {
         ...inputs[event.target.id],
@@ -158,7 +158,7 @@ const UpdateScore = props => {
                       className={classes.textField}
                       margin="normal"
                       onChange={handleInput}
-                      // onKeyUp={() => keylogger()}
+                      // onKeyUp={() => keylogger(inputs[parameter_id].keylog || ['*'])}
                       name="score"
                     />
                     <TextField
