@@ -70,4 +70,5 @@ export async function logout() {
   localStorage.removeItem("expiresIn");
   localStorage.removeItem("eventId");
   localStorage.removeItem("levelId");
+  localStorage.removeItem("teamId");
 };
