@@ -78,11 +78,7 @@ export const post_score_update = (ids, params_details, keylogs) => {
   })
   param_ids.forEach(param => {
     values.push(parseInt(params_details[param].score));
-    if (params_details[param].comments === null) {
       comments.push("")
-    } else {
-      comments.push(params_details[param].comments);
-    }
   });
   Object.keys(keylogs).forEach((parameter_obj) => {
     let keylogString = "";
