@@ -153,17 +153,30 @@ const Level = props => {
                           </Button>
                         </Link>
                       )}
-
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        className="button"
-                        onClick={() => props.freezeScore(ids)}
-                      >
-                        <div onClick={handleClickOpen} id={team.id}>
-                          Freeze
-                        </div>
-                      </Button>
+                      {shouldDisable[team.id] || is_frozen ? (
+                        <Button
+                          variant="contained"
+                          disabled
+                          color="secondary"
+                          className="button"
+                          onClick={() => props.freezeScore(ids)}
+                        >
+                          <div onClick={handleClickOpen} id={team.id}>
+                            Frozen
+                          </div>
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          className="button"
+                          onClick={() => props.freezeScore(ids)}
+                        >
+                          <div onClick={handleClickOpen} id={team.id}>
+                            Freeze
+                          </div>
+                        </Button>
+                      )}
                     </div>
                   );
                 })
