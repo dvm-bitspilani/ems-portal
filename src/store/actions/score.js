@@ -75,18 +75,19 @@ export const post_score_update = (ids, params_details, keylogs) => {
     if (id !== 0) {
       param_ids.push(id);
     }
-  })
-  param_ids.forEach(param => {
-    values.push(parseInt(params_details[param].score));
-      comments.push("")
   });
-  Object.keys(keylogs).forEach((parameter_obj) => {
+  param_ids.forEach(param => {
+    // let score = params_details[param].score !== "" ? params_details[param].score : 0;
+    values.push(parseInt(params_details[param].score));
+    comments.push("");
+  });
+  Object.keys(keylogs).forEach(parameter_obj => {
     let keylogString = "";
-    keylogs[parameter_obj].keylogs.forEach((char) => {
+    keylogs[parameter_obj].keylogs.forEach(char => {
       keylogString += char;
-    })
+    });
     keylogsArr.push(keylogString);
-  })
+  });
   // arrays populated
   // make object to be stringified later and
   // populate object with above arrays
