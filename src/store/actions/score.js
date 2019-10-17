@@ -44,9 +44,11 @@ export const fetch_params = ids => {
   };
 };
 
-export const post_score_update = (ids, params_details, keylogs) => {
+export const post_score_update = (parameters, ids, params_details, keylogs) => {
   // ------ prepare body to send over request ---------
-  /*  structure of params_details
+  /*  structure of params_details [object] - may NOT contain all parameters 
+      returned by backend as its formation depends upon the number of fields
+      the judge has filled up.
     {
      1:{
        score: "",
@@ -59,34 +61,87 @@ export const post_score_update = (ids, params_details, keylogs) => {
      ...
      ...
    }
+      structure of parameters [array]-  will always contain all parameters
+      returned by backend.
+      [
+        {
+          parameter_id,
+          parameter_instance_value,
+          parameter_instance_comment
+          ...
+          ...
+        }
+        ...
+        ...
+      ]
   */
   const param_ids = [];
   const values = [];
   const comments = [];
   const keylogsArr = [];
-  // eslint-disable-next-line no-unused-vars
-  // for (let param in params_details) {
-  //   if (param === 0) continue;
-  //   param_ids.push(param);
+
+  // if (Object.keys(params_details).length === 0) {
+  //   parameters.forEach(parameter => {
+  //     param_ids.push(parameter.parameter_id);
+  //     values.push(parameter.parameter_instance_value);
+  //     comments.push(parameter.parameter_instance_comment);
+  //     keylogsArr.push("");
+  //   });
+  // } else {
+  //   Object.keys(params_details).forEach(param => {
+  //     let id = parseInt(param);
+  //     if (id !== 0) {
+  //       param_ids.push(id);
+  //     }
+  //   });
+  //   param_ids.forEach(param => {
+  //     values.push(parseInt(params_details[param].score));
+  //     comments.push("");
+  //   });
+  //   Object.keys(keylogs).forEach(parameter_obj => {
+  //     let keylogString = "";
+  //     keylogs[parameter_obj].keylogs.forEach(char => {
+  //       keylogString += char;
+  //     });
+  //     keylogsArr.push(keylogString);
+  //   });
   // }
 
-  Object.keys(params_details).forEach(param => {
-    let id = parseInt(param);
-    if (id !== 0) {
-      param_ids.push(id);
-    }
-  });
-  param_ids.forEach(param => {
-    // let score = params_details[param].score !== "" ? params_details[param].score : 0;
-    values.push(parseInt(params_details[param].score));
+  // iterate through every parameter
+  parameters.forEach(parameter => {
+    // extract properties for this parameter
+    const {
+      parameter_id,
+      parameter_instance_value,
+    } = parameter;
+
+    // push parameter id
+    param_ids.push(parameter_id);
+    // push empty string to comments coz backend fucked up lmao
     comments.push("");
-  });
-  Object.keys(keylogs).forEach(parameter_obj => {
-    let keylogString = "";
-    keylogs[parameter_obj].keylogs.forEach(char => {
-      keylogString += char;
-    });
-    keylogsArr.push(keylogString);
+
+    if (Object.keys(params_details).indexOf(parameter_id.toString()) >= 0) {
+      // params_details contains info for this parameter
+      // implies that the judge HAS entered some score for this field
+
+      // push score
+      values.push(params_details[parameter_id].score)
+      // prepare and push keylogs
+      let keylogString = "";
+      keylogs[parameter_id.toString()].keylogs.forEach(char => {
+        keylogString += char;
+      });
+      keylogsArr.push(keylogString);
+
+      // all items prepared fpr POST request
+    }
+    else {
+      // the matching parameter does not exist
+      // implies that Judge has NOT filled this field
+
+      values.push(parameter_instance_value);
+      keylogsArr.push("")
+    }
   });
   // arrays populated
   // make object to be stringified later and
@@ -115,7 +170,14 @@ export const post_score_update = (ids, params_details, keylogs) => {
         "Content-Type": "application/json"
       }
     })
-      .then(response => response.json())
+      .then(response => {
+        if (response.status !== 200) {
+          // handle all errors here
+          window.alert("Please fill all fields!");
+        } else {
+          response.json();
+        }
+      })
       .then(data => {
         dispatch(updateScore());
       })

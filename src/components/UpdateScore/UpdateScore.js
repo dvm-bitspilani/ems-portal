@@ -131,17 +131,9 @@ const UpdateScore = props => {
 
   useEffect(() => {
     props.fetchParams(ids);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // const paramIds = [];
-  // if (props.params_info !== undefined) {
-  //   for (let parameter of props.params_info) {
-  //     paramIds.push(parameter.parameter_id);
-  //   }
-  // }
 
-  // const { handleSubmit, handleInputChange, inputs } = useScores();
-  // const params_info = [];
   return (
     <div>
       {props.params_info === undefined ? (
@@ -160,13 +152,15 @@ const UpdateScore = props => {
                 parameter_id,
                 parameter_max_value,
                 parameter_min_value,
-                parameter_instance_value,
+                parameter_instance_value
               } = parameter;
               // params_info.push({ parameter_id: { score: "", comments: "" } });
 
               return (
                 <div id={parameter_id} key={index}>
-                  <Typography variant="h6" className={classes.parameterName}>{parameter_name}</Typography>
+                  <Typography variant="h6" className={classes.parameterName}>
+                    {parameter_name}
+                  </Typography>
                   <Typography variant="body1">{`Min-score:${parameter_min_value} | Max-score:${parameter_max_value}`}</Typography>
                   <form>
                     <TextField
@@ -188,7 +182,10 @@ const UpdateScore = props => {
               variant="contained"
               color="primary"
               className="button"
-              onClick={() => props.updateScore(ids, inputs, keylogs)}
+              onClick={() => {
+                const params_info = [...props.params_info];
+                props.updateScore(params_info, ids, inputs, keylogs);
+              }}
             >
               <div
                 // onClick={() => {
@@ -242,8 +239,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateScore: (ids, inputs, keylogs) =>
-      dispatch(actions.post_score_update(ids, inputs, keylogs)),
+    updateScore: (parameters, ids, inputs, keylogs) =>
+      dispatch(actions.post_score_update(parameters, ids, inputs, keylogs)),
     fetchParams: ids => dispatch(actions.fetch_params(ids))
   };
 };
