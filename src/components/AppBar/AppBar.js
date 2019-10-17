@@ -5,20 +5,12 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
   IconButton,
   Drawer,
   List,
   ListItem,
   ListItemText,
   Divider,
-  Dialog,
-  DialogActions,
-  ClickAwayListener,
-  // DialogContent,
-  // DialogContentText,
-  DialogTitle,
-  Slide
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { logout } from "../../utils/auth";
@@ -38,29 +30,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
 const TopBar = props => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState({
     left: false
   });
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    logout()
-      .then(() => {
-        props.history.replace("/");
-      })
-      .catch(console.error);
-  };
 
   const toggleDrawer = (side, open) => event => {
     if (

@@ -9,12 +9,12 @@ import {
   Button,
   ListItemText,
   Paper,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Slide,
+  // Dialog,
+  // DialogActions,
+  // DialogContent,
+  // DialogContentText,
+  // DialogTitle,
+  // Slide,
   makeStyles
 } from "@material-ui/core";
 import "./level.scss";
@@ -33,7 +33,7 @@ import Spinner from "../Spinner/Spinner";
 const useStyles = makeStyles(theme => ({
   container: {
     backgroundColor: grey[200],
-    minHeight: "calc(100vh - 130px)",
+    minHeight: "calc(100vh - 90px)",
     padding: theme.spacing(2)
     // paddingTop: theme.spacing(2)
   },
@@ -47,33 +47,46 @@ const useStyles = makeStyles(theme => ({
 //   return () => set(!value); // toggle the state to force render
 // }
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+// const Transition = React.forwardRef(function Transition(props, ref) {
+//   return <Slide direction="up" ref={ref} {...props} />;
+// });
 
 const Level = props => {
   const classes = useStyles();
   const teams = [...props.teams];
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
   // state variables to disable Update Score button
   const [shouldDisable, setShouldDisable] = useState({});
-  const [id, setId] = useState(-1);
+  // const [id, setId] = useState(-1);  
 
   // const forceUpdate = useForceUpdate();
   const handleClickOpen = e => {
-    setOpen(true);
-    setId(e.target.id);
+    e.persist();
+    const teamId = e.target.id;
+    console.log("TeamId",e.target.id);
+    // console.log(e)
+    // setId(e.target.id);
+    // console.log(e.target.id);
+    if (window.confirm("Do you really want to freeze this score?")) {
+      const IDs = {
+        eventId: localStorage.getItem("eventId"),
+        levelId: localStorage.getItem("levelId"),
+        teamId: teamId
+      }
+      props.freezeScore(IDs);
+      shouldDisable[teamId] = true;
+      setShouldDisable({...shouldDisable});
+    }
   };
 
-  const handleClose = () => {
-    setOpen(false);
-    // props.history.goBack();
-    shouldDisable[id] = true;
-    setShouldDisable({ ...shouldDisable });
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  //   shouldDisable[id] = true;
+  //   setShouldDisable({ ...shouldDisable });
+  // };
 
-  console.log("Event Id", props.eventId);
+  // console.log("Event Id", props.eventId);
   useEffect(() => {
     console.log("Using effect");
     // console.log(props.eventId);
@@ -82,6 +95,7 @@ const Level = props => {
       localStorage.getItem("eventId"),
       localStorage.getItem("levelId")
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -105,6 +119,7 @@ const Level = props => {
                     levelId: localStorage.getItem("levelId"),
                     teamId: team.id
                   };
+                  // console.log("TeamID",team.id);
 
                   return (
                     <div className="teamName" key={index}>
@@ -162,9 +177,8 @@ const Level = props => {
                           disabled
                           color="secondary"
                           className="button"
-                          onClick={() => props.freezeScore(ids)}
                         >
-                          <div onClick={handleClickOpen} id={team.id}>
+                          <div id={team.id}>
                             Frozen
                           </div>
                         </Button>
@@ -173,7 +187,9 @@ const Level = props => {
                           variant="contained"
                           color="secondary"
                           className="button"
-                          onClick={() => props.freezeScore(ids)}
+                          // onClick={() => props.freezeScore(ids)}    
+                          // onClick={handleClickOpen} 
+                          // id={team.id}   
                         >
                           <div onClick={handleClickOpen} id={team.id}>
                             Freeze
@@ -188,7 +204,7 @@ const Level = props => {
           </Paper>
         )}
       </Container>
-      <Dialog
+      {/* <Dialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
@@ -210,7 +226,7 @@ const Level = props => {
             Okay
           </Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 };

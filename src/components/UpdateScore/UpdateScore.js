@@ -131,6 +131,7 @@ const UpdateScore = props => {
 
   useEffect(() => {
     props.fetchParams(ids);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // const paramIds = [];
   // if (props.params_info !== undefined) {

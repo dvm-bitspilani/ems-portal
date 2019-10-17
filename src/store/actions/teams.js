@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-const rootURL = "https://testwallet.bits-oasis.org/ems/judge/events";
+const rootURL = "https://www.bits-oasis.org/ems/judge/events";
 
 export const populateTeams = (teamsList, eventId, levelId) => {
   return {
