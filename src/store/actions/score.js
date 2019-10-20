@@ -110,10 +110,7 @@ export const post_score_update = (parameters, ids, params_details, keylogs) => {
   // iterate through every parameter
   parameters.forEach(parameter => {
     // extract properties for this parameter
-    const {
-      parameter_id,
-      parameter_instance_value,
-    } = parameter;
+    const { parameter_id, parameter_instance_value } = parameter;
 
     // push parameter id
     param_ids.push(parameter_id);
@@ -125,7 +122,7 @@ export const post_score_update = (parameters, ids, params_details, keylogs) => {
       // implies that the judge HAS entered some score for this field
 
       // push score
-      values.push(params_details[parameter_id].score)
+      values.push(params_details[parameter_id].score);
       // prepare and push keylogs
       let keylogString = "";
       keylogs[parameter_id.toString()].keylogs.forEach(char => {
@@ -134,13 +131,12 @@ export const post_score_update = (parameters, ids, params_details, keylogs) => {
       keylogsArr.push(keylogString);
 
       // all items prepared fpr POST request
-    }
-    else {
+    } else {
       // the matching parameter does not exist
       // implies that Judge has NOT filled this field
 
       values.push(parameter_instance_value);
-      keylogsArr.push("")
+      keylogsArr.push("");
     }
   });
   // arrays populated
@@ -169,19 +165,19 @@ export const post_score_update = (parameters, ids, params_details, keylogs) => {
         Authorization: `Bearer ${access}`,
         "Content-Type": "application/json"
       }
-    })
-      .then(response => {
-        if (response.status !== 200) {
-          // handle all errors here
-          window.alert("Please fill all fields!");
-        } else {
-          response.json();
-        }
-      })
-      .then(data => {
-        dispatch(updateScore());
-      })
-      .catch(console.error);
+    }).then(response => {
+      if (response.status !== 200) {
+        // handle all errors here
+        window.alert(response.body.message);
+      } else {
+        response
+          .json()
+          .then(data => {
+            dispatch(updateScore());
+          })
+          .catch(console.error);
+      }
+    });
   };
 };
 
