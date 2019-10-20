@@ -9,8 +9,6 @@ import {
   Paper,
   Dialog,
   DialogActions,
-  DialogContent,
-  DialogContentText,
   DialogTitle,
   Slide
 } from "@material-ui/core";
@@ -209,12 +207,6 @@ const UpdateScore = props => {
             <DialogTitle id="alert-dialog-slide-title">
               {"Score updated successfully!"}
             </DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-slide-description">
-                The score for this team has been updated. Please note that any
-                changes made while entering the score have also been recorded.
-              </DialogContentText>
-            </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} color="primary">
                 Return to Teams
