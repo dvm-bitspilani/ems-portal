@@ -167,6 +167,7 @@ export const post_score_update = (parameters, ids, params_details, keylogs) => {
       }
     }).then(response => {
       if (response.status !== 200) {
+        console.log(response)
         // handle all errors here
         window.alert(response.body.message);
       } else {

@@ -18,7 +18,8 @@ response:
     levelId
   }
 }
------------------------ */ 
+----------------------- */
+
 export const fetchEvents = () => {
   const access = localStorage.getItem("access");
   return dispatch => {
@@ -30,7 +31,24 @@ export const fetchEvents = () => {
     })
       .then(response => response.json())
       .then(data => {
-        dispatch(updateEventsList(data.events_info))
+        dispatch(updateEventsList(data.events_info));
+      })
+      .catch(console.error);
+  };
+};
+
+export const fetchLevels = eventId => {
+  const access = localStorage.getItem("access");
+  return dispatch => {
+    fetch(`https://testwallet.bits-oasis.org/ems/judge/event/${eventId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${access}`
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        //dispatch action to update levels for this event
       })
       .catch(console.error);
   };

@@ -9,65 +9,44 @@ import {
   Button,
   ListItemText,
   Paper,
-  // Dialog,
-  // DialogActions,
-  // DialogContent,
-  // DialogContentText,
-  // DialogTitle,
-  // Slide,
   makeStyles
 } from "@material-ui/core";
 import "./level.scss";
 import { grey } from "@material-ui/core/colors";
 import Spinner from "../Spinner/Spinner";
 
-// structure of teams array from request
-// teams: [
-//   {
-//     teamName,
-//     teamId,
-//     score
-//   }
-// ]
+/* structure of teams array from request
+    teams: [
+      {
+        teamName,
+        teamId,
+        score
+      }
+    ]
+*/
 
 const useStyles = makeStyles(theme => ({
   container: {
     backgroundColor: grey[200],
     minHeight: "calc(100vh - 90px)",
     padding: theme.spacing(2)
-    // paddingTop: theme.spacing(2)
   },
   paper: {
     padding: theme.spacing(3, 2)
   }
 }));
 
-// function useForceUpdate(){
-//   const [value, set] = useState(true); //boolean state
-//   return () => set(!value); // toggle the state to force render
-// }
-
-// const Transition = React.forwardRef(function Transition(props, ref) {
-//   return <Slide direction="up" ref={ref} {...props} />;
-// });
-
 const Level = props => {
   const classes = useStyles();
   const teams = [...props.teams];
-  // const [open, setOpen] = useState(false);
 
   // state variables to disable Update Score button
   const [shouldDisable, setShouldDisable] = useState({});
-  // const [id, setId] = useState(-1);  
 
-  // const forceUpdate = useForceUpdate();
   const handleClickOpen = e => {
     e.persist();
     const teamId = e.target.id;
     console.log("TeamId",e.target.id);
-    // console.log(e)
-    // setId(e.target.id);
-    // console.log(e.target.id);
     if (window.confirm("Do you really want to freeze this score?")) {
       const IDs = {
         eventId: localStorage.getItem("eventId"),
@@ -80,17 +59,8 @@ const Level = props => {
     }
   };
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  //   shouldDisable[id] = true;
-  //   setShouldDisable({ ...shouldDisable });
-  // };
-
-  // console.log("Event Id", props.eventId);
   useEffect(() => {
     console.log("Using effect");
-    // console.log(props.eventId);
-    // console.log(props.levelId);
     props.fetchTeams(
       localStorage.getItem("eventId"),
       localStorage.getItem("levelId")
@@ -186,10 +156,7 @@ const Level = props => {
                         <Button
                           variant="contained"
                           color="secondary"
-                          className="button"
-                          // onClick={() => props.freezeScore(ids)}    
-                          // onClick={handleClickOpen} 
-                          // id={team.id}   
+                          className="button"  
                         >
                           <div onClick={handleClickOpen} id={team.id}>
                             Freeze
@@ -204,29 +171,6 @@ const Level = props => {
           </Paper>
         )}
       </Container>
-      {/* <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="alert-dialog-slide-title">
-          {"Score frozen!"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            The total score for this team has been frozen. You will not be able
-            to alter the score.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Okay
-          </Button>
-        </DialogActions>
-      </Dialog> */}
     </div>
   );
 };
