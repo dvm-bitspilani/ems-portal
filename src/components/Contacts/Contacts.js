@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     overflowX: "scroll"
   },
   table: {
-    minWidth: 500,
+    minWidth: 500
   },
   caption: {
     margin: theme.spacing(1, 0)
@@ -48,10 +48,26 @@ const createData = (name, phone, email) => {
 };
 
 const rows = [
-  createData("Shivanshu Ayachi", "+91-7389216920", "f20180778@pilani.bits-pilani.ac.in"),
-  createData("Divyansh Agarwal", "+91-8800992911", "f20180791@pilani.bits-pilani.ac.in"),
-  createData("Shreyans Jain", "+91-9582945729", "f20180253@pilani.bits-pilani.ac.in"),
-  createData("Akshit Patel", "+91-7000392197", "f201800094@pilani.bits-pilani.ac.in")
+  createData(
+    "Shivanshu Ayachi",
+    "+91-7389216920",
+    "f20180778@pilani.bits-pilani.ac.in"
+  ),
+  createData(
+    "Divyansh Agarwal",
+    "+91-8800992911",
+    "f20180791@pilani.bits-pilani.ac.in"
+  ),
+  createData(
+    "Shreyans Jain",
+    "+91-9582945729",
+    "f20180253@pilani.bits-pilani.ac.in"
+  ),
+  createData(
+    "Akshit Patel",
+    "+91-7000392197",
+    "f201800094@pilani.bits-pilani.ac.in"
+  )
 ];
 
 const Contacts = props => {

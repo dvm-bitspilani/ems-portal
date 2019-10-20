@@ -8,6 +8,12 @@ export const updateScore = () => {
   };
 };
 
+export const updateScoreError = () => {
+  return {
+    type: actions.UPDATE_SCORE_ERROR
+  };
+};
+
 export const freezeScore = teamId => {
   return {
     type: actions.FREEZE_SCORE,
@@ -80,33 +86,6 @@ export const post_score_update = (parameters, ids, params_details, keylogs) => {
   const comments = [];
   const keylogsArr = [];
 
-  // if (Object.keys(params_details).length === 0) {
-  //   parameters.forEach(parameter => {
-  //     param_ids.push(parameter.parameter_id);
-  //     values.push(parameter.parameter_instance_value);
-  //     comments.push(parameter.parameter_instance_comment);
-  //     keylogsArr.push("");
-  //   });
-  // } else {
-  //   Object.keys(params_details).forEach(param => {
-  //     let id = parseInt(param);
-  //     if (id !== 0) {
-  //       param_ids.push(id);
-  //     }
-  //   });
-  //   param_ids.forEach(param => {
-  //     values.push(parseInt(params_details[param].score));
-  //     comments.push("");
-  //   });
-  //   Object.keys(keylogs).forEach(parameter_obj => {
-  //     let keylogString = "";
-  //     keylogs[parameter_obj].keylogs.forEach(char => {
-  //       keylogString += char;
-  //     });
-  //     keylogsArr.push(keylogString);
-  //   });
-  // }
-
   // iterate through every parameter
   parameters.forEach(parameter => {
     // extract properties for this parameter
@@ -166,18 +145,17 @@ export const post_score_update = (parameters, ids, params_details, keylogs) => {
         "Content-Type": "application/json"
       }
     }).then(response => {
-      if (response.status !== 200) {
-        console.log(response)
-        // handle all errors here
-        window.alert(response.body.message);
-      } else {
-        response
-          .json()
-          .then(data => {
+      response
+        .json()
+        .then(data => {
+          if (response.status !== 400) {
+            window.alert(data.message);
+          } else {
+            window.alert(data.message);
             dispatch(updateScore());
-          })
-          .catch(console.error);
-      }
+          }
+        })
+        .catch(console.error);
     });
   };
 };

@@ -46,16 +46,16 @@ const Level = props => {
   const handleClickOpen = e => {
     e.persist();
     const teamId = e.target.id;
-    console.log("TeamId",e.target.id);
+    // console.log("TeamId", e.target.id);
     if (window.confirm("Do you really want to freeze this score?")) {
       const IDs = {
         eventId: localStorage.getItem("eventId"),
         levelId: localStorage.getItem("levelId"),
         teamId: teamId
-      }
+      };
       props.freezeScore(IDs);
       shouldDisable[teamId] = true;
-      setShouldDisable({...shouldDisable});
+      setShouldDisable({ ...shouldDisable });
     }
   };
 
@@ -65,7 +65,7 @@ const Level = props => {
       localStorage.getItem("eventId"),
       localStorage.getItem("levelId")
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -148,15 +148,13 @@ const Level = props => {
                           color="secondary"
                           className="button"
                         >
-                          <div id={team.id}>
-                            Frozen
-                          </div>
+                          <div id={team.id}>Frozen</div>
                         </Button>
                       ) : (
                         <Button
                           variant="contained"
                           color="secondary"
-                          className="button"  
+                          className="button"
                         >
                           <div onClick={handleClickOpen} id={team.id}>
                             Freeze

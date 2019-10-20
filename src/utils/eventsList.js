@@ -5,7 +5,7 @@ export default async function fetchEvents() {
   await fetch("https://testwallet.bits-oasis.org/ems/events/", {
     method: "GET",
     headers: {
-      "Authorization": `Bearer ${access}`
+      Authorization: `Bearer ${access}`
     }
   })
     .then(response => response.json())

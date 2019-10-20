@@ -55,7 +55,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SignIn(props) {
-
   const classes = useStyles();
   const [username, setUser] = useState("");
   const [password, setPass] = useState("");
@@ -117,7 +116,10 @@ function SignIn(props) {
               onClick={() => {
                 login(username, password)
                   .then(() => {
-                    if (localStorage.getItem("access") !== "undefined" && localStorage.getItem("access") !== null) {
+                    if (
+                      localStorage.getItem("access") !== "undefined" &&
+                      localStorage.getItem("access") !== null
+                    ) {
                       props.history.push("/dashboard");
                       // eventsList().then(props.updateEventsList, console.error);
                       // props.fetchEvents();

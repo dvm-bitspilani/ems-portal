@@ -4,7 +4,7 @@ const rootURL = "https://www.bits-oasis.org/ems/judge/events";
 export const populateTeams = (teamsList, eventId, levelId) => {
   return {
     type: actionTypes.POPULATE_TEAMS,
-    teams: teamsList,
+    teams: teamsList
     // eventId: eventId,
     // levelId: levelId
   };
@@ -17,8 +17,8 @@ export const setIds = (eventId, levelId) => {
     type: actionTypes.SET_IDS,
     eventId: eventId,
     levelId: levelId
-  }
-}
+  };
+};
 
 export const populateTeamInfo = (teamInfo, teamId) => {
   return {

@@ -128,6 +128,7 @@ const UpdateScore = props => {
   };
 
   useEffect(() => {
+    console.log("using effect from update score");
     props.fetchParams(ids);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -187,10 +188,9 @@ const UpdateScore = props => {
             >
               <div
                 // onClick={() => {
-                //   if (!props.updateScoreError) return handleClickOpen;
-                //   else return null;
-                // }}
-                onClick={handleClickOpen}
+                //   if (!props.updateScoreError) handleClickOpen();
+                // }} 
+                // onClick={handleClickOpen}
               >
                 Update
               </div>

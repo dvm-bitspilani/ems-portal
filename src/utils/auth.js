@@ -31,7 +31,7 @@ export async function login(username, password) {
       localStorage.setItem("expiresIn", new Date());
     })
     .catch(console.error);
-};
+}
 
 export const hasSessionExpired = () => {
   // checks if the current session has expired
@@ -71,4 +71,4 @@ export async function logout() {
   localStorage.removeItem("eventId");
   localStorage.removeItem("levelId");
   localStorage.removeItem("teamId");
-};
+}

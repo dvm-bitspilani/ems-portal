@@ -10,7 +10,7 @@ import {
   List,
   ListItem,
   ListItemText,
-  Divider,
+  Divider
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { logout } from "../../utils/auth";

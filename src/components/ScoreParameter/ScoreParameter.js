@@ -1,12 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Typography, TextField } from "@material-ui/core";
 
-const useStyles = (theme => ({
+const useStyles = theme => ({
   textField: {
     marginBottom: theme.spacing(1),
     width: "100%"
   }
-}))
+});
 
 const ScoreParameter = props => {
   const { parameter_id, parameter_name } = props;

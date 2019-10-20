@@ -50,8 +50,8 @@ const Events = props => {
   // each level button will lead to a new route with the grading buttons
 
   useEffect(() => {
-    props.fetchEvents()
-  }, [])  
+    props.fetchEvents();
+  }, []);
 
   const events = props.events;
   return (
