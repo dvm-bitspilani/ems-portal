@@ -6,11 +6,11 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import {
   // BrowserRouter as Router,
   Route,
-  withRouter,
-  Link
+  Link,
+  BrowserRouter,
 } from "react-router-dom";
-
-const useStyles = makeStyles(theme => ({
+import { withRouter } from "react-router";
+const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     width: "99vw",
@@ -21,23 +21,22 @@ const useStyles = makeStyles(theme => ({
     height: "40px",
     fontSize: theme.typography.fontSize.larger,
     borderBottom: "1px solid #b5b5b5",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
   },
   nested: {
-    paddingLeft: theme.spacing(4)
+    paddingLeft: theme.spacing(4),
   },
   links: {
     textDecoration: "none",
     fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-    color: "rgba(0,0,0,.54)"
+    color: "rgba(0,0,0,.54)",
   },
   lastLink: {
     textDecoration: "none",
     fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-    color: "black"
-  }
+    color: "black",
+  },
 }));
-
 
 function RouterBreadcrumbs() {
   const classes = useStyles();
@@ -52,7 +51,7 @@ function RouterBreadcrumbs() {
       {/* <div className={classes.root}> */}
       <Route>
         {() => {
-          let pathnames = window.location.pathname.split("/").filter(x => x);
+          let pathnames = window.location.pathname.split("/").filter((x) => x);
           return (
             <Breadcrumbs aria-label="breadcrumb">
               <Link to="/dashboard" className={classes.links}>
@@ -60,7 +59,7 @@ function RouterBreadcrumbs() {
               </Link>
               {pathnames.map((value, index) => {
                 const last = index === pathnames.length - 1;
-                pathnames = pathnames.filter(value => {
+                pathnames = pathnames.filter((value) => {
                   return value !== "dashboard";
                 });
                 const to = `/dashboard/${pathnames
