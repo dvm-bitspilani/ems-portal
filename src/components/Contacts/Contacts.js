@@ -48,10 +48,10 @@ const createData = (name, phone, email) => {
 };
 
 const rows = [
-  createData("Shivanshu Ayachi", "+91-7389216920", "f20180778@pilani.bits-pilani.ac.in"),
-  createData("Divyansh Agarwal", "+91-8800992911", "f20180791@pilani.bits-pilani.ac.in"),
-  createData("Shreyans Jain", "+91-9582945729", "f20180253@pilani.bits-pilani.ac.in"),
-  createData("Akshit Patel", "+91-7000392197", "f201800094@pilani.bits-pilani.ac.in")
+  createData("Sarthak Arora", "+91-7087797760", "f20200060@pilani.bits-pilani.ac.in"),
+  createData("Alvin Adarsh Kumar", "+91-9135945158", "f20200931@pilani.bits-pilani.ac.in"),
+  createData("Dhruv Popuri", "+91-9553714240", "f20200930@pilani.bits-pilani.ac.in"),
+  createData("Aditya Thakur", "+91-9228632935", "f20200630@pilani.bits-pilani.ac.in")
 ];
 
 const Contacts = props => {
