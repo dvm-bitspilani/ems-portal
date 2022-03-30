@@ -7,6 +7,21 @@ Utility functions for Authorization:
 4. refreshSession: get new access token from backend and restart session timer 
 -------------------------
 */
+// Fake Api Auth Call for Bypass
+// const mockLogin = (username, password) => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (username === "test" && password === "password") {
+//         localStorage.setItem("access", "AccessGranted");
+//         console.log("access granted");
+//         resolve();
+//       } else {
+//         console.log("access denied");
+//         reject({ message: 'Error' });
+//       }
+//     }, 1000);
+//   });
+// }
 
 export async function login(username, password) {
   // send login request and if successful,
@@ -14,7 +29,7 @@ export async function login(username, password) {
 
   const authData = { username, password };
 
-  await fetch("https://testwallet.bits-oasis.org/ems/jwt/get_token/", {
+  await fetch("https://bits-apogee.org/ems/jwt/get_token/", {
     method: "POST",
     body: JSON.stringify(authData),
     headers: {
@@ -31,6 +46,12 @@ export async function login(username, password) {
       localStorage.setItem("expiresIn", new Date());
     })
     .catch(console.error);
+
+  // try {
+  //   await mockLogin(username, password);
+  // } catch (e) {
+  //   console.log(e.message);
+  // }
 };
 
 export const hasSessionExpired = () => {
@@ -43,7 +64,7 @@ export const hasSessionExpired = () => {
 export const refreshSession = () => {
   const refreshToken = localStorage.getItem("refresh");
 
-  fetch("https://testwallet.bits-oasis.org/ems/jwt/refresh_token", {
+  fetch("https://bits-apogee.org/ems/jwt/refresh_token", {
     method: "POST",
     body: JSON.stringify(refreshToken),
     headers: {
