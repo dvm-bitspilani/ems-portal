@@ -68,7 +68,7 @@ function SignIn(props) {
         align="center"
         className={classes.header}
       >
-        OASIS'19 EMS
+        APOGEE'22 EMS
       </Typography>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
