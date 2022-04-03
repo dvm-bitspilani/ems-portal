@@ -4,40 +4,40 @@ const rootURL = "https://bits-apogee.org/ems/judge/events";
 
 export const updateScore = () => {
   return {
-    type: actions.UPDATE_SCORE
+    type: actions.UPDATE_SCORE,
   };
 };
 
-export const freezeScore = teamId => {
+export const freezeScore = (teamId) => {
   return {
     type: actions.FREEZE_SCORE,
-    teamId: teamId
+    teamId: teamId,
   };
 };
 
-export const populateParams = data => {
+export const populateParams = (data) => {
   return {
     type: actions.POPULATE_PARAMS,
     params_info: data.parameters_info,
-    teamId: data.team_id
+    teamId: data.team_id,
   };
 };
 
-export const fetch_params = ids => {
+export const fetch_params = (ids) => {
   const { teamId } = ids;
   const eventId = localStorage.getItem("eventId");
   const levelId = localStorage.getItem("levelId");
   const access = localStorage.getItem("access");
 
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${access}`
-      }
+        Authorization: `Bearer ${access}`,
+      },
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         dispatch(populateParams(data));
       })
       .catch(console.error);
@@ -70,16 +70,16 @@ export const post_score_update = (ids, params_details, keylogs) => {
   //   param_ids.push(param);
   // }
 
-  Object.keys(params_details).forEach(param => {
+  Object.keys(params_details).forEach((param) => {
     let id = parseInt(param);
     if (id !== 0) {
       param_ids.push(id);
     }
-  })
-  param_ids.forEach(param => {
+  });
+  param_ids.forEach((param) => {
     values.push(parseInt(params_details[param].score));
     if (params_details[param].comments === null) {
-      comments.push("")
+      comments.push("");
     } else {
       comments.push(params_details[param].comments);
     }
@@ -88,9 +88,9 @@ export const post_score_update = (ids, params_details, keylogs) => {
     let keylogString = "";
     keylogs[parameter_obj].keylogs.forEach((char) => {
       keylogString += char;
-    })
+    });
     keylogsArr.push(keylogString);
-  })
+  });
   // arrays populated
   // make object to be stringified later and
   // populate object with above arrays
@@ -100,7 +100,7 @@ export const post_score_update = (ids, params_details, keylogs) => {
   postData["comments"] = comments;
   postData["keylogs"] = keylogsArr;
 
-  console.log(postData);
+  // console.log(postData);
 
   // ---------------------------------------------------
 
@@ -108,42 +108,44 @@ export const post_score_update = (ids, params_details, keylogs) => {
   const access = localStorage.getItem("access");
   const eventId = localStorage.getItem("eventId");
   const levelId = localStorage.getItem("levelId");
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score/`, {
       method: "POST",
       // body: JSON.stringify(postData),
       body: JSON.stringify(postData),
       headers: {
         Authorization: `Bearer ${access}`,
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         dispatch(updateScore());
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+      });
   };
 };
 
-export const post_score_freeze = ids => {
+export const post_score_freeze = (ids) => {
   const { teamId } = ids;
   const access = localStorage.getItem("access");
   const eventId = localStorage.getItem("eventId");
   const levelId = localStorage.getItem("levelId");
-  return dispatch => {
+  return (dispatch) => {
     fetch(
       `${rootURL}/${eventId}/levels/${levelId}/teams/${teamId}/score/freeze`,
       {
         method: "POST",
         body: JSON.stringify({}),
         headers: {
-          Authorization: `Bearer ${access}`
-        }
+          Authorization: `Bearer ${access}`,
+        },
       }
     )
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         dispatch(freezeScore(teamId));
       })
       .catch(console.error);

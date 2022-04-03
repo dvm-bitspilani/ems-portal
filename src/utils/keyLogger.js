@@ -17,19 +17,19 @@ function keylogger(input,oldLogs){
         }
             if(event.keyCode == "8" || event.keyCode =="46"){
                 if(lastStar == keylogs.length -1){
-                    console.log("doNothing");
+                    // console.log("doNothing");
                 }else{
                     keylogs[lastStar+ 2 ] = "*";
                     document.getElementById("demo").innerHTML+= '\n' + keyLogs;
-                    console.log(keyLogs);
+                    // console.log(keyLogs);
                 }
             }else{
                 keylogs[lastStar+1] = value;
                 document.getElementById("demo").innerHTML+= '\n' + keyLogs;
-                console.log("step-2 "+keyLogs);
+                // console.log("step-2 "+keyLogs);
             }
         oldLogs = keyLogs;
-        console.log(oldLogs);
+        // console.log(oldLogs);
         return keylogs;
     }
 }

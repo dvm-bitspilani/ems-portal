@@ -51,7 +51,7 @@ const Events = props => {
 
   useEffect(() => {
     props.fetchEvents()
-  }, [])  
+  }, [])
 
   const events = props.events;
   return (

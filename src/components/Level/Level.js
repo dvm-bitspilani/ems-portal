@@ -73,9 +73,9 @@ const Level = props => {
     setShouldDisable({ ...shouldDisable });
   };
 
-  console.log("Event Id", props.eventId);
+  // console.log("Event Id", props.eventId);
   useEffect(() => {
-    console.log("Using effect");
+    // console.log("Using effect");
     // console.log(props.eventId);
     // console.log(props.levelId);
     props.fetchTeams(

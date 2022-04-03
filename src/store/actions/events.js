@@ -8,6 +8,7 @@ export const updateEventsList = events => {
 };
 
 /* ---------------------
+
 GET LIST OF EVENTS -
 response: 
 {
@@ -18,9 +19,12 @@ response:
     levelId
   }
 }
+
 ----------------------- */
+
 export const fetchEvents = () => {
   const access = localStorage.getItem("access");
+
   return dispatch => {
     fetch("https://bits-apogee.org/ems/events/", {
       method: "GET",

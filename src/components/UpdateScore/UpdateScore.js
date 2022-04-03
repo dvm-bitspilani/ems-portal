@@ -52,6 +52,7 @@ const UpdateScore = props => {
   const [open, setOpen] = React.useState(false);
   const [inputs, setInputs] = useState({});
   const [keylogs, updateKeyLogs] = useState({});
+  let score_input_control;
   const handleInput = e => {
     // for (let input of inputs) {
     //   if (e.target.id === input) {
@@ -115,6 +116,11 @@ const UpdateScore = props => {
   };
 
   const handleClickOpen = () => {
+    const score = inputs[score_input_control[0]].score;
+    if(score>score_input_control[1] || score<score_input_control[2]){
+      alert(`Please enter the value between ${score_input_control[2]} and ${score_input_control[1]}`);
+      return;
+    }
     setOpen(true);
   };
 
@@ -161,6 +167,7 @@ const UpdateScore = props => {
                 parameter_min_value,
                 parameter_instance_value,
               } = parameter;
+              score_input_control = [parameter_id,parameter_max_value,parameter_min_value];
               // params_info.push({ parameter_id: { score: "", comments: "" } });
 
               return (
