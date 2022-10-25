@@ -1,4 +1,4 @@
-# Event Management System ([APOGEE '22](https://bits-apogee.org/))   
+# Event Management System ([OASIS '22](https://bits-oasis.org/))   
 
 ## _To-do_
   - [x] _Disable update button when score has been frozen_
