@@ -26,7 +26,7 @@ export const fetchEvents = () => {
   const access = localStorage.getItem("access");
 
   return dispatch => {
-    fetch("https://bits-oasis.org/2022/main/ems/events/", {
+    fetch("http://bits-apogee.org/ems/events/", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${access}`
