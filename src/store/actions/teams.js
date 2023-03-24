@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-const rootURL = "http://bits-apogee.org/ems/judge/events";
+const rootURL = "https://bits-apogee.org/ems/judge/events";
 
 export const populateTeams = (teamsList, eventId, levelId) => {
   return {
