@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/portal-ems/static/css/main.4e23b011.css",
+    "main.js": "/portal-ems/static/js/main.96f8db55.js",
+    "index.html": "/portal-ems/index.html",
+    "main.4e23b011.css.map": "/portal-ems/static/css/main.4e23b011.css.map",
+    "main.96f8db55.js.map": "/portal-ems/static/js/main.96f8db55.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4e23b011.css",
+    "static/js/main.96f8db55.js"
+  ]
+}
