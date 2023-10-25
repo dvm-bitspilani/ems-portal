@@ -1,6 +1,6 @@
 import * as actions from "./actionTypes";
 
-const rootURL = "https://bits-oasis.org/ems/judge/events";
+const rootURL = "https://bits-oasis.org/2023/main/ems/judge/events";
 
 export const updateScore = () => {
   return {
